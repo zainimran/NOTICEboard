@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap - Prebuilt Layout</title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+<link href="css/landingcustomStyleSheet.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
+
+<link rel="stylesheet prefetch" href="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.3/angular-material.css">
+<link rel="stylesheet prefetch" href="https://material.angularjs.org/1.1.3/docs.css">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid"> 
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>	
+      <a class="navbar-brand" href="#"><img src="LOGO.png"></a></div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="defaultNavbar1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a class="headerlink" href="#secondrow">FEATURES</a></li>
+        <li><a class="headerlink" href="#fourthrow">ABOUT US</a></li>
+        <li><a class="headerlink" href="#fifthrow">CONTACT</a></li>
+        <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="username">
+          <input type="text" class="form-control" placeholder="password">
+        </div>
+        <button type="submit" class="btn btn-default loginbtn">Login</button>
+      </form>
+        <!--<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>-->
+      </ul>
+    </div>
+    <!-- /.navbar-collapse --> 
+  </div>
+  <!-- /.container-fluid --> 
+</nav>
+<div class="container-fluid">
+  <div class="row firstrow" id="firstrow">
+      <h1 class="text-center firstrowh1">NEVER MISS ANYTHING AGAIN</h1>
+      <div class="col-md-4 col-md-offset-2"><img src="Rectangle_15.png"></div>
+    <div class="col-md-5 lappytext col-md-offset-0">
+     						<div>Your own noticeboard whenever you need it <br>
+      						No need to change platforms <br>
+							Have all your important events in one place</div>
+							<div>
+						  		<div class="row">
+							  		<div class="col-sm-4 col-md-offset-7">
+							  		<a href="#thirdrow"><button type="button" class="btn btn-lg btn-default signupbtn">SIGN UP</button></a>
+							  		</div>
+						  		</div>
+						  </div>
+    </div>
+	   
+  </div>
+  <div class="row secondrow">
+    <h1 class="text-center secondrowh1" id="secondrow">THE <span style="color:#3991c3">FEATURES</span> YOU NEED</h1>
+    <div class="col-md-3 col-md-offset-2"><img src="Feature_1.png"></div>
+    <div class="col-md-3"><img src="Feature_2.png"></div>
+    <div class="col-md-3"><img src="Feature_3.png"></div>
+  </div>
+  <div class="row thirdrow" id="thirdrow">
+    <h1 class="text-center thirdrowh1"><span style="color:#e9840c">Sign up</span> to join the network</h1>
+    <div class="col-md-6">
+    	<div ng-controller="DemoCtrl" layout="column" ng-cloak="" class="md-inline-form inputdemoBasicUsage" ng-app="MyApp">
+    	<md-content layout-padding="" class="signupform">
+    <div>
+      <form name="userForm">
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>First name</label>
+            <input ng-model="user.firstName">
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>Last Name</label>
+            <input ng-model="user.lastName">
+          </md-input-container>
+        </div>
+        <md-input-container class="md-block">
+          <input name="email" ng-model="user.email" placeholder="Email ID" required="" ng-pattern="/^[A-Za-z0-9._%]+@lums.edu.pk$/">
+           <div ng-messages="userForm.email.$error" role="alert" multiple="">
+              <div ng-message="required" class="my-message">You must supply an Email ID.</div>
+              <div ng-message="pattern" class="my-message">That doesn't look like a valid email.
+              </div>
+            </div>
+        </md-input-container>
+        
+        <md-input-container class="md-block">
+          <input type = "password" name="password" id="password" ng-model="user.password" placeholder="Password" required="" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/" ng-minlength="8" />
+           <div ng-messages="userForm.password.$error" role="alert" multiple="">
+              <div ng-message="required" class="my-message">You must supply a password.</div>
+              <div ng-message="minlength" class="my-message">Please enter atleast 8 characters.
+              </div>
+              <div ng-message="pattern" class="my-message">Password should contain one number,one character and one special character.
+              </div>
+            </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <input type = "password" name="confirmPassword" id="confirmPassword" ng-model="user.passwordConfirm" required="" placeholder="Confirm Password" data-match="user.password">
+        </md-input-container>        
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>City</label>
+            <input ng-model="user.city">
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm="">
+            <label>Role</label>
+            <md-select ng-model="user.role">
+              <md-option ng-repeat="role in roles" value="{{role.abbrev}}">
+                {{role.abbrev}}
+              </md-option>
+            </md-select>  
+        	</md-input-container>
+        </div>
+        <div class="row">
+        	<div class="col-sm-3 col-md-offset-9">
+        		<button type="submit" class="btn btn-lg btn-default signupbtn">SIGN UP</button>	
+        	</div>
+      	</div>
+      </form>
+    </div>
+  </md-content>
+    	</div>
+    </div>
+    <div class="col-md-6 aa"><img src="Layer_4.png"></div>
+  </div>
+  <div class="row fourthrow">
+   	<h1 class="text-center fourthrowh1" id="fourthrow">THE STAR TEAM</h1>
+	<div class="row">	
+		<div class="col-md-2 col-md-offset-2"><img src="shayan.png"></div>
+		<div class="col-md-2">
+			<h4 class="text-center pname">Shayan Ali</h4>
+			<p class="pinfo">Lorem Ipsum is simply dummy
+			of the printing and typesetting 
+			industry. Lorem Ipsum has been 
+			the industry's standard dummy 
+			text ever since the 1500s, when.
+			</p>
+		</div>
+		<div class="col-md-2"><img src="adnan.png"></div>
+		<div class="col-md-2">
+			<h4 class="text-center pname">Adnan Ahmad</h4>
+			<p class="pinfo">Lorem Ipsum is simply dummy
+			of the printing and typesetting 
+			industry. Lorem Ipsum has been 
+			the industry's standard dummy 
+			text ever since the 1500s, when.
+			</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2 col-md-offset-2">
+			<h4 class="text-center pname">Zain Imran</h4>
+			<p class="pinfo">Lorem Ipsum is simply dummy
+			of the printing and typesetting 
+			industry. Lorem Ipsum has been 
+			the industry's standard dummy 
+			text ever since the 1500s, when.
+			</p>
+		</div>
+		<div class="col-md-2"><img src="zain.png"></div>
+		<div class="col-md-2">
+			<h4 class="text-center pname">Anusha Cassum</h4>
+			<p class="pinfo">Lorem Ipsum is simply dummy
+			of the printing and typesetting 
+			industry. Lorem Ipsum has been 
+			the industry's standard dummy 
+			text ever since the 1500s, when.
+			</p>
+		</div>
+		<div class="col-md-2"><img src="anusha.png"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 col-md-offset-2">
+			<h4 class="pname">Who are we?</h4>
+			<p class="pinfo">Lorem Ipsum is simply dummy
+			of the printing and typesetting 
+			industry. Lorem Ipsum has been 
+			the industry's standard dummy 
+			text ever since the 1500s, when.
+			</p>
+		</div>
+		<div class="col-md-2"><img src="umar_pic.png"></div>
+		<div class="col-md-2">
+			<h4 class="text-center pname">Umar Farooq</h4>
+			<p class="pinfo">Lorem Ipsum is simply dummy
+			of the printing and typesetting 
+			industry. Lorem Ipsum has been 
+			the industry's standard dummy 
+			text ever since the 1500s, when.
+			</p>
+		</div>
+	</div>
+  </div>
+  	<div class="row fifthrow" id="fifthrow">
+  	  <h1 class="text-center fifthrowh1">CONTACT US</h1>
+	  <div class="col-md-4 col-md-offset-1"><img src="Screenshot_(28).png"></div>
+	  <div class="col-md-7">
+	  	<img src="location_icon.png" style="display:inline"><h5 style="display:inline">&nbsp;&nbsp;Lahore University of Management sciences Opposite Sector U, DHA., Lahore 54792, Pakistan.</h5>
+	  	<br><br>
+	  	<img src="1491079917_Mail.png" style="display:inline-block"><h5 style="display:inline-block">&nbsp;&nbsp;Anusha.cassum@gmail.com</h5>
+	  	<br><br>
+	  	<img src="1491079960_MB__phone.png" style="display:inline-block"><h5 style="display:inline-block">&nbsp;&nbsp;+92-333-4266049</h5>
+	  </div>
+    </div>
+</div>
+
+<div class="container-fluid footer">
+ <div class="navbar-footer">
+	<ul class="nav navbar-nav navbar-right">
+        <li><a class="footerlink" href="#firstrow">HOME</a></li>
+        <li><a class="footerlink" href="#fifthrow">CONTACT</a></li>
+	 </ul>
+ </div> 
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="js/jquery-1.11.3.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/bootstrap.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/svg-assets-cache.js"></script>
+<script src="https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.3/angular-material.js"></script>
+
+<script src="js/signupform.js"></script>
+</body>
+</html>
