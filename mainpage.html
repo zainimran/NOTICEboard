@@ -17,6 +17,7 @@
 
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/jquery.mCustomScrollbar.min.css">
 
+<link rel="stylesheet" href="Monthly-master/css/monthly.css">
 
 <!-- Angular Material style sheet -->
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
@@ -109,7 +110,7 @@
 			</div>
 	  	</div>
 		<div class="rightcol">
-			<div class="calendar"></div>
+			<div class="monthly" id="mycalendar"></div>
 			<div class="lostnfounds">
 				<div class="lfHeading">
 					<h4 class="eHeadingtext">Lost & Found</h4>
@@ -374,6 +375,13 @@
 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="js/bootstrap.js"></script>
+
+<script type="text/javascript" src="Monthly-master/js/monthly.js"></script>
+<script type="text/javascript">
+    $(window).load( function() {
+        $('#mycalendar').monthly();
+    });
+</script>
 
 <script>
 	$('.usericondiv').on('click', function() {

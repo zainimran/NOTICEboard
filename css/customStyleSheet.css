@@ -350,7 +350,7 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 	margin-top: 35px;
 	padding-left: 8px;
 	width: 315px;
-	height: 163px;
+	height: 199px;
 	background-color: #e7e4e4;
 	box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.21);
 }
@@ -376,7 +376,7 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 }
 
 .lnffeed {
-	max-height: 131px;
+	max-height: 166px;
 	overflow-y: auto;
 }
 
