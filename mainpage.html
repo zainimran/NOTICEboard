@@ -10,6 +10,9 @@
 <link href="css/bootstrap.css" rel="stylesheet">
 
 <link href="css/customStyleSheet.css" rel="stylesheet" type="text/css">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
+
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/jquery.mCustomScrollbar.min.css">
@@ -26,10 +29,8 @@
     <![endif]-->
 </head>
 <body ng-app="NOTICEboard" ng-cloak>
-<!--<nav class="navbar navbar-default">
-  <div class="container-fluid"> 
-    <!-- Brand and toggle get grouped for better mobile display -->
-<header class="newheader">
+<nav class="navbar navbar-default newheader">
+<div class="container-fluid">
 	<div class="logodiv"><img class="logo" src="_NOTICEboard.png"></div>
 	<div class="userinfo">
 		<div class="username">Zain</div>
@@ -43,33 +44,56 @@
 		</div>
 	</div>
 	<div class="headerline"></div>
-</header>
-	
-	<!-- Collect the nav links, forms, and other content for toggling -->
-    
-    <!-- /.navbar-collapse -2-> 
-  </div><!-- /.container-fluid -2-> 
-</nav>-->
+</div>
+</nav>
 
-<div class="content">
+<div class="container-fluid">
+<div class="row mainrow">
 
 	<div class="feed">
 		<div class="searchbar">
-			<!--<div class="searchinput"><input placeholder="looking for something"></div>-->
 			<md-input-container md-no-float class="md-block">
 				<input class="searchinput" placeholder="looking for something">
+				<div class="filterbtn"><img src="hamburger_btn_for_search.png"></div>
 			</md-input-container>
+			<div class="filter_dropdown">
+			  <h6>Filter by:</h6>
+				<label>
+					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_0">
+					Events</label>
+				<br>
+				<label>
+					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_1">
+					Lost & Found</label>
+				<br>
+				<label>
+					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_2">
+					Book Swaps</label>
+				<br>
+				<label>
+					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_3">
+					Course Swaps</label>
+			</div>
 		</div>
-		<!--<div class="notifications"></div>-->
+		<div class="notifications"><img src="notifications.png">
+			<div class="notif_dropdown">
+				<div class="notif_dropdownheading">Notifications</div>
+				<div class="notif1">Event today: RUNG  3:30pm - 6:30pm</div>
+				<div class="notif1">Event today: CSO Seminar 3:30pm</div>
+			</div>
+		</div>
 	  <div class="events">
-			<div class="eHeading">Upcoming Events</div>
+			<div class="eHeading">
+				<h4 class="eHeadingtext">Upcoming Events</h4>
+				<a class="add" href="#"><img class="addevent" id="addEvent" src="1491100704_cancel.png"></a>
+		  	</div>
 			<div class="eventfeed">
 				<div class="event1">
 					<img class="eventpic" src="Bild-Berlin-1.png">
 					<div class="eventinfo">
 						<div class="eTitle">RUNG</div>
 						<div class="addtofav"><img id="star" class="unfaved" src="star_off.png"></div>
-						<div class="eInfo">Named after the festival of Holi, Rung is one of the major events of LUMS...<b>read more</b></div>
+						<div class="eInfo">Named after the festival of Holi, Rung is one of the major events of LUMS...<p class="open_overlay"><b>read more</b></p></div>
 						<div class="eDateDetailed">31 March - 2 June
 													   3:30pm - 6:30pm
 													   Bedian road Lahore
@@ -87,7 +111,10 @@
 		<div class="rightcol">
 			<div class="calendar"></div>
 			<div class="lostnfounds">
-				<div class="lfHeading">Lost & Found</div>
+				<div class="lfHeading">
+					<h4 class="eHeadingtext">Lost & Found</h4>
+					<a class="add" href="#"><img class="addlnf" src="1491100704_cancel.png"></a>
+				</div>
 				<div class="lnffeed">
 					<div class="lostnfound1">
 						<img class="lostnfoundpic" src="brain1.png">
@@ -104,7 +131,10 @@
 			</div>
 		</div>
 		<div class="courseSwaps">
-			<div class="csHeading">Course Swaps</div>
+			<div class="csHeading">
+				<h4 class="eHeadingtext">Course Swaps</h4>
+				<a class="add" href="#"><img class="addevent" id="addCourse" src="1491100704_cancel.png"></a>
+			</div>
 			<div class="csfeed">
 				<div class="courseSwap1">
 					<div class="courseSwap1a">Have: Anthropology by meow boy <br>
@@ -132,7 +162,10 @@
 			</div>
 		</div>
 		<div class="bookSwaps">
-			<div class="csHeading">Book Swaps</div>
+			<div class="csHeading">
+				<h4 class="eHeadingtext">Book Swaps</h4>
+				<a class="add" href="#"><img class="addevent" id="addBook" src="1491100704_cancel.png"></a>
+			</div>
 			<div class="csfeed">
 				<div class="courseSwap1">
 					<div class="courseSwap1a">Have: what is political science by mr meow <br>
@@ -160,8 +193,163 @@
 			</div>
 		</div>
 	</div>
+	<div class="overlay">
+		<div class="event1_overlay alloverlays">
+			<img class="eventpic" src="Bild-Berlin-1.png">
+			<div class="eventinfo">
+				<div class="eTitle">RUNG</div>
+				<div class="addtofav"><img class="unfaved" src="star_off.png"></div>
+				<div class="deleteEvent"><img src="garbage.png"></div>
+				<div class="eInfo">named after the festival of holi rug is one 
+					of the major events of lumsnamed after the festival of holi rug is one 
+					of the major events of lumsnamed after the festival of holi rug is one 
+					of the major events of lums..vnamed after the festival of holi rug is one 
+					of the major events of lums..vnamnanamed after the festival of holi rug is one 
+					of the major events of lumsnamed after the festival of holi rug is one 
+					of the major events of lumsnamed after the festival of holi rug is one 
+					of the major events of lums
+				</div>
+				<div class="eDateDetailed_overlay">31 March - 2 June
+											   3:30pm - 6:30pm
+											   Bedian road Lahore
+				</div>
+				<div class="eDate_overlay"><img src="Layer_6.png"></div>							
+			</div>
+		</div>
+	  <div class="addBook_overlay alloverlays">
+		<form>
+			<label for="textfield">I HAVE THIS BOOK:</label>
+           	<br>
+            	<input type="text" name="textfield" id="bookname">
+            <br>
+            <label for="textfield">AUTHOR:</label>
+            <br>
+            	<input type="text" name="textfield" id="bookauthor">
+            <br>
+            <label for="textfield">CONTACT NUMBER:</label>
+            <br>
+            	<input type="number" id="bookcontact">
+            <br>
+            <label for="textfield">UPLOAD IMAGE</label>
+            <br>
+            	<input type="file">
+            <br>
+            <br>
+            <input type="submit" value="POST">
+		</form>
+	   </div>
+	   <div class="createCourse_overlay alloverlays">
+		<form>
+			<div class="courseform_left">
+				<label for="textfield">I HAVE THIS COURSE:</label>
+				<br>
+					<input type="text" name="textfield" id="coursename">
+				<br>
+				<label for="textfield">TIME:</label>
+				<br>
+					<input type="time">
+				<br>
+				<label for="textfield">DATE:</label>
+				<br>
+					<input type="date">
+				<br>
+				<label for="textfield">INSTRUCTOR:</label>
+				<br>
+					<input type="text" name="textfield" id="instructor">
+            </div>
+            <div class="courseform_right">
+            	<label for="textfield">I NEED THIS COURSE:</label>
+				<br>
+					<input type="text" name="textfield" id="coursename2">
+				<br>
+				<label for="textfield">TIME:</label>
+				<br>
+					<input type="time">
+				<br>
+				<label for="textfield">DATE:</label>
+				<br>
+					<input type="date">
+				<br>
+				<label for="textfield">INSTRUCTOR:</label>
+				<br>
+					<input type="text" name="textfield" id="instructor2">
+            	<br>
+				<br>
+				<input type="submit" value="POST">
+            </div>
+		</form>
+	   </div>
+      <div class="addLnf_overlay alloverlays">
+		<form>
+			<div class="input-group">
+		  	  <span class="input-group-addon"><input type="radio" name="choice"></span>
+				<label for="input" class="form-control">Lost</label>
+			  <span class="input-group-addon"><input type="radio" name="choice"></span>
+				<label for="input" class="form-control">Found</label>
+			</div>
+		  <label for="textfield">ITEM:</label>
+           	<br>
+            	<input type="text" name="textfield" id="item">
+            <br>
+            <label for="textfield">DESCRIPTION:</label>
+            <br>
+            	<textarea rows="4" cols="50"></textarea>
+            <br>
+            <label for="textfield">UPLOAD IMAGE</label>
+            <br>
+            	<input type="file">
+            <br>
+            <br>
+            <input type="submit" value="POST">
+		</form>
+	   </div>
+	   <div class="addEvent_overlay alloverlays">
+		<form>
+			<div class="courseform_left">
+				<label for="textfield">EVENT NAME:</label>
+				<br>
+					<input type="text" name="textfield" id="eventname">
+				<br>
+				<label for="textfield">DESCRIPTION:</label>
+				<br>
+            		<textarea rows="4" cols="40"></textarea>
+				<br>
+				<label for="textfield">EVENT DATE:</label>
+				<br>
+					<input type="date">
+				<br>
+				<label for="textfield">VENUE:</label>
+				<br>
+					<input type="text" name="textfield" id="venue">
+            </div>
+            <div class="courseform_right">
+            	<label for="textfield">UPLOAD IMAGE:</label>
+				<br>
+            		<input type="file">
+				<br>
+				<label for="textfield">TIME:</label>
+				<br>
+					<input type="time">
+				<br>
+				<br>
+				<input type="submit" value="POST">
+            </div>
+		</form>
+	   </div>
+	</div>
+	<div class="cover"></div>
 </div>
-  
+</div>
+
+<div class="container-fluid footer">
+ <div class="navbar-footer">
+	<ul class="nav navbar-nav navbar-right">
+        <li><a class="footerlink" href="#">HOME</a></li>
+        <li><a class="footerlink" href="#">CONTACT</a></li>
+        <li><a class="footerlink" href="#">TERMS OF SERVICE</a></li>
+	 </ul>
+ </div> 
+</div>	
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 <script src="js/jquery-1.11.3.min.js"></script>
 
@@ -190,6 +378,42 @@
 <script>
 	$('.usericondiv').on('click', function() {
 		$('.profile_dropdown').toggle();
+	});
+	$('.notifications').on('click', function() {
+		$('.notif_dropdown').toggle();
+	});
+	$('.filterbtn').on('click', function() {
+		$('.filter_dropdown').toggle();
+	});
+	$('.open_overlay').on('click', function() {
+		$('.overlay').show();
+		$('.cover').show();
+		$('.event1_overlay').show()
+	});
+	$('.cover').on('click', function() {
+		$('.overlay').hide();
+		$('.cover').hide();
+		$('.alloverlays').hide();
+	});
+	$('#addBook').on('click', function() {
+		$('.overlay').show();
+		$('.cover').show();
+		$('.addBook_overlay').show()
+	});
+	$('#addCourse').on('click', function() {
+		$('.overlay').show();
+		$('.cover').show();
+		$('.createCourse_overlay').show()
+	});
+	$('.addlnf').on('click', function() {
+		$('.overlay').show();
+		$('.cover').show();
+		$('.addLnf_overlay').show()
+	});
+	$('#addEvent').on('click', function() {
+		$('.overlay').show();
+		$('.cover').show();
+		$('.addEvent_overlay').show()
 	});
 	$('#star').on('click', function() {
 		if ($('#star').attr('class') === 'unfaved') {

@@ -5,6 +5,10 @@
 	font-family: 'Roboto', sans-serif !important;
 }
 
+body {
+	overflow-x: hidden; 
+}
+
 .navbar-default {
 	background-image: url(DARK_HEADER.png);
 	background-size: cover;
