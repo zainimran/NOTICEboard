@@ -1,0 +1,110 @@
+@charset "utf-8";
+/* CSS Document */
+
+* {
+	font-family: 'Roboto', sans-serif !important;
+}
+
+body {
+	overflow-x: hidden; 
+}
+
+.navbar-default {
+	background-image: url(DARK_HEADER.png);
+	background-size: cover;
+	margin-bottom: 0px;
+}
+
+.loginbtn {
+	color: #fff;
+	background-color: #01b7ab;
+}
+
+.headerlink {
+	color: #fff !important;
+}
+
+.firstrow {
+	background-image:url(lower_header.png);
+}
+
+.firstrowh1 {
+	margin-top: 123px;
+	margin-bottom: 50px;
+	font-size: 40px;
+	font-weight: 100;
+}
+
+.lappytext {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 2;
+}
+
+.signupbtn {
+	background-color: #e9840c;
+	color: aliceblue;
+}
+
+.secondrow {
+	padding-top: 30px;
+	padding-bottom: 60px;
+}
+
+.secondrowh1 {
+	margin-bottom: 50px;
+	font-size: 19px;
+	font-weight: 100;
+}
+
+.thirdrow {
+	background-color: #e3e3e3;
+}
+
+.thirdrowh1 {
+	font-size: 27px;
+	font-weight: 400;
+}
+
+.signupform {
+	background-color: #e3e3e3;
+}
+
+.fourthrow {
+	padding-top: 20px;
+	padding-bottom: 60px;
+}
+
+.fourthrowh1 {
+	font-size: 20px;
+	font-weight: 300;
+	margin-bottom: 40px;
+}
+
+.pname {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.pinfo {
+	font-size: 10px;
+	font-weight: 500;
+}
+
+.fifthrow {
+	background-color: rgba(187, 177, 177, 0.7);
+	padding-bottom: 40px;
+}
+
+.fifthrowh1 {
+	font-size: 20px;
+	font-weight: 300;
+}
+
+.footer {
+	background-image: url(Rectangle_21.png);
+}
+
+.footerlink {
+	color: #ffffff;
+}

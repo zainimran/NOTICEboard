@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOTICEboard</title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+<link href="css/customStyleSheet.css" rel="stylesheet" type="text/css">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic" rel="stylesheet">
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/jquery.mCustomScrollbar.min.css">
+
+<link rel="stylesheet" href="Monthly-master/css/monthly.css">
+
+<!-- Angular Material style sheet -->
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body ng-app="NOTICEboard" ng-cloak>
+<nav class="navbar navbar-default newheader">
+<div class="container-fluid">
+	<div class="logodiv"><img class="logo" src="_NOTICEboard.png"></div>
+	<div class="userinfo">
+		<div class="username">Zain</div>
+		<div class="usericondiv"><img class="usericon" src="user_icon.png"></div>
+		<div class="profile_dropdown">
+			<div class="usericondiv_dd"><img class="usericon_dd" src="user_icon.png"></div>
+			<div class="profile_info">Zain Imran <br>
+									  18100260@lums.edu.pk
+			</div>
+			<div class="signout_btn btn">Sign out</div>
+		</div>
+	</div>
+	<div class="headerline"></div>
+</div>
+</nav>
+
+<div class="container-fluid">
+<div class="row mainrow">
+
+	<div class="feed">
+		<div class="searchbar">
+			<md-input-container md-no-float class="md-block">
+				<input class="searchinput" placeholder="looking for something">
+				<div class="filterbtn"><img src="hamburger_btn_for_search.png"></div>
+			</md-input-container>
+			<div class="filter_dropdown">
+			  <h6>Filter by:</h6>
+				<label>
+					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_0">
+					Events</label>
+				<br>
+				<label>
+					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_1">
+					Lost & Found</label>
+				<br>
+				<label>
+					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_2">
+					Book Swaps</label>
+				<br>
+				<label>
+					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_3">
+					Course Swaps</label>
+			</div>
+		</div>
+		<div class="notifications"><img src="notifications.png">
+			<div class="notif_dropdown">
+				<div class="notif_dropdownheading">Notifications</div>
+				<div class="notif1">Event today: RUNG  3:30pm - 6:30pm</div>
+				<div class="notif1">Event today: CSO Seminar 3:30pm</div>
+			</div>
+		</div>
+	  <div class="events">
+			<div class="eHeading">
+				<h4 class="eHeadingtext">Upcoming Events</h4>
+				<a class="add" href="#"><img class="addevent" id="addEvent" src="1491100704_cancel.png"></a>
+		  	</div>
+			<div class="eventfeed">
+				<div class="event1">
+					<img class="eventpic" src="Bild-Berlin-1.png">
+					<div class="eventinfo">
+						<div class="eTitle">RUNG</div>
+						<div class="addtofav"><img id="star" class="unfaved" src="star_off.png"></div>
+						<div class="eInfo">Named after the festival of Holi, Rung is one of the major events of LUMS...<p class="open_overlay"><b>read more</b></p></div>
+						<div class="eDateDetailed">31 March - 2 June
+													   3:30pm - 6:30pm
+													   Bedian road Lahore
+						</div>
+						<div class="eDate"><img src="Layer_6.png"></div>							
+					</div>
+				</div>
+				<div class="event1"></div>
+				<div class="event1"></div>
+				<div class="event1"></div>
+				<div class="event1"></div>
+				<div class="event1"></div>
+			</div>
+	  	</div>
+		<div class="rightcol">
+			<div class="monthly" id="mycalendar"></div>
+			<div class="lostnfounds">
+				<div class="lfHeading">
+					<h4 class="eHeadingtext">Lost & Found</h4>
+					<a class="add" href="#"><img class="addlnf" src="1491100704_cancel.png"></a>
+				</div>
+				<div class="lnffeed">
+					<div class="lostnfound1">
+						<img class="lostnfoundpic" src="brain1.png">
+						<div class="lostnfoundinfo">
+							<div class="lfInfo">lost brain at khokha somewher. please help</div>
+							<div class="lf_maillink"><img class="mailicon" src="outlook_icon.png"></div>
+						</div>
+					</div>
+					<div class="lostnfound2"></div>
+					<div class="lostnfound1"></div>
+					<div class="lostnfound2"></div>
+					<div class="lostnfound1"></div>
+				</div>
+			</div>
+		</div>
+		<div class="courseSwaps">
+			<div class="csHeading">
+				<h4 class="eHeadingtext">Course Swaps</h4>
+				<a class="add" href="#"><img class="addevent" id="addCourse" src="1491100704_cancel.png"></a>
+			</div>
+			<div class="csfeed">
+				<div class="courseSwap1">
+					<div class="courseSwap1a">Have: Anthropology by meow boy <br>
+											  		10:20 - 5:20
+					</div>
+					<div class="courseSwap1b">
+						<div class="courseNeed">Need: political science pol sci 299 by mr meow <br>
+													12:30-3:30 Mon Fri
+						</div>					
+						<div class="cs_maillink"><img class="mailicon" src="outlook_icon.png"></div>
+					</div>
+				</div>
+				<div class="courseSwap1">
+					<div class="courseSwap1a"></div>
+					<div class="courseSwap1b"></div>
+				</div>
+				<div class="courseSwap1">
+					<div class="courseSwap1a"></div>
+					<div class="courseSwap1b"></div>
+				</div>
+				<div class="courseSwap1">
+					<div class="courseSwap1a"></div>
+					<div class="courseSwap1b"></div>
+				</div>
+			</div>
+		</div>
+		<div class="bookSwaps">
+			<div class="csHeading">
+				<h4 class="eHeadingtext">Book Swaps</h4>
+				<a class="add" href="#"><img class="addevent" id="addBook" src="1491100704_cancel.png"></a>
+			</div>
+			<div class="csfeed">
+				<div class="courseSwap1">
+					<div class="courseSwap1a">Have: what is political science by mr meow <br>
+											  		first edition
+					</div>
+					<div class="courseSwap1b">
+						<div class="courseNeed">Need: book of love by zain imran lover boy <br>
+													latest edition
+						</div>					
+						<div class="cs_maillink"><img class="mailicon" src="outlook_icon.png"></div>
+					</div>
+				</div>
+				<div class="courseSwap1">
+					<div class="courseSwap1a"></div>
+					<div class="courseSwap1b"></div>
+				</div>
+				<div class="courseSwap1">
+					<div class="courseSwap1a"></div>
+					<div class="courseSwap1b"></div>
+				</div>
+				<div class="courseSwap1">
+					<div class="courseSwap1a"></div>
+					<div class="courseSwap1b"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="overlay">
+		<div class="event1_overlay alloverlays">
+			<img class="eventpic" src="Bild-Berlin-1.png">
+			<div class="eventinfo">
+				<div class="eTitle">RUNG</div>
+				<div class="addtofav"><img class="unfaved" src="star_off.png"></div>
+				<div class="deleteEvent"><img src="garbage.png"></div>
+				<div class="eInfo">named after the festival of holi rug is one 
+					of the major events of lumsnamed after the festival of holi rug is one 
+					of the major events of lumsnamed after the festival of holi rug is one 
+					of the major events of lums..vnamed after the festival of holi rug is one 
+					of the major events of lums..vnamnanamed after the festival of holi rug is one 
+					of the major events of lumsnamed after the festival of holi rug is one 
+					of the major events of lumsnamed after the festival of holi rug is one 
+					of the major events of lums
+				</div>
+				<div class="eDateDetailed_overlay">31 March - 2 June
+											   3:30pm - 6:30pm
+											   Bedian road Lahore
+				</div>
+				<div class="eDate_overlay"><img src="Layer_6.png"></div>							
+			</div>
+		</div>
+	  <div class="addBook_overlay alloverlays">
+		<form>
+			<label for="textfield">I HAVE THIS BOOK:</label>
+           	<br>
+            	<input type="text" name="textfield" id="bookname">
+            <br>
+            <label for="textfield">AUTHOR:</label>
+            <br>
+            	<input type="text" name="textfield" id="bookauthor">
+            <br>
+            <label for="textfield">CONTACT NUMBER:</label>
+            <br>
+            	<input type="number" id="bookcontact">
+            <br>
+            <label for="textfield">UPLOAD IMAGE</label>
+            <br>
+            	<input type="file">
+            <br>
+            <br>
+            <input type="submit" value="POST">
+		</form>
+	   </div>
+	   <div class="createCourse_overlay alloverlays">
+		<form>
+			<div class="courseform_left">
+				<label for="textfield">I HAVE THIS COURSE:</label>
+				<br>
+					<input type="text" name="textfield" id="coursename">
+				<br>
+				<label for="textfield">TIME:</label>
+				<br>
+					<input type="time">
+				<br>
+				<label for="textfield">DATE:</label>
+				<br>
+					<input type="date">
+				<br>
+				<label for="textfield">INSTRUCTOR:</label>
+				<br>
+					<input type="text" name="textfield" id="instructor">
+            </div>
+            <div class="courseform_right">
+            	<label for="textfield">I NEED THIS COURSE:</label>
+				<br>
+					<input type="text" name="textfield" id="coursename2">
+				<br>
+				<label for="textfield">TIME:</label>
+				<br>
+					<input type="time">
+				<br>
+				<label for="textfield">DATE:</label>
+				<br>
+					<input type="date">
+				<br>
+				<label for="textfield">INSTRUCTOR:</label>
+				<br>
+					<input type="text" name="textfield" id="instructor2">
+            	<br>
+				<br>
+				<input type="submit" value="POST">
+            </div>
+		</form>
+	   </div>
+      <div class="addLnf_overlay alloverlays">
+		<form>
+			<div class="input-group">
+		  	  <span class="input-group-addon"><input type="radio" name="choice"></span>
+				<label for="input" class="form-control">Lost</label>
+			  <span class="input-group-addon"><input type="radio" name="choice"></span>
+				<label for="input" class="form-control">Found</label>
+			</div>
+		  <label for="textfield">ITEM:</label>
+           	<br>
+            	<input type="text" name="textfield" id="item">
+            <br>
+            <label for="textfield">DESCRIPTION:</label>
+            <br>
+            	<textarea rows="4" cols="50"></textarea>
+            <br>
+            <label for="textfield">UPLOAD IMAGE</label>
+            <br>
+            	<input type="file">
+            <br>
+            <br>
+            <input type="submit" value="POST">
+		</form>
+	   </div>
+	   <div class="addEvent_overlay alloverlays">
+		<form>
+			<div class="courseform_left">
+				<label for="textfield">EVENT NAME:</label>
+				<br>
+					<input type="text" name="textfield" id="eventname">
+				<br>
+				<label for="textfield">DESCRIPTION:</label>
+				<br>
+            		<textarea rows="4" cols="40"></textarea>
+				<br>
+				<label for="textfield">EVENT DATE:</label>
+				<br>
+					<input type="date">
+				<br>
+				<label for="textfield">VENUE:</label>
+				<br>
+					<input type="text" name="textfield" id="venue">
+            </div>
+            <div class="courseform_right">
+            	<label for="textfield">UPLOAD IMAGE:</label>
+				<br>
+            		<input type="file">
+				<br>
+				<label for="textfield">TIME:</label>
+				<br>
+					<input type="time">
+				<br>
+				<br>
+				<input type="submit" value="POST">
+            </div>
+		</form>
+	   </div>
+	</div>
+	<div class="cover"></div>
+</div>
+</div>
+
+<div class="container-fluid footer">
+ <div class="navbar-footer">
+	<ul class="nav navbar-nav navbar-right">
+        <li><a class="footerlink" href="#">HOME</a></li>
+        <li><a class="footerlink" href="#">CONTACT</a></li>
+        <li><a class="footerlink" href="#">TERMS OF SERVICE</a></li>
+	 </ul>
+ </div> 
+</div>	
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="js/jquery-1.11.3.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+<!-- Angular Material Library -->
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+<script type="text/javascript">    
+	angular.module('NOTICEboard', ['ngMaterial']);
+</script>
+
+<script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src="http://cdn.jsdelivr.net/jquery.mcustomscrollbar/3.0.6/jquery.mCustomScrollbar.concat.min.js"></script>
+
+
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/bootstrap.js"></script>
+
+<script type="text/javascript" src="Monthly-master/js/monthly.js"></script>
+<script type="text/javascript">
+    $(window).load( function() {
+        $('#mycalendar').monthly();
+    });
+</script>
+
+<script>
+	$('.usericondiv').on('click', function() {
+		$('.profile_dropdown').toggle();
+	});
+	$('.notifications').on('click', function() {
+		$('.notif_dropdown').toggle();
+	});
+	$('.filterbtn').on('click', function() {
+		$('.filter_dropdown').toggle();
+	});
+	$('.open_overlay').on('click', function() {
+		$('.overlay').show();
+		$('.cover').show();
+		$('.event1_overlay').show()
+	});
+	$('.cover').on('click', function() {
+		$('.overlay').hide();
+		$('.cover').hide();
+		$('.alloverlays').hide();
+	});
+	$('#addBook').on('click', function() {
+		$('.overlay').show();
+		$('.cover').show();
+		$('.addBook_overlay').show()
+	});
+	$('#addCourse').on('click', function() {
+		$('.overlay').show();
+		$('.cover').show();
+		$('.createCourse_overlay').show()
+	});
+	$('.addlnf').on('click', function() {
+		$('.overlay').show();
+		$('.cover').show();
+		$('.addLnf_overlay').show()
+	});
+	$('#addEvent').on('click', function() {
+		$('.overlay').show();
+		$('.cover').show();
+		$('.addEvent_overlay').show()
+	});
+	$('#star').on('click', function() {
+		if ($('#star').attr('class') === 'unfaved') {
+			$('#star').attr({
+				class: 'faved',
+				src: 'star_on.png'
+			})
+		}
+		else {
+			$('#star').attr({
+				class: 'unfaved',
+				src: 'star_off.png'
+			})
+		}
+	});
+</script>
+
+<script>
+    (function($){
+        $(window).on("load",function(){
+            $(".eventfeed").mCustomScrollbar({
+				theme: "minimal-dark"
+			});
+			$(".lnffeed").mCustomScrollbar({
+				theme: "minimal-dark"
+			});
+			$(".csfeed").mCustomScrollbar({
+				theme: "minimal-dark"
+			});
+        });
+    })(jQuery);
+</script>
+</body>
+</html>
