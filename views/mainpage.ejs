@@ -53,28 +53,30 @@
 
 	<div class="feed">
 		<div class="searchbar">
-			<md-input-container md-no-float class="md-block">
-				<input class="searchinput" placeholder="looking for something">
-				<div class="filterbtn"><img src="hamburger_btn_for_search.png"></div>
-			</md-input-container>
-			<div class="filter_dropdown">
-			  <h6>Filter by:</h6>
-				<label>
-					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_0">
-					Events</label>
-				<br>
-				<label>
-					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_1">
-					Lost & Found</label>
-				<br>
-				<label>
-					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_2">
-					Book Swaps</label>
-				<br>
-				<label>
-					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_3">
-					Course Swaps</label>
-			</div>
+			<form action = "/search" method = "post">
+				<md-input-container md-no-float class="md-block">
+					<input type = "text" class="searchinput" placeholder="looking for something" name = "query">
+					<div class="filterbtn"><img src="hamburger_btn_for_search.png"></div>
+				</md-input-container>
+				<div class="filter_dropdown">
+				  <h6>Filter by:</h6>
+					<label>
+						<input type="checkbox" name="searchfilter" value="Events" id="Searchfilter_0">
+						Events</label>
+					<br>
+					<label>
+						<input type="checkbox" name="searchfilter" value="LostAndFound" id="Searchfilter_1">
+						Lost & Found</label>
+					<br>
+					<label>
+						<input type="checkbox" name="searchfilter" value="BookSwap" id="Searchfilter_2">
+						Book Swaps</label>
+					<br>
+					<label>
+						<input type="checkbox" name="searchfilter" value="CourseSwap" id="Searchfilter_3">
+						Course Swaps</label>
+				</div>
+			</form>
 		</div>
 		<div class="notifications"><img src="notifications.png">
 			<div class="notif_dropdown">

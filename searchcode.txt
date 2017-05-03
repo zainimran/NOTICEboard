@@ -1,0 +1,9 @@
+db.getCollection('events').find(
+  { "$text": {
+      "$search": "hosted" 
+    }   
+  }, 
+  { textScore: {$meta: "textScore"}
+  }).sort({
+    textScore: {$meta: "textScore"}
+   })

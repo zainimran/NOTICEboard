@@ -10,11 +10,11 @@ var mongoose = require('mongoose');
 var eventSchema = mongoose.Schema({
 
     local            : {
-        email 		 : {type : String, unique : true},
+        email 		 : String,
         Title		 : String,
         DATETIME	 : Date,
         LOCATION	 : String,
-        Description	 : String
+        Description	 : {type : String, index :true,text:true}
     }
 });
 

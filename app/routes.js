@@ -168,6 +168,75 @@ module.exports = function(app, passport,path) {
 		})
 		res.redirect('/mainpage')
 	});
+
+	app.post('/search', isLoggedIn, function(req, res) {
+		//let x = req.body.searchfilter
+		let query = req.body.query
+		//console.log(x)
+		//console.log(req.body)
+		//let json = [];
+		var dat = new Promise ((resolve) =>{
+			var x = req.body.searchfilter
+			console.log(x)
+			
+			//console.log(query)
+			let json = [];
+			if(x === 'Events'){
+				var x = new Promise (resolve => {Events.find({"$text":{"$search": query}},{ textScore: {$meta: "textScore"}}).sort({textScore: {$meta: "textScore"}})
+				.exec(function(err,results){resolve(results)})})
+				x.then(val=>{json.push(val); resolve(json)})
+
+			
+			}
+			else if(x === 'LostAndFound'){
+				var x = new Promise (resolve => {LnF.find({"$text":{"$search": query}},{ textScore: {$meta: "textScore"}}).sort({textScore: {$meta: "textScore"}})
+				.exec(function(err,results){resolve(results)})})
+				x.then(val=>{json.push(val); resolve(json)})
+			}
+			else if(x === 'CourseSwap'){
+				var x = new Promise (resolve => {Courses.find({"$text":{"$search": query}},{ textScore: {$meta: "textScore"}}).sort({textScore: {$meta: "textScore"}})
+				.exec(function(err,results){resolve(results)})})
+				x.then(val=>{json.push(val); resolve(json)})
+			}
+			else if(x === 'BookSwap'){
+				var x = new Promise (resolve => {Books.find({"$text":{"$search": query}},{ textScore: {$meta: "textScore"}}).sort({textScore: {$meta: "textScore"}})
+				.exec(function(err,results){resolve(results)})})
+				x.then(val=>{json.push(val); resolve(json)})
+			}
+			else{
+				let i = x.length
+				x.forEach(y=>{
+					if(y === 'Events'){
+						var x = new Promise (resolve => {Events.find({"$text":{"$search": query}},{ textScore: {$meta: "textScore"}}).sort({textScore: {$meta: "textScore"}})
+						.exec(function(err,results){resolve(results)})})
+						x.then(val=>{if(val !== undefined) {json.push(val)} i = i - 1; if(i ===0){resolve(json)}})
+					}
+					else if(y === 'LostAndFound'){
+						var x = new Promise (resolve => {LnF.find({"$text":{"$search": query}},{ textScore: {$meta: "textScore"}}).sort({textScore: {$meta: "textScore"}})
+						.exec(function(err,results){resolve(results)})})
+						x.then(val=>{if(val !== undefined) {json.push(val)} i= i - 1; if(i ===0){resolve(json)}})
+					}
+					else if(y === 'CourseSwap'){
+						var x = new Promise (resolve => {Courses.find({"$text":{"$search": query}},{ textScore: {$meta: "textScore"}}).sort({textScore: {$meta: "textScore"}})
+						.exec(function(err,results){resolve(results)})})
+						x.then(val=>{if(val !== undefined) {json.push(val)} i= i - 1; if(i ===0){resolve(json)}})
+					}
+					else if(y === 'BookSwap'){
+						var x = new Promise (resolve => {Books.find({"$text":{"$search": query}},{ textScore: {$meta: "textScore"}}).sort({textScore: {$meta: "textScore"}})
+						.exec(function(err,results){resolve(results)})})
+						x.then(val=>{if(val !== undefined) {json.push(val)} i= i-1; if(i ===0){resolve(json)}})
+					}
+				})
+			}
+		})
+
+		dat.then(val => {
+			val.forEach(x=> console.log(x))
+			//need to send response to client from here
+		})
+		//console.log('array')
+		//db.getCollection('events').find({"$text":{"$search": "hosted"}},{ textScore: {$meta: "textScore"}}).sort({textScore: {$meta: "textScore"}})
+	})
 };
 
 // route middleware to make sure
