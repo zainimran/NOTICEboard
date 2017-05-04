@@ -424,6 +424,20 @@
 				class: 'faved',
 				src: 'star_on.png'
 			})
+			text = $('.eInfo').text()
+			console.log(text)
+			email = $('.profile_info').text()
+			title = $('.eTitle').text()
+			title2 = ""
+			for(var i =0;i<title.length/2;i++){
+				title2 = title2+title[i]
+			}
+			title = title2
+			DATETIME = $('.eDateDetailed').text()
+			console.log(email)
+			console.log(title)
+			console.log(DATETIME)
+			$.post("/star_on", {eventData: text, user: email, timings : DATETIME, title:title})
 		}
 		else {
 			$('#star').attr({

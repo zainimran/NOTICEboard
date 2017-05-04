@@ -3,7 +3,7 @@ var Events            = require('../app/models/events');
 var Books             = require('../app/models/books');
 var Courses             = require('../app/models/courses');
 var LnF             = require('../app/models/lostandfound');
-
+var Notifications = require('../app/models/notifications');
 module.exports = function(app, passport,path) {
 
 	// =====================================
@@ -237,11 +237,59 @@ module.exports = function(app, passport,path) {
 		//console.log('array')
 		//db.getCollection('events').find({"$text":{"$search": "hosted"}},{ textScore: {$meta: "textScore"}}).sort({textScore: {$meta: "textScore"}})
 	})
+	app.post('/star_on', isLoggedIn, function(req, res) {
+			console.log("someone turned on notifications for")
+			console.log(req.body)
+			email = req.body.user
+			eventData = req.body.eventData
+			title = req.body.title
+			DATETIME = req.body.timings
+			email = email.replace(/(\r\n|\n|\r|\t| )/gm,"");
+			eventData = eventData.replace(/(\r\n|\n|\r|\t)/gm,"");
+			eventData = eventData.replace("...read more"," ");
+			DATETIME = DATETIME.replace(/(\r\n|\r|\t)/gm,"");
+			DATETIME = DATETIME.split('\n')
+			DATE = DATETIME[0]
+			TIME = DATETIME[1]
+			TIME = TIME.replace("   ","")
+			LOCATION = DATETIME[2]
+			LOCATION = LOCATION.replace("   ","")
+			title = title.replace(/(\r\n|\n|\r|\t| )/gm,"");
+			/*console.log(email)
+			console.log(eventData)
+			console.log(title)
+			console.log(DATE)
+			console.log(TIME)
+			console.log(LOCATION)*/
+			var newEvent            = new Notifications();
+			//Events.find()
+			Events.findOne({'local.Title' : title, 'local.Description' : eventData }, function(err, events) {
+				if (err)
+                return done(err);
+
+	            // check to see if theres already a user with that email
+	            if (events) {
+	            	newEvent.local.email    = email;
+	            	newEvent.local.event_id = events._id
+	            	newEvent.save(function(err) {
+				    	if (err)
+				        	throw err;
+				    	console.log("successfully saved notification data")
+					})
+	            	//console.log(events._id)
+	            	//console.log('THIS IS FROM MONGO')
+	            	//console.log(events)
+	            }
+			})
+			//console.log(Events.find({}))
+			
+
+	})
 };
 
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
-
+	console.log('no')
 	// if user is authenticated in the session, carry on
 	if (req.isAuthenticated())
 		return next();
