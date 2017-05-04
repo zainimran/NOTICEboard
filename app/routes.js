@@ -265,7 +265,7 @@ module.exports = function(app, passport,path) {
 		//Events.find()
 		Events.findOne({'local.Title' : title, 'local.Description' : eventData }, function(err, events) {
 			if (err)
-            return done(err);
+            	return done(err);
 
             // check to see if theres already a user with that email
             if (events) {

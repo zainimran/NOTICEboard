@@ -1,62 +1,64 @@
-// server.js
-
-// set up ======================================================================
-// get all the tools we need
-var express  = require('express');
-var app      = express();
-var port     = process.env.PORT || 8080;
+var express = require('express');
+var app = express();
+var server = require('http').Server(app);
+var path= require('path')
+var port = process.env.PORT || 8080;
 var mongoose = require('mongoose');
 var passport = require('passport');
-var flash    = require('connect-flash');
-var path = require('path');
-var http = require('http');
-var session = require('express-session');
+var flash = require('connect-flash');
+
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var socketio = require('socket.io')
-app.use(express.static(__dirname + '\\views'));
+var session = require('express-session');
 
-var configDB = require('./config/database.js');
+// Add connect-mongo to project - npm install connect-mongo
 var MongoStore = require('connect-mongo')(session);
 
+var configDB = require('./config/database.js');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var chatdb = require('./app/models/user.js');
+
 // configuration ===============================================================
+// NOTE: This might need to be put into a callback/promise inside an initialize function
 var db = mongoose.connect(configDB.url); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 
+// set up our express application
+app.use(cookieParser()); // read cookies (needed for auth)
+app.use(bodyParser()); // get information from html forms
+
+app.set('view engine', 'ejs'); // set up ejs for templating
 var mongoStore = new MongoStore({
   mongooseConnection: db.connection,
 });
+app.use(session({
+  secret: 'secret',
+  clear_interval: 900,
+  cookie: { maxAge: 2 * 60 * 60 * 1000 },
+  store: mongoStore,
+}));
 
-app.configure(function() {
 
-	// set up our express application
-	app.use(express.logger('dev')); // log every request to the console
-	app.use(express.cookieParser()); // read cookies (needed for auth)
-	app.use(express.bodyParser()); // get information from html forms
 
-	app.set('view engine', 'ejs'); // set up ejs for templating
+// required for passport
+app.use(session({ secret: 'secret' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+app.use(express.static(__dirname + '\\views'));
+//app.use(express.static(__dirname + '/public'));
 
-	// required for passport
-	app.use(express.session({
-		secret: 'ilovescotchscotchyscotchscotch',
-		clear_interval: 900,
-		cookie: { maxAge: 2 * 60 * 60 * 1000 },
-		store: mongoStore
-    })); // session secret
-	app.use(passport.initialize());
-	app.use(passport.session()); // persistent login sessions
-	app.use(flash()); // use connect-flash for flash messages stored in session
+require('./app/routes.js')(app, passport,path); // load our routes and pass in our app and fully configured passport
 
-});
 
-// socketio ======================================================================
-var server = http.Server(app)
-const io = socketio(server)
+
+// Intercept Socket.io's handshake request
 io.use(function(socket, next) {
 
     // Use the 'cookie-parser' module to parse the request cookies
-    cookieParser('ilovescotchscotchyscotchscotch')(socket.request, {}, function(err) {
+    cookieParser('secret')(socket.request, {}, function(err) {
 
         // Get the session id from the request cookies
         var sessionId = socket.request.signedCookies ? socket.request.signedCookies['connect.sid'] : undefined;
@@ -72,8 +74,8 @@ io.use(function(socket, next) {
             // Set the Socket.io session information
             socket.request.session = session;
             console.log(sessionId);
-            console.log(socket.request.user);
-            console.log(socket)
+            //console.log(socket.request.user);
+            //console.log(socket)
 
             // Use Passport to populate the user details
             passport.initialize()(socket.request, {}, function() {
@@ -91,6 +93,7 @@ io.use(function(socket, next) {
     });
   });
 
+// socket.io
 io.on('connection', function(socket) {
     console.log('a user connected');
 
@@ -112,11 +115,14 @@ io.on('connection', function(socket) {
     });
 });
 
-
 // routes ======================================================================
-require('./app/routes.js')(app, passport,path); // load our routes and pass in our app and fully configured passport
+require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
-server.listen(port);
+http.listen(port);
+
+app.get('/', function(req, res) {
+	//res.render('index.ejs'); // load the index.ejs file
+	res.render(path.join(path.dirname(__dirname) + '/views/landingpage.ejs'),{ message: req.flash('loginMessage') });
+});
 console.log('The magic happens on port ' + port);
-console.log(__dirname + '\\views')
