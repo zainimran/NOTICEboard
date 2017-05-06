@@ -4,7 +4,7 @@ var Books             = require('../app/models/books');
 var Courses             = require('../app/models/courses');
 var LnF             = require('../app/models/lostandfound');
 var Notifications = require('../app/models/notifications');
-module.exports = function(app, passport,path) {
+module.exports = function(app, passport,path,clientSockets) {
 
 	// =====================================
 	// HOME PAGE (with login links) ========
@@ -244,7 +244,8 @@ module.exports = function(app, passport,path) {
 		eventData = req.body.eventData
 		title = req.body.title
 		DATETIME = req.body.timings
-		email = email.replace(/(\r\n|\n|\r|\t| )/gm,"");
+		email = email.split('\n')
+		email = email[1].replace(/(\r\n|\n|\r|\t| )/gm,"");
 		eventData = eventData.replace(/(\r\n|\n|\r|\t)/gm,"");
 		eventData = eventData.replace("...read more"," ");
 		DATETIME = DATETIME.replace(/(\r\n|\r|\t)/gm,"");
@@ -263,6 +264,9 @@ module.exports = function(app, passport,path) {
 		console.log(LOCATION)*/
 		var newEvent            = new Notifications();
 		//Events.find()
+		//console.log(email)
+		//console.log(clientSockets)
+		clientSockets[email].emit('notify', "You just turned on notifications for "+ title)
 		Events.findOne({'local.Title' : title, 'local.Description' : eventData }, function(err, events) {
 			if (err)
             	return done(err);
@@ -286,7 +290,7 @@ module.exports = function(app, passport,path) {
 
 // route middleware to make sure
 function isLoggedIn(req, res, next) {
-	console.log('no')
+	//console.log('no')
 	// if user is authenticated in the session, carry on
 	if (req.isAuthenticated())
 		return next();

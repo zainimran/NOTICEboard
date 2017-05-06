@@ -54,27 +54,21 @@ app.configure(function() {
 var server = http.Server(app)
 const io = socketio(server)
 io.use(function(socket, next) {
-
     // Use the 'cookie-parser' module to parse the request cookies
     cookieParser('ilovescotchscotchyscotchscotch')(socket.request, {}, function(err) {
-
         // Get the session id from the request cookies
         var sessionId = socket.request.signedCookies ? socket.request.signedCookies['connect.sid'] : undefined;
-
         if (!sessionId) return next(new Error('sessionId was not found in socket.request'), false);
-
         // Use the mongoStorage instance to get the Express session information
         mongoStore.get(sessionId, function(err, session) {
-            console.log('efe');
+            //console.log('efe');
             if (err) return next(err, false);
             if (!session) return next(new Error('session was not found for ' + sessionId), false);
-
             // Set the Socket.io session information
             socket.request.session = session;
-            console.log(sessionId);
-            console.log(socket.request.user);
-            console.log(socket)
-
+            //console.log(sessionId);
+            //console.log(socket.request.user);
+            //console.log(socket)
             // Use Passport to populate the user details
             passport.initialize()(socket.request, {}, function() {
                 passport.session()(socket.request, {}, function() {
@@ -91,30 +85,33 @@ io.use(function(socket, next) {
     });
   });
 
+let clientSockets = {}
 io.on('connection', function(socket) {
-    console.log('a user connected');
-
-    socket.on('chat message', function(msg) {
-        console.log('a use connected');
-        var name = "efe";
+    socket.emit('ClientID', 0)    
+    socket.on('Save', msg => {
+        console.log('user connected')
         console.log(msg)
-        /*chatdb.saveMsg({
-            name: name,
-            msg: msg
-        }, function(err) {
-            if (err) throw err;
-            io.emit('chat message', msg);
-        });*/
-    });
-
+        console.log('socket added')
+        for (var key in clientSockets){
+            clientSockets[key].emit("notify", "A new user just got online! Email " + msg['email'])
+        }
+        clientSockets[msg['email']] = socket;
+        console.log(clientSockets)
+    })
     socket.on('disconnect', function() {
         console.log('user disconnected');
+        for (var key in clientSockets){
+            if(clientSockets[key] === socket){
+                delete clientSockets[key]
+                console.log(key + " disconnected")
+            }
+        }
     });
 });
 
 
 // routes ======================================================================
-require('./app/routes.js')(app, passport,path); // load our routes and pass in our app and fully configured passport
+require('./app/routes.js')(app, passport,path,clientSockets); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
 server.listen(port);
