@@ -25,7 +25,7 @@ body {
 }
 
 .firstlink {
-	margin-top: 2.5px;
+	margin-top: 3px;
 }
 
 .firstrow {
@@ -111,4 +111,7 @@ body {
 
 .footerlink {
 	color: #ffffff;
+}
+.lastlink {
+	margin-top: -1px;
 }
