@@ -32,7 +32,7 @@
 <body ng-app="NOTICEboard" ng-cloak>
 <nav class="navbar navbar-default newheader">
 <div class="container-fluid">
-	<div class="logodiv"><img class="logo" src="_NOTICEboard.png"></div>
+	<div class="logodiv"><img class="logo" src="LOGO.png"></div>
 	<div class="userinfo">
 		<div class="username">Zain</div>
 		<div class="usericondiv"><img class="usericon" src="user_icon.png"></div>
@@ -93,7 +93,8 @@
 					<img class="eventpic" src="Bild-Berlin-1.png">
 					<div class="eventinfo">
 						<div class="eTitle">RUNG</div>
-						<div class="addtofav"><img id="star" class="unfaved" src="star_off.png"></div>
+						<div class="addtofav"><img class="unfaved star" src="star_off.png"></div>
+						<div class="editpost"><img class="event_editbtn" src="pencil.png"></div>
 						<div class="eInfo">Named after the festival of Holi, Rung is one of the major events of LUMS...<p class="open_overlay"><b>read more</b></p></div>
 						<div class="eDateDetailed">31 March - 2 June
 													   3:30pm - 6:30pm
@@ -121,7 +122,10 @@
 						<img class="lostnfoundpic" src="brain1.png">
 						<div class="lostnfoundinfo">
 							<div class="lfInfo">lost brain at khokha somewher. please help</div>
-							<div class="lf_maillink"><img class="mailicon" src="outlook_icon.png"></div>
+							<div class="lf_maillink emailexpand">
+								<p class="emailhere">18100260@lums.edu.pk</p>
+								<img class="mailicon" src="outlook_icon.png">
+							</div>
 						</div>
 					</div>
 					<div class="lostnfound2"></div>
@@ -145,7 +149,10 @@
 						<div class="courseNeed">Need: political science pol sci 299 by mr meow <br>
 													12:30-3:30 Mon Fri
 						</div>					
-						<div class="cs_maillink"><img class="mailicon" src="outlook_icon.png"></div>
+						<div class="cs_maillink emailexpand">
+							<p class="emailhere">18100260@lums.edu.pk</p>
+							<img class="mailicon" src="outlook_icon.png">
+						</div>
 					</div>
 				</div>
 				<div class="courseSwap1">
@@ -176,7 +183,10 @@
 						<div class="courseNeed">Need: book of love by zain imran lover boy <br>
 													latest edition
 						</div>					
-						<div class="cs_maillink"><img class="mailicon" src="outlook_icon.png"></div>
+						<div class="cs_maillink emailexpand">
+							<p class="emailhere">18100260@lums.edu.pk</p>
+							<img class="mailicon" src="outlook_icon.png">
+						</div>
 					</div>
 				</div>
 				<div class="courseSwap1">
@@ -199,7 +209,7 @@
 			<img class="eventpic" src="Bild-Berlin-1.png">
 			<div class="eventinfo">
 				<div class="eTitle">RUNG</div>
-				<div class="addtofav"><img class="unfaved" src="star_off.png"></div>
+				<div class="addtofav"><img class="unfaved star" src="star_off.png"></div>
 				<div class="deleteEvent"><img src="garbage.png"></div>
 				<div class="eInfo">named after the festival of holi rug is one 
 					of the major events of lumsnamed after the festival of holi rug is one 
@@ -337,6 +347,143 @@
             </div>
 		</form>
 	   </div>
+	   <div class="searchResult_overlay alloverlays container-fluid">
+	   		<div class="row">
+		   		<h1 class="searchHeading">Search Results for: <span style="color:#0D98E8;">something</span></h1>
+				<div class="col-md-9">
+					<div class="row">
+						<div class="searchbar_spg">
+							<md-input-container md-no-float class="md-block">
+								<input class="searchinput" placeholder="looking for something">
+							</md-input-container>
+						</div>
+					</div>
+					<div class="row">
+						<div class="search_feed">
+							<div class="row searchResult1">
+								<div class="col-sm-2 eventpic_spg"><img src="lums_pics.png"></div>
+								<div class="col-md-8 eventInfo_spg">
+									<h4>CSO: Internship seminar</h4>
+									<p>Seminar for all student related FAQs. Please be on time...<span style="color: blue">read more</span></p>
+								</div>
+								<div class="col-sm-2 eventTime_spg">
+									<div class="row">
+										<div class="col-lg-6"><img src="Layer_6.png"></div>
+										<div class="col-lg-6"><img class="faved star" src="star_on_copy.png"></div>
+									</div>
+									<div class="row">
+										<p class="eventTime_spg">31 March - 2 June<br>
+										3:30pm - 6:30pm<br>
+										Bedian road, Lahore</p>
+									</div>
+								</div>
+							</div>
+							<div class="row searchResult2">
+								<div class="col-md-5 bookLeft_spg">
+									<div class="row">
+										<div class="col-md-3"><h4 class="bookSubheading_spg">Have Book:</h4></div>
+										<div class="col-md-9">
+											<p class="bookInfo_spg">Software Engineering<br>
+											Author: Mr. Google<br>
+											Edition: First Edition</p>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-7 bookRight_spg">
+									<div class="row">
+										<div class="col-md-3"><h4 class="bookSubheading_spg">Need Book:</h4></div>
+										<div class="col-md-5">
+											<p class="bookInfo_spg">What is political science<br>
+											Author: Mr. Meow<br>
+											Edition: Latest Edition</p>
+										</div>
+										<div class="col-md-4">
+											<div class="emailtag_spg">
+												<div class="row">
+													<div class="col-md-8"><h6 class="email_spg">18100260@lums.edu.pk</h6></div>
+													<div class="col-md-1 emailpic_spg"><img src="outlook_icon.png"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row searchResult3">
+								<div class="col-sm-2 lnfpic_spg"><img src="love.png"></div>
+								<div class="col-md-7 eventInfo_spg">
+									<h4><span style="color: #0d98e8">Found:</span> Ice Cream</h4>
+									<p>I found an ice cream on the khokha table yesterday that looks like this. Please let me know if it was your, because I ate it.</p>
+								</div>
+								<div class="col-md-3">
+									<div class="lnfemailtag_spg">
+										<div class="row">
+											<div class="col-md-8"><h6 class="email_spg">18100260@lums.edu.pk</h6></div>
+											<div class="col-md-1 emailpic_spg"><img src="outlook_icon.png"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row searchResult1">
+								<div class="col-sm-2 eventpic_spg"><img src="lums_pics.png"></div>
+								<div class="col-md-8 eventInfo_spg">
+									<h4>CSO: Internship seminar</h4>
+									<p>Seminar for all student related FAQs. Please be on time...<span style="color: blue">read more</span></p>
+								</div>
+								<div class="col-sm-2 eventTime_spg">
+									<div class="row">
+										<div class="col-lg-6"><img src="Layer_6.png"></div>
+										<div class="col-lg-6"><img class="faved star" src="star_on_copy.png"></div>
+									</div>
+									<div class="row">
+										<p class="eventTime_spg">31 March - 2 June<br>
+										3:30pm - 6:30pm<br>
+										Bedian road, Lahore</p>
+									</div>
+								</div>
+							</div>
+							<div class="row searchResult1">
+								<div class="col-sm-2 eventpic_spg"><img src="lums_pics.png"></div>
+								<div class="col-md-8 eventInfo_spg">
+									<h4>CSO: Internship seminar</h4>
+									<p>Seminar for all student related FAQs. Please be on time...<span style="color: blue">read more</span></p>
+								</div>
+								<div class="col-sm-2 eventTime_spg">
+									<div class="row">
+										<div class="col-lg-6"><img src="Layer_6.png"></div>
+										<div class="col-lg-6"><img class="faved star" src="star_on_copy.png"></div>
+									</div>
+									<div class="row">
+										<p class="eventTime_spg">31 March - 2 June<br>
+										3:30pm - 6:30pm<br>
+										Bedian road, Lahore</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+   				</div>
+	   			<div class="col-md-3">
+	   				<div class="filter_dropdown_spg">
+					  <h6>Filter by:</h6>
+						<label>
+							<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_0s">
+							Events</label>
+						<br>
+						<label>
+							<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_1s">
+							Lost & Found</label>
+						<br>
+						<label>
+							<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_2s">
+							Book Swaps</label>
+						<br>
+						<label>
+							<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_3s">
+							Course Swaps</label>
+					</div>
+	   			</div>						   		
+		   	</div>
+	   </div>
 	</div>
 	<div class="cover"></div>
 </div>
@@ -345,7 +492,7 @@
 <div class="container-fluid footer">
  <div class="navbar-footer">
 	<ul class="nav navbar-nav navbar-right">
-        <li><a class="footerlink" href="#">HOME</a></li>
+        <li><a class="footerlink firstlink" href="#">HOME</a></li>
         <li><a class="footerlink" href="#">CONTACT</a></li>
         <li><a class="footerlink" href="#">TERMS OF SERVICE</a></li>
 	 </ul>
@@ -377,82 +524,6 @@
 <script src="js/bootstrap.js"></script>
 
 <script type="text/javascript" src="Monthly-master/js/monthly.js"></script>
-<script type="text/javascript">
-    $(window).load( function() {
-        $('#mycalendar').monthly();
-    });
-</script>
-
-<script>
-	$('.usericondiv').on('click', function() {
-		$('.profile_dropdown').toggle();
-	});
-	$('.notifications').on('click', function() {
-		$('.notif_dropdown').toggle();
-	});
-	$('.filterbtn').on('click', function() {
-		$('.filter_dropdown').toggle();
-	});
-	$('.open_overlay').on('click', function() {
-		$('.overlay').show();
-		$('.cover').show();
-		$('.event1_overlay').show()
-	});
-	$('.cover').on('click', function() {
-		$('.overlay').hide();
-		$('.cover').hide();
-		$('.alloverlays').hide();
-	});
-	$('#addBook').on('click', function() {
-		$('.overlay').show();
-		$('.cover').show();
-		$('.addBook_overlay').show()
-	});
-	$('#addCourse').on('click', function() {
-		$('.overlay').show();
-		$('.cover').show();
-		$('.createCourse_overlay').show()
-	});
-	$('.addlnf').on('click', function() {
-		$('.overlay').show();
-		$('.cover').show();
-		$('.addLnf_overlay').show()
-	});
-	$('#addEvent').on('click', function() {
-		$('.overlay').show();
-		$('.cover').show();
-		$('.addEvent_overlay').show()
-	});
-	$('#star').on('click', function() {
-		if ($('#star').attr('class') === 'unfaved') {
-			$('#star').attr({
-				class: 'faved',
-				src: 'star_on.png'
-			})
-		}
-		else {
-			$('#star').attr({
-				class: 'unfaved',
-				src: 'star_off.png'
-			})
-		}
-	});
-</script>
-
-<script>
-    (function($){
-        $(window).on("load",function(){
-            $(".eventfeed").mCustomScrollbar({
-				theme: "minimal-dark"
-			});
-			$(".lnffeed").mCustomScrollbar({
-				theme: "minimal-dark"
-			});
-			$(".csfeed").mCustomScrollbar({
-				theme: "minimal-dark"
-			});
-        });
-    })(jQuery);
-</script>
+<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
