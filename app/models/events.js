@@ -14,7 +14,8 @@ var eventSchema = mongoose.Schema({
         Title		 : String,
         DATETIME	 : Date,
         LOCATION	 : String,
-        Description	 : {type : String, index :true,text:true}
+        Description	 : {type : String, index :true,text:true},
+        image 		 : String
     }
 });
 

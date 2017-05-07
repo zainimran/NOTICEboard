@@ -14,6 +14,7 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var socketio = require('socket.io')
+var SocketIOFile = require('socket.io-file');
 app.use(express.static(__dirname + '\\views'));
 
 var configDB = require('./config/database.js');
@@ -87,6 +88,39 @@ io.use(function(socket, next) {
 
 let clientSockets = {}
 io.on('connection', function(socket) {
+    var uploader = new SocketIOFile(socket, {
+        uploadDir: __dirname +'\\data',                          // simple directory
+        chunkSize: 10240,                           // default is 10240(1KB)
+        transmissionDelay: 0,                       // delay of each transmission, higher value saves more cpu resources, lower upload speed. default is 0(no delay)
+        overwrite: false,                           // overwrite file if exists, default is true.
+        // rename: function(filename) {
+        //  var split = filename.split('.');    // split filename by .(extension)
+        //  var fname = split[0];   // filename without extension
+        //  var ext = split[1];
+
+        //  return `${fname}_${count++}.${ext}`;
+        // }
+    });
+    uploader.on('start', (fileInfo) => {
+        console.log('Start uploading');
+        console.log(fileInfo);
+    });
+    uploader.on('stream', (fileInfo) => {
+        console.log(`${fileInfo.wrote} / ${fileInfo.size} byte(s)`);
+    });
+    uploader.on('complete', (fileInfo) => {
+        //console.log('Upload Complete.');
+        //console.log(fileInfo);
+        /*socket.on('pic', (msg)=>{
+            console.log(msg)
+        })*/
+    });
+    uploader.on('error', (err) => {
+        console.log('Error!', err);
+    });
+    uploader.on('abort', (fileInfo) => {
+        console.log('Aborted: ', fileInfo);
+    });
     socket.emit('ClientID', 0)    
     socket.on('Save', msg => {
         console.log('user connected')
@@ -95,8 +129,11 @@ io.on('connection', function(socket) {
         for (var key in clientSockets){
             clientSockets[key].emit("notify", "A new user just got online! Email " + msg['email'])
         }
+        for (var key in clientSockets){
+            console.log('people online are '+key)
+        }
         clientSockets[msg['email']] = socket;
-        console.log(clientSockets)
+        //console.log(clientSockets)
     })
     socket.on('disconnect', function() {
         console.log('user disconnected');
@@ -105,6 +142,9 @@ io.on('connection', function(socket) {
                 delete clientSockets[key]
                 console.log(key + " disconnected")
             }
+        }
+        for (var key in clientSockets){
+            console.log('people online are '+key)
         }
     });
 });

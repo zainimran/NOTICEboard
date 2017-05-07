@@ -13,7 +13,7 @@ Monthly 2.2.0 by Kevin Thornbloom is licensed under a Creative Commons Attributi
 				disablePast: false,
 				eventList: true,
 				events: "",
-				jsonUrl: "http://localhost:8000/events.json",
+				jsonUrl: "",
 				linkCalendarToEventUrl: true,
 				maxWidth: false,
 				mode: "event",

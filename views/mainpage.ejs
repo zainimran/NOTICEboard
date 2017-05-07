@@ -50,7 +50,6 @@
 
 <div class="container-fluid">
 <div class="row mainrow">
-
 	<div class="feed">
 		<div class="searchbar">
 			<form action = "/search" method = "post">
@@ -276,7 +275,7 @@
 		</form>
 	   </div>
       <div class="addLnf_overlay alloverlays">
-		<form action ="/lostandFound" method = "post">
+		<form action ="/lostandFound" method = "post" id = "lnfform">
 			<div class="input-group">
 		  	  <span class="input-group-addon"><input type="radio" name="choiceLost"></span>
 				<label for="input" class="form-control">Lost</label>
@@ -293,14 +292,14 @@
             <br>
             <label for="textfield">UPLOAD IMAGE</label>
             <br>
-            	<input type="file">
+            	<input type="file" id = "fileevent1" name = "image">
             <br>
             <br>
             <input type="submit" value="POST">
 		</form>
 	   </div>
 	   <div class="addEvent_overlay alloverlays">
-		<form action="/eventsInsert" method="post">
+		<form action="/eventsInsert" method="post" id = "eventform">
 			<div class="courseform_left">
 				<label for="textfield">EVENT NAME:</label>
 				<br>
@@ -321,7 +320,7 @@
             <div class="courseform_right">
             	<label for="textfield">UPLOAD IMAGE:</label>
 				<br>
-            		<input type="file" name = "image">
+            		<input type="file" name = "image" id = "fileevent">
 				<br>
 				<label for="textfield">TIME:</label>
 				<br>
@@ -349,6 +348,8 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/lib.js"></script>
+<script src="js/socket.io.js"></script>
+<script src="js/socket.io-file-client.js"></script>
 <script src="js/client.js"></script>
 <!-- Angular Material Library -->
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
@@ -374,8 +375,36 @@
 
 <script type="text/javascript" src="Monthly-master/js/monthly.js"></script>
 <script type="text/javascript">
-    $(window).load( function() {
-        $('#mycalendar').monthly();
+    var sampleEvents = {
+		"monthly": [
+			{
+			"id": 1,
+			"name": "Whole month event",
+			"startdate": "2017-5-01",
+			"enddate": "2017-5-2",
+			"starttime": "12:00",
+			"endtime": "2:00",
+			"color": "#99CCCC",
+			"url": ""
+			},
+			{
+			"id": 2,
+			"name": "Test encompasses month",
+			"startdate": "2017-5-29",
+			"enddate": "2017-5-30",
+			"starttime": "12:00",
+			"endtime": "2:00",
+			"color": "#CC99CC",
+			"url": ""
+			}
+		]
+	};
+    $(window).on('load', function() {
+        $('#mycalendar').monthly({
+        	mode: 'event',
+			dataType: 'json',
+			events: sampleEvents
+        });
     });
 </script>
 
@@ -421,12 +450,13 @@
 	});
 	$('#star').on('click', function() {
 		if ($('#star').attr('class') === 'unfaved') {
+			//console.log(sampleEvents.monthly)
 			$('#star').attr({
 				class: 'faved',
 				src: 'star_on.png'
 			})
 			text = $('.eInfo').text()
-			console.log(text)
+			//console.log(text)
 			email = $('.profile_info').text()
 			title = $('.eTitle').text()
 			title2 = ""
@@ -435,16 +465,69 @@
 			}
 			title = title2
 			DATETIME = $('.eDateDetailed').text()
-			console.log(email)
-			console.log(title)
-			console.log(DATETIME)
 			$.post("/star_on", {eventData: text, user: email, timings : DATETIME, title:title})
+			//console.log(DATETIME)
+			/*console.log(email)
+			console.log(title)
+			console.log(DATETIME)*/
+			DATETIME = DATETIME.replace(/(\r\n|\r|\t)/gm,"");
+			DATETIME = DATETIME.split('\n')
+			DATE = DATETIME[0]
+			TIME = DATETIME[1]
+			TIME = TIME.replace("   ","")
+			//console.log(DATE)
+			sampleEvents.monthly.push({
+				"name": title,
+				"startdate": "2017-5-03",
+				"enddate": "2017-5-3",
+				"starttime": "23:00",
+				"color": "#99CCCC"	
+			})
+			$('#mycalendar').html("");
+			$('#mycalendar').monthly({events: sampleEvents});
 		}
 		else {
 			$('#star').attr({
 				class: 'unfaved',
 				src: 'star_off.png'
 			})
+
+			text = $('.eInfo').text()
+			//console.log(text)
+			email = $('.profile_info').text()
+			title = $('.eTitle').text()
+			title2 = ""
+			for(var i =0;i<title.length/2;i++){
+				title2 = title2+title[i]
+			}
+			title = title2
+			DATETIME = $('.eDateDetailed').text()
+			/*console.log(email)
+			console.log(title)
+			console.log(DATETIME)*/
+			SampleEvents = {"monthly" : []};
+			for (j = 0;j < sampleEvents.monthly.length;j++) {
+				if(sampleEvents.monthly[j].name === title){
+					//console.log('iwasinsideshit')
+					//console.log(title)
+					//break;
+				}
+				else {
+					SampleEvents.monthly.push(sampleEvents.monthly[j])
+				}
+			}
+			//console.log(i)
+			console.log(title)
+			//console.log('iwashere')
+			//delete sampleEvents.monthly[i]
+			//console.log(sampleEvents)
+			//console.log('================================')
+			//console.log(SampleEvents)
+			sampleEvents = SampleEvents;
+			$('#mycalendar').html("");
+			$('#mycalendar').monthly({events: SampleEvents});
+			$.post("/star_off", {eventData: text, user: email, timings : DATETIME, title:title})
+
 		}
 	});
 </script>

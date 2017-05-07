@@ -7,6 +7,7 @@
     "connect-flash": "~0.1.1",
     "connect-mongo": "^1.3.2",
     "cookie-parser": "^1.4.3",
+    "delivery": "0.0.6",
     "ejs": "~0.8.5",
     "express": "~3.4.4",
     "express-session": "^1.15.2",
@@ -18,6 +19,9 @@
     "passport-google-oauth": "~0.1.5",
     "passport-local": "~0.1.6",
     "passport-twitter": "~1.0.2",
-    "socket.io": "^1.7.3"
+    "socket.io": "^1.7.3",
+    "socket.io-client": "^1.7.3",
+    "socket.io-file": "^2.0.14",
+    "socket.io-file-client": "^2.0.121"
   }
 }

@@ -78,11 +78,13 @@ module.exports = function(app, passport,path,clientSockets) {
 		newEvent.local.LOCATION    = req.body.venue;
 		//newEvent.local.Name    = req.body.Name;
 		newEvent.local.Description    = req.body.description;
+		newEvent.local.image = req.body.image
 		// save the user
 		// set the user's local credentials
 		//newEvent.local.email    = email;
 		
 		console.log(newEvent)
+		//console.log(req.body)
 		newEvent.save(function(err) {
 		    if (err)
 		        throw err;
@@ -147,6 +149,8 @@ module.exports = function(app, passport,path,clientSockets) {
 		newEvent.local.email    = req.user.local.email;
 		newEvent.local.LostItem = req.body.lostitem; // use the generateHash function in our user model
 		newEvent.local.Description = req.body.description;
+		newEvent.local.image = req.body.image
+		console.log(req.body)
 		console.log(req.body.choiceFound)
 		console.log(req.body.choiceLost)
 		if (req.body.choiceFound === undefined && req.body.choiceLost === 'on')
@@ -238,8 +242,7 @@ module.exports = function(app, passport,path,clientSockets) {
 		//db.getCollection('events').find({"$text":{"$search": "hosted"}},{ textScore: {$meta: "textScore"}}).sort({textScore: {$meta: "textScore"}})
 	})
 	app.post('/star_on', isLoggedIn, function(req, res) {
-		console.log("someone turned on notifications for")
-		console.log(req.body)
+		//console.log(req.body)
 		email = req.body.user
 		eventData = req.body.eventData
 		title = req.body.title
@@ -256,22 +259,13 @@ module.exports = function(app, passport,path,clientSockets) {
 		LOCATION = DATETIME[2]
 		LOCATION = LOCATION.replace("   ","")
 		title = title.replace(/(\r\n|\n|\r|\t| )/gm,"");
-		/*console.log(email)
-		console.log(eventData)
-		console.log(title)
-		console.log(DATE)
-		console.log(TIME)
-		console.log(LOCATION)*/
+		console.log("someone turned on notifications for "+title + " " + email)
 		var newEvent            = new Notifications();
-		//Events.find()
-		//console.log(email)
-		//console.log(clientSockets)
 		clientSockets[email].emit('notify', "You just turned on notifications for "+ title)
 		Events.findOne({'local.Title' : title, 'local.Description' : eventData }, function(err, events) {
 			if (err)
             	return done(err);
 
-            // check to see if theres already a user with that email
             if (events) {
             	newEvent.local.email    = email;
             	newEvent.local.event_id = events._id
@@ -280,9 +274,48 @@ module.exports = function(app, passport,path,clientSockets) {
 			        	throw err;
 			    	console.log("successfully saved notification data")
 				})
-            	//console.log(events._id)
-            	//console.log('THIS IS FROM MONGO')
-            	//console.log(events)
+            }
+		})			
+	})
+
+	app.post('/star_off', isLoggedIn, function(req, res) {
+		//console.log(req.body)
+		email = req.body.user
+		eventData = req.body.eventData
+		title = req.body.title
+		DATETIME = req.body.timings
+		email = email.split('\n')
+		email = email[1].replace(/(\r\n|\n|\r|\t| )/gm,"");
+		eventData = eventData.replace(/(\r\n|\n|\r|\t)/gm,"");
+		eventData = eventData.replace("...read more"," ");
+		DATETIME = DATETIME.replace(/(\r\n|\r|\t)/gm,"");
+		DATETIME = DATETIME.split('\n')
+		DATE = DATETIME[0]
+		TIME = DATETIME[1]
+		TIME = TIME.replace("   ","")
+		LOCATION = DATETIME[2]
+		LOCATION = LOCATION.replace("   ","")
+		title = title.replace(/(\r\n|\n|\r|\t| )/gm,"");
+		console.log("someone turned OFF notifications for "+ title + " "+ email)
+		//clientSockets[email].emit('notify', "You just turned off notifications for "+ title)
+		Events.findOne({'local.Title' : title, 'local.Description' : eventData }, function(err, events) {
+			if (err)
+            	return done(err);
+
+            // check to see if theres already a user with that email
+            
+            if (events) {
+            	Notifications.findOne({'local.email' : email, 'local.event_id' : events._id}, function(err, notif) {
+            		if(err)
+            			return done(err);
+            		if(notif){
+            			notif.remove()
+            			clientSockets[email].emit('notify1', "You just turned off notifications for "+ title)	
+            		}
+            	})	
+            }
+            else {
+            	clientSockets[email].emit('notify1', "You cant turn off notifications for unsubscribed "+ title + " because it doesnt exist")
             }
 		})			
 	})

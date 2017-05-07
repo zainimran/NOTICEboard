@@ -14,7 +14,8 @@ var lnFSchema = mongoose.Schema({
         email 		 : String,
         LostItem	 : String,
         Description  : String,
-        LostORFound  : String
+        LostORFound  : String,
+        image 		 : String
     }
 });
 
