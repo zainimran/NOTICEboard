@@ -1,6 +1,3 @@
-EDIT THE HTML. MAKE IT A TEMPLATE TO FEED USER's CALENDAER EVENT. ALSO PROVIDE OPTION OF BEING REDIRECTED TO THE EVENT's page. TO INCLUDE THE
-JSON MAKE IT A PART OF THE SCRIPT TAG. IT WOULD ALSO BECOME A TEMPLATE.
-
 #Monthly.js
 A jQuery based responsive calendar plugin by <a href="https://twitter.com/kthornbloom" target="_blank">@kthornbloom</a>
 

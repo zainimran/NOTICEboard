@@ -55,9 +55,51 @@ module.exports = function(app, passport,path,clientSockets) {
 	// we will want this protected so you have to be logged in to visit
 	// we will use route middleware to verify this (the isLoggedIn function)
 	app.get('/mainpage', isLoggedIn, function(req, res) {
-		res.render('mainpage.ejs', {
-			user : req.user // get the user out of session and pass to template
-		});
+		Events.find({},function(err,data){
+			//console.log(data)
+			var arr = [];
+			var k = 1;
+			for(j = data.length-1; j>=data.length-6; j--){
+				x = data[j]
+				y = {}
+				console.log(x)
+				y['Date'] = x.local.DATETIME.toISOString().split('T')[0]
+				y['Time'] = x.local.DATETIME.toISOString().split('T')[1].split(':')[0] + ':' + x.local.DATETIME.toISOString().split('T')[1].split(':')[1]
+				if (parseInt(x.local.DATETIME.toISOString().split('T')[1].split(':')[0]) >=12){
+					y['Time'] = y['Time']+ "PM"
+				}
+				else{
+					y['Time'] = y['Time']+ "AM"
+				}
+				y['Description'] = x.local.Description
+				var tmp = x.local.Description.split(' ')
+				var bla = "";
+				i = 0;
+				tmp.forEach(p => {
+					if(i < 9){
+						bla = bla + p + " ";
+					}
+					else if(i == 10){
+						bla = bla + p;
+					}
+					i = i + 1
+				})
+				y['parsed'] = bla
+				y['title'] = x.local.Title
+				y['location'] = x.local.LOCATION
+				y['img'] = x.local.image
+				y['email'] = x.local.email
+				y['id'] = k
+				arr.push(y)
+				k = k + 1
+				
+			}
+			console.log(arr)
+			res.render('mainpage.ejs', {
+				user : req.user, // get the user out of session and pass to template
+				Event: arr
+			});	
+		})
 	});
 
 	// =====================================

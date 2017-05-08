@@ -408,21 +408,30 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 }
 
 .lf_maillink {
+	position: absolute;
+	right: 13px;
 	display: inline-block;
 	float: right;
+	z-index: 1;
 	height: 23px;
-	width: 26px;
-	margin-top: -6px;
-	margin-right: -38px;
-	padding-left: 5px;
+	width: auto;
+	margin-top: -11px;
 	background-color: #fdfdfd;
 	border-bottom-left-radius: 3px;
 	box-shadow: 1px 1px 1.92px 0.08px rgba(0, 0, 0, 0.24);
 }
 
+.emaillabel {
+	display: inline-block;
+	float: left;
+}
+
 .mailicon {
+	display: inline-block;
 	width: 16px;
 	height: 16px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 .lfInfo {
@@ -501,13 +510,14 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 }
 
 .cs_maillink {
+	position: absolute;
+	right: 13px;
 	display: inline-block;
 	float: right;
-	height: 25px;
-	width: 26px;
-	margin-top: -35px;
-	margin-right: -5px;
-	padding-left: 5px;
+	z-index: 1;
+	height: 23px;
+	width: auto;
+	margin-top: -33px;
 	background-color: #fdfdfd;
 	border-bottom-left-radius: 3px;
 	box-shadow: 1px 1px 1.92px 0.08px rgba(0, 0, 0, 0.24);
@@ -539,7 +549,7 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 }
 
 .overlay {
-	display: none;
+	/*display: none;*/
 	z-index: 10;
 	position: absolute;
 	top: 30%;
@@ -549,7 +559,9 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 }
 
 .cover {
+/*
 	display: none;
+*/
 	position:fixed;
 	top: 0;
 	left: 0;
@@ -657,4 +669,155 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 	height: 300px;
 	border-radius: 2px;
 	background-color: #f4f4f4;
+}
+
+.searchinput:focus {
+	padding-top: 0px;
+}
+
+.emailhere {
+	display: none;
+	float: left;
+	margin-left: 5px;
+}
+
+.searchResult_overlay {
+	/*display: none;*/
+	margin-top: -100px;
+	margin-left: -150px;
+	z-index: 10;
+	padding: 9px 30px;
+	width: 958px;
+	height: 726px;
+	border-radius: 2px;
+	border-width: 1px;
+	border-color: #000000;
+	border-style: solid;
+	background-color: #fafafa;
+}
+
+.searchHeading {
+	padding-bottom: 10px;
+	border-bottom: 1px rgba(0,0,0,1.00) solid;
+}
+
+.searchbar_spg {
+	padding-left: 10px;
+	width: auto;
+	height: 30px;
+	border-radius: 1px;
+	background-color: #fafafa;
+	box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.35);
+}
+
+.filter_dropdown_spg {
+	background-color: #fafafa;
+	box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.35);
+	z-index: 1;
+	margin-top: 15px;
+	padding: 5px;
+}
+
+.search_feed {
+	max-height: 400px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-right: 10px;
+}
+
+.searchResult1 {
+	background-color: #f9f8f8;
+	padding: 10px 10px;
+	border: solid rgba(106,101,101,1.00) 0.5px;
+}
+
+.eventInfo_spg {
+	margin-top: -10px;
+}
+
+.eventTime_spg {
+	font-size: 8.33px;
+	font-weight: 400;
+	font-family: Arial;
+}
+
+.bookLeft_spg {
+	background-color: #edeff1;
+	border-radius: 2px;
+	border-right-width: 1px;
+	border-right-color: rgba(0, 0, 0, 0.23);
+	border-right-style: solid;
+}
+
+.bookRight_spg {
+	background-color: #f5eaea;
+	border-radius: 2px;
+}
+
+.bookSubheading_spg {
+	color: #0d98e8;
+}
+
+.searchResult2 {
+	padding: 10px 10px; 
+	border: solid rgba(106,101,101,1.00) 0.5px;
+}
+
+.bookInfo_spg {
+	font-size: 10px;
+	margin-top: 10px;
+}
+
+.emailtag_spg {
+	background-color: #fdfdfd;
+	border-bottom-left-radius: 3px;
+	box-shadow: 1px 1px 1.92px 0.08px rgba(0, 0, 0, 0.24);
+	margin-right: -9px;
+	margin-left: -12px;
+}
+
+.email_spg {
+	font-size: 9px;
+}
+
+.searchResult3 {
+	padding: 10px 10px;
+	background-color: #edeff1;
+	border: solid rgba(106,101,101,1.00) 0.5px;
+}
+
+.eventpic_spg {
+	border-right-width: 1px;
+	border-right-color: rgba(0, 0, 0, 0.23);
+	border-right-style: solid;
+}
+
+.lnfpic_spg {
+	border-right-width: 1px;
+	border-right-color: rgba(0, 0, 0, 0.23);
+	border-right-style: solid;
+}
+
+.lnfInfo_spg {
+	font-size: 10px;
+}
+
+.lnfemailtag_spg {
+	background-color: #fdfdfd;
+	border-bottom-left-radius: 3px;
+	box-shadow: 1px 1px 1.92px 0.08px rgba(0, 0, 0, 0.24);
+	margin-right: -9px;
+	margin-left: 25px;
+	margin-top: -10px;
+}
+
+.editpost {
+	display: inline-block;
+	float: right;
+	margin-right: 5px;
+}
+
+.event_editbtn {
+	width: 17px;
+	height: 16px;
 }
