@@ -157,3 +157,4 @@ require('./app/routes.js')(app, passport,path,clientSockets); // load our routes
 server.listen(port);
 console.log('The magic happens on port ' + port);
 console.log(__dirname + '\\views')
+
