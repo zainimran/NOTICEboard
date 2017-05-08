@@ -34,14 +34,14 @@
 <div class="container-fluid">
 	<div class="logodiv"><img class="logo" src="LOGO.png"></div>
 	<div class="userinfo">
-		<div class="username">Zain</div>
+		<div class="username"><%= user.local.FirstName%></div>
 		<div class="usericondiv"><img class="usericon" src="user_icon.png"></div>
 		<div class="profile_dropdown">
 			<div class="usericondiv_dd"><img class="usericon_dd" src="user_icon.png"></div>
-			<div class="profile_info">Zain Imran <br>
-									  18100260@lums.edu.pk
+			<div class="profile_info"><%= user.local.FirstName + ' ' + user.local.LastName%><br>
+									  <%= user.local.email%>
 			</div>
-			<div class="signout_btn btn">Sign out</div>
+			<a href="/logout"><div class="signout_btn btn">Sign out</div></a>
 		</div>
 	</div>
 	<div class="headerline"></div>
@@ -50,31 +50,32 @@
 
 <div class="container-fluid">
 <div class="row mainrow">
-
 	<div class="feed">
 		<div class="searchbar">
-			<md-input-container md-no-float class="md-block">
-				<input class="searchinput" placeholder="looking for something">
-				<div class="filterbtn"><img src="hamburger_btn_for_search.png"></div>
-			</md-input-container>
-			<div class="filter_dropdown">
-			  <h6>Filter by:</h6>
-				<label>
-					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_0">
-					Events</label>
-				<br>
-				<label>
-					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_1">
-					Lost & Found</label>
-				<br>
-				<label>
-					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_2">
-					Book Swaps</label>
-				<br>
-				<label>
-					<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_3">
-					Course Swaps</label>
-			</div>
+			<form action = "/search" method = "post">
+				<md-input-container md-no-float class="md-block">
+					<input type = "text" class="searchinput" placeholder="looking for something" name = "query">
+					<div class="filterbtn"><img src="hamburger_btn_for_search.png"></div>
+				</md-input-container>
+				<div class="filter_dropdown">
+				  <h6>Filter by:</h6>
+					<label>
+						<input type="checkbox" name="searchfilter" value="Events" id="Searchfilter_0">
+						Events</label>
+					<br>
+					<label>
+						<input type="checkbox" name="searchfilter" value="LostAndFound" id="Searchfilter_1">
+						Lost & Found</label>
+					<br>
+					<label>
+						<input type="checkbox" name="searchfilter" value="BookSwap" id="Searchfilter_2">
+						Book Swaps</label>
+					<br>
+					<label>
+						<input type="checkbox" name="searchfilter" value="CourseSwap" id="Searchfilter_3">
+						Course Swaps</label>
+				</div>
+			</form>
 		</div>
 		<div class="notifications"><img src="notifications.png">
 			<div class="notif_dropdown">
@@ -228,18 +229,18 @@
 			</div>
 		</div>
 	  <div class="addBook_overlay alloverlays">
-		<form>
+		<form action = "/bookSwapInsert" method = "post">
 			<label for="textfield">I HAVE THIS BOOK:</label>
            	<br>
-            	<input type="text" name="textfield" id="bookname">
+            	<input type="text" name= "bookoffered">
             <br>
             <label for="textfield">AUTHOR:</label>
             <br>
-            	<input type="text" name="textfield" id="bookauthor">
+            	<input type="text" name="bookoffauthor">
             <br>
             <label for="textfield">CONTACT NUMBER:</label>
             <br>
-            	<input type="number" id="bookcontact">
+            	<input type="number" name="contact">
             <br>
             <label for="textfield">UPLOAD IMAGE</label>
             <br>
@@ -250,97 +251,90 @@
 		</form>
 	   </div>
 	   <div class="createCourse_overlay alloverlays">
-		<form>
+		<form action = "/courseSwapInsert" method = "post">
 			<div class="courseform_left">
 				<label for="textfield">I HAVE THIS COURSE:</label>
 				<br>
-					<input type="text" name="textfield" id="coursename">
+					<input type="text" name="courseoffered">
 				<br>
 				<label for="textfield">TIME:</label>
 				<br>
-					<input type="time">
+					<input type="time" name = "timingsoffered">
 				<br>
-				<label for="textfield">DATE:</label>
-				<br>
-					<input type="date">
 				<br>
 				<label for="textfield">INSTRUCTOR:</label>
 				<br>
-					<input type="text" name="textfield" id="instructor">
+					<input type="text" name="instructoroffered">
             </div>
             <div class="courseform_right">
             	<label for="textfield">I NEED THIS COURSE:</label>
 				<br>
-					<input type="text" name="textfield" id="coursename2">
+					<input type="text" name="courserequired">
 				<br>
 				<label for="textfield">TIME:</label>
 				<br>
-					<input type="time">
-				<br>
-				<label for="textfield">DATE:</label>
-				<br>
-					<input type="date">
+					<input type="time" name = "timingsrequired">
 				<br>
 				<label for="textfield">INSTRUCTOR:</label>
 				<br>
-					<input type="text" name="textfield" id="instructor2">
+					<input type="text" name="instructorrequired">
             	<br>
 				<br>
 				<input type="submit" value="POST">
             </div>
 		</form>
-	   </div>
+	  </div>
       <div class="addLnf_overlay alloverlays">
-		<form>
+		<form action ="/lostandFound" method = "post" id = "lnfform">
 			<div class="input-group">
-		  	  <span class="input-group-addon"><input type="radio" name="choice"></span>
+		  	  <span class="input-group-addon"><input type="radio" name="choiceLost"></span>
 				<label for="input" class="form-control">Lost</label>
-			  <span class="input-group-addon"><input type="radio" name="choice"></span>
+			  <span class="input-group-addon"><input type="radio" name="choiceFound"></span>
 				<label for="input" class="form-control">Found</label>
 			</div>
 		  <label for="textfield">ITEM:</label>
            	<br>
-            	<input type="text" name="textfield" id="item">
+            	<input type="text" name="lostitem">
             <br>
             <label for="textfield">DESCRIPTION:</label>
             <br>
-            	<textarea rows="4" cols="50"></textarea>
+            	<textarea rows="4" cols="50" name = "description"></textarea>
             <br>
             <label for="textfield">UPLOAD IMAGE</label>
             <br>
-            	<input type="file">
+            	<input type="file" id = "fileevent1" name = "image">
             <br>
             <br>
             <input type="submit" value="POST">
 		</form>
 	   </div>
 	   <div class="addEvent_overlay alloverlays">
-		<form>
+		<form action="/eventsInsert" method="post" id = "eventform">
 			<div class="courseform_left">
 				<label for="textfield">EVENT NAME:</label>
 				<br>
-					<input type="text" name="textfield" id="eventname">
+					<input type="text" name="eventname">
 				<br>
 				<label for="textfield">DESCRIPTION:</label>
 				<br>
-            		<textarea rows="4" cols="40"></textarea>
+            		<textarea rows="4" cols="40" name = "description"></textarea>
 				<br>
 				<label for="textfield">EVENT DATE:</label>
 				<br>
-					<input type="date">
+					<input type="date" name = "date">
 				<br>
 				<label for="textfield">VENUE:</label>
 				<br>
-					<input type="text" name="textfield" id="venue">
+					<input type="text" name= "venue">
             </div>
             <div class="courseform_right">
             	<label for="textfield">UPLOAD IMAGE:</label>
 				<br>
-            		<input type="file">
+            		<input type="file" name = "image" id = "fileevent">
 				<br>
 				<label for="textfield">TIME:</label>
 				<br>
-					<input type="time">
+					<input type="time" name = "time">
 				<br>
 				<br>
 				<input type="submit" value="POST">

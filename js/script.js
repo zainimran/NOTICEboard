@@ -1,5 +1,12 @@
-$(window).load( function() {
-	$('#mycalendar').monthly();
+var sampleEvents = {
+	"monthly": []
+};
+$(window).on('load', function() {
+	$('#mycalendar').monthly({
+    	mode: 'event',
+		dataType: 'json',
+		events: sampleEvents
+     });
 });
 $('.usericondiv').on('click', function() {
 	$('.profile_dropdown').toggle();
