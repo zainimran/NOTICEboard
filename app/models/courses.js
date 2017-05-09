@@ -17,7 +17,8 @@ var courseSchema = mongoose.Schema({
         InstructorOffered : String,
         CourseRequired: String,
         TimingsRequired: String,
-        InstructorRequired: String
+        InstructorRequired: String,
+        Description	 : {type : String, index :true,text:true}
     }
 });
 

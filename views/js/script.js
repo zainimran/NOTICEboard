@@ -30,41 +30,164 @@ socket.on('results',(msg)=>{
 		
 		for(i = 0; i<msg.length;i++){
 			//console.log(msg[i].image)
-			newdiv = document.createElement('div'); 
-			newdiv.className = "row searchResult"+(i+1);
-			child1 = document.createElement('div'); 
-			child1.className = "col-sm-2 eventpic_spg"
-			img = document.createElement('img');
-			img.src = "data/lums_pics.png"//"data/"+msg[i].image
-			child1.append(img)
-			newdiv.append(child1)
-			child2 = document.createElement('div'); 
-			child2.className = "col-md-8 eventInfo_spg"
-			h4 = document.createElement('h4');
-			h4.append(msg[i].Title) 
-			child2.append(h4)
-			p4 = document.createElement('p');
-			p4.append(msg[i].Description)
-			child2.append(p4)
-			newdiv.append(child2)
-			child3 = document.createElement('div');
-			child3.className = "col-sm-2 eventTime_spg"
-			child3Child = document.createElement('div')
-			child3Child.className = "row"
-			p = document.createElement('p');
-			p.className = "eventTime_spg"
-			b = document.createElement('br')
-			b1 = document.createElement('br')
-			p.append('Date: '+msg[i].DATETIME.split('T')[0])
-			p.append(b)
-			p.append('Time: '+msg[i].DATETIME.split('T')[1].split(':')[0] + ':' + msg[i].DATETIME.split('T')[1].split(':')[1])
-			p.append(b1)
-			p.append('Location: '+msg[i].LOCATION)
-			child3Child.append(p)
-			child3.append(child3Child)
-			newdiv.append(child3)
-			console.log(newdiv)
-			$(".search_feed").append(newdiv)
+			if (msg[i].Title !== undefined){
+				newdiv = document.createElement('div'); 
+				newdiv.className = "row searchResult"+(i+1);
+				child1 = document.createElement('div'); 
+				child1.className = "col-sm-2 eventpic_spg"
+				img = document.createElement('img');
+				img.src = "data/lums_pics.png"//"data/"+msg[i].image
+				child1.append(img)
+				newdiv.append(child1)
+				child2 = document.createElement('div'); 
+				child2.className = "col-md-8 eventInfo_spg"
+				h4 = document.createElement('h4');
+				h4.append(msg[i].Title) 
+				child2.append(h4)
+				p4 = document.createElement('p');
+				p4.append(msg[i].Description)
+				child2.append(p4)
+				newdiv.append(child2)
+				child3 = document.createElement('div');
+				child3.className = "col-sm-2 eventTime_spg"
+				child3Child = document.createElement('div')
+				child3Child.className = "row"
+				p = document.createElement('p');
+				p.className = "eventTime_spg"
+				b = document.createElement('br')
+				b1 = document.createElement('br')
+				p.append('Date: '+msg[i].DATETIME.split('T')[0])
+				p.append(b)
+				p.append('Time: '+msg[i].DATETIME.split('T')[1].split(':')[0] + ':' + msg[i].DATETIME.split('T')[1].split(':')[1])
+				p.append(b1)
+				p.append('Location: '+msg[i].LOCATION)
+				child3Child.append(p)
+				child3.append(child3Child)
+				newdiv.append(child3)
+				console.log(newdiv)
+				$(".search_feed").append(newdiv)
+			}
+			else if(msg[i].BookOffered !== undefined){
+				newdiv = document.createElement('div'); 
+				newdiv.className = "row searchResult"+(i+1);
+				child1 = document.createElement('div'); 
+				child1.className = "col-sm-2 eventpic_spg"
+				img = document.createElement('img');
+				img.src = "data/lums_pics.png"//"data/"+msg[i].image
+				child1.append(img)
+				newdiv.append(child1)
+				child2 = document.createElement('div'); 
+				child2.className = "col-md-8 eventInfo_spg"
+				h4 = document.createElement('h4');
+				h4.append('Have :'+msg[i].BookOffered + ' Want :'+msg[i].BookRequired) 
+				child2.append(h4)
+				p4 = document.createElement('p');
+				p4.append('Have :'+msg[i].BookOffered + 'by author '+ msg[i].BookOffAuthor+ '. Want :'+msg[i].BookRequired + ' by author '+ msg[i].BookReqAuthor+'. Please contact at '+ msg[i].ContactNumber+'.')
+				child2.append(p4)
+				newdiv.append(child2)
+				child3 = document.createElement('div');
+				child3.className = "col-sm-2 eventTime_spg"
+				child3Child = document.createElement('div')
+				child3Child.className = "row"
+				p = document.createElement('p');
+				p.className = "eventTime_spg"
+				b = document.createElement('br')
+				b1 = document.createElement('br')
+				p.append(' ')
+				p.append(b)
+				p.append(' ')
+				p.append(b1)
+				p.append(' ')
+				child3Child.append(p)
+				child3.append(child3Child)
+				newdiv.append(child3)
+				console.log(newdiv)
+				$(".search_feed").append(newdiv)
+			}
+			else if(msg[i].CourseOffered !== undefined){
+				newdiv = document.createElement('div'); 
+				newdiv.className = "row searchResult"+(i+1);
+				child1 = document.createElement('div'); 
+				child1.className = "col-sm-2 eventpic_spg"
+				img = document.createElement('img');
+				img.src = "data/lums_pics.png"//"data/"+msg[i].image
+				child1.append(img)
+				newdiv.append(child1)
+				child2 = document.createElement('div'); 
+				child2.className = "col-md-8 eventInfo_spg"
+				h4 = document.createElement('h4');
+				h4.append('Have :'+" "+msg[i].CourseOffered +" "+" "+" "+'| Want :'+" "+msg[i].CourseRequired) 
+				child2.append(h4)
+				p4 = document.createElement('p');
+				p4.append('Have : '+" "+msg[i].CourseOffered + ' by instructor '+ msg[i].InstructorOffered+ ' at time '+ msg[i].TimingsOffered + '. Want :'+msg[i].CourseRequired + ' by instructor '+ msg[i].InstructorRequired+' at time '+msg[i].TimingsRequired+'. Please contact at '+ msg[i].email+'.')
+				child2.append(p4)
+				newdiv.append(child2)
+				child3 = document.createElement('div');
+				child3.className = "col-sm-2 eventTime_spg"
+				child3Child = document.createElement('div')
+				child3Child.className = "row"
+				p = document.createElement('p');
+				p.className = "eventTime_spg"
+				b = document.createElement('br')
+				b1 = document.createElement('br')
+				p.append(' ')
+				p.append(b)
+				p.append(' ')
+				p.append(b1)
+				p.append(' ')
+				child3Child.append(p)
+				child3.append(child3Child)
+				newdiv.append(child3)
+				console.log(newdiv)
+				$(".search_feed").append(newdiv)
+			}
+			else if(msg[i].LostItem !== undefined){
+				newdiv = document.createElement('div'); 
+				newdiv.className = "row searchResult"+(i+1);
+				child1 = document.createElement('div'); 
+				child1.className = "col-sm-2 eventpic_spg"
+				img = document.createElement('img');
+				img.src = "data/lums_pics.png"//"data/"+msg[i].image
+				child1.append(img)
+				newdiv.append(child1)
+				child2 = document.createElement('div'); 
+				child2.className = "col-md-8 eventInfo_spg"
+				h4 = document.createElement('h4');
+				h4.append('LOST : '+msg[i].LostItem) 
+				child2.append(h4)
+				p4 = document.createElement('p');
+				console.log(msg[i].Description)
+				console.log(msg[i].LostORFound)
+				console.log(msg[i])
+				if(msg[i].LostORFound === 'Lost'){
+					p4.append('Lost : '+" "+msg[i].LostItem + '. '+ msg[i].Description+ '. Please contact at '+ msg[i].email+' if found.')	
+				}
+				else if(msg[i].LostORFound === 'Found'){
+					p4.append('Found : '+" "+msg[i].LostItem + '. '+ msg[i].Description +'. Please contact at '+ msg[i].email+' if yours.')					
+				}
+				child2.append(p4)
+				newdiv.append(child2)
+				child3 = document.createElement('div');
+				child3.className = "col-sm-2 eventTime_spg"
+				child3Child = document.createElement('div')
+				child3Child.className = "row"
+				p = document.createElement('p');
+				p.className = "eventTime_spg"
+				b = document.createElement('br')
+				b1 = document.createElement('br')
+				p.append(' ')
+				p.append(b)
+				p.append(' ')
+				p.append(b1)
+				p.append(' ')
+				child3Child.append(p)
+				child3.append(child3Child)
+				newdiv.append(child3)
+				console.log(newdiv)
+				$(".search_feed").append(newdiv)
+			}
+			console.log('results')
+			console.log(msg)
 		}
 	}
 	$('.overlay').show();

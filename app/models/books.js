@@ -16,7 +16,8 @@ var bookSchema = mongoose.Schema({
         BookOffAuthor: String,
         BookRequired : String,
         BookReqAuthor: String,
-        ContactNumber: String
+        ContactNumber: String,
+        Description	 : {type : String, index :true,text:true}
     }
 });
 

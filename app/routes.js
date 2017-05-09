@@ -92,17 +92,15 @@ module.exports = function(app, passport,path,clientSockets) {
 					y['img'] = x.local.image
 					y['email'] = x.local.email
 					y['id'] = "eventpost event"+k.toString()
-					console.log(y)
+					//console.log(y)
 					arr.push(y)
 					//console.log(y)
 					//console.log("THIS IS HERE")
 					k = k + 1
 					emailID = x.local.email
-				}
-				
-				
+				}	
 			}
-			console.log(arr)
+			//console.log(arr)
 			console.log("PUSHED IN FOR TEMPLATING")
 			//notifications = [];
 			/*Notifications.find({'local.email' : emailID}, function(err,dat){
@@ -201,6 +199,8 @@ module.exports = function(app, passport,path,clientSockets) {
 		newEvent.local.CourseRequired    = req.body.courserequired;
 		newEvent.local.TimingsRequired    = req.body.timingsrequired;
 		newEvent.local.InstructorRequired    = req.body.instructorrequired;
+		newEvent.local.Description = req.body.courseoffered + ' ' + req.body.instructoroffered; + ' ' + req.body.courserequired + ' ' + req.body.instructorrequired;
+		console.log(newEvent.local.Description)
 		//newEvent.local.Name    = req.body.Name;
 		// save the user
 		// set the user's local credentials
@@ -224,11 +224,11 @@ module.exports = function(app, passport,path,clientSockets) {
 		newEvent.local.Description = req.body.description;
 		newEvent.local.image = req.body.image
 		console.log(req.body)
-		console.log(req.body.choiceFound)
-		console.log(req.body.choiceLost)
-		if (req.body.choiceFound === undefined && req.body.choiceLost === 'on')
+		console.log(req.body.choice1)
+		console.log(req.body.choice2)
+		if (req.body.choice1 === 'on')
 			newEvent.local.LostORFound    = 'Lost';
-		else if(req.body.choiceLost === undefined && req.body.choiceFound === 'on')
+		else if(req.body.choice2 === 'on')
 			newEvent.local.LostORFound    = 'Found';
 		else
 			console.log("THIS IS AN ERROR")
@@ -241,7 +241,7 @@ module.exports = function(app, passport,path,clientSockets) {
 		newEvent.save(function(err) {
 		    if (err)
 		        throw err;
-		    console.log("successfully saved course")
+		    console.log("successfully saved Lost and found.")
 		})
 		res.redirect('/mainpage')
 	});
@@ -341,6 +341,7 @@ module.exports = function(app, passport,path,clientSockets) {
 				x.forEach(z => {
 					console.log(z.local)
 					y.push(z.local)
+					console.log(z.local)
 				})
 				//console.log(x[0].local)
 				//console.log(x)
