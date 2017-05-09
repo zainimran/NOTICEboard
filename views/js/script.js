@@ -9,6 +9,16 @@ $(window).on('load', function() {
      });
 });
 
+$('.eventpost').each(function(i, obj) {
+	var x = "event"+(i+1)
+	obj.classList.add(x)    
+});
+
+$('.event_overlay').each(function(i, obj) {
+	var x = "event"+(i+1)
+	obj.classList.add('alloverlays')
+	obj.classList.add(x)    
+});
 socket.on('results',(msg)=>{
 	console.log(msg)
 	$(".search_feed").html('')
@@ -183,9 +193,10 @@ $('.star').on('click', function() {
 	divs = $(this).closest('.eventinfo').children();
 	eventClass = $(this).closest('.eventpost').attr('class').split(' ')[1]
 	TEXT = $('.'+eventClass).find('.eInfo').text().split('...read more')
-	TEXT = TEXT[0] + ' '+ TEXT[1]
+	TEXT = TEXT[1]
+	//console.log(TEXT)
 	TEXT = TEXT.replace(/(\r\n|\r|\t)/gm,"")
-	console.log(TEXT)
+	//console.log(TEXT)
 	/*console.log(TEXT)
 	console.log('blaaaaaaaa')
 	DATETIME = $('.'+eventClass).find('.eDateDetailed').text()
@@ -210,18 +221,30 @@ $('.star').on('click', function() {
 			title2 = title2+title[i]
 		}
 		title = divs[0].outerText
-		DATETIME = $('.'+eventClass).find('.eDateDetailed').text()
+		DATETIME = divs[4].outerText.split('\n')
+		
+		//DATETIME = $('.'+eventClass).find('.eDateDetailed').text()
 		$.post("/star_on", {eventData: text, user: email, timings : DATETIME, title:title})
-		DATETIME = DATETIME.replace(/(\r\n|\r|\t)/gm,"");
-		DATETIME = DATETIME.split('\n')
-		DATE = DATETIME[0]
-		TIME = DATETIME[1]
-		TIME = TIME.replace("   ","")
+		//DATETIME = DATETIME.replace(/(\r\n|\r|\t)/gm,"");
+		//DATETIME = DATETIME.split('\n')
+		//console.log(DATETIME)
+		//console.log('blablabl')
+		DATE = DATETIME[0].split(':')[1]
+		DATE = DATE.replace(' ','')
+		//console.log(DATETIME[1].includes('AM'))
+		//console.log(DATETIME[1].includes('PM'))
+		FIRST = DATETIME[1].split(':')[1]
+		if (DATETIME[1].includes('PM')){
+			FIRST = parseInt(FIRST) + 12
+		}
+		TIME = FIRST.toString() + ':'+DATETIME[1].split(':')[2].replace('M',"").replace('A','').replace('P','')
+		TIME = TIME.replace(" ","")
+		//console.log(TIME)
 		sampleEvents.monthly.push({
 			"name": title,
-			"startdate": "2017-5-03",
-			"enddate": "2017-5-3",
-			"starttime": "23:00",
+			"startdate": DATE,
+			"enddate": DATE,
+			"starttime":TIME,
 			"color": "#99CCCC"
 		})
 		//console.log(sampleEvents)
@@ -239,9 +262,9 @@ $('.star').on('click', function() {
 			class: 'unfaved star',
 			src: 'star_off.png'
 		})
-		TEXT = $('.'+eventClass).find('.eInfo').text().split('...read more')
+		/*TEXT = $('.'+eventClass).find('.eInfo').text().split('...read more')
 		TEXT = TEXT[0] + ' '+ TEXT[1]
-		TEXT = TEXT.replace(/(\r\n|\r|\t)/gm,"")
+		TEXT = TEXT.replace(/(\r\n|\r|\t)/gm,"")*/
 		text = TEXT
 		email = $('.profile_info').text()
 		title = $('.eTitle').text()
@@ -250,7 +273,11 @@ $('.star').on('click', function() {
 			title2 = title2+title[i]
 		}
 		title = divs[0].outerText
-		DATETIME = $('.'+eventClass).find('.eDateDetailed').text()
+		DATETIME = divs[4].outerText.split('\n')
+		DATE = DATETIME[0].split(':')[0]
+		DATE = DATE.replace(' ','')
+		TIME = DATETIME[1].split(':')[1]
+		TIME = TIME.replace(" ","")
 		//DATETIME = DATETIME.replace(/(\r\n|\r|\t)/gm,"");
 		//DATETIME = DATETIME.split('\n')
 		//DATE = DATETIME[0]

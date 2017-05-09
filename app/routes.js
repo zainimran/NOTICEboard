@@ -56,14 +56,14 @@ module.exports = function(app, passport,path,clientSockets) {
 	// we will use route middleware to verify this (the isLoggedIn function)
 	app.get('/mainpage', isLoggedIn, function(req, res) {
 		Events.find({},function(err,data){
-			console.log(data)
+			//console.log(data)
 			var arr = [];
 			var k = 1;
 			emailID = "";
 			for(j = data.length-1; j>=data.length-6; j--){
 				x = data[j]
 				y = {}
-				if(j>0){
+				if(j>=0){
 					y['Date'] = x.local.DATETIME.toISOString().split('T')[0]
 					y['Time'] = x.local.DATETIME.toISOString().split('T')[1].split(':')[0] + ':' + x.local.DATETIME.toISOString().split('T')[1].split(':')[1]
 					if (parseInt(x.local.DATETIME.toISOString().split('T')[1].split(':')[0]) >=12){
@@ -86,12 +86,16 @@ module.exports = function(app, passport,path,clientSockets) {
 						i = i + 1
 					})
 					y['parsed'] = bla
+					//console.log(bla)
 					y['title'] = x.local.Title
 					y['location'] = x.local.LOCATION
 					y['img'] = x.local.image
 					y['email'] = x.local.email
-					y['id'] = k
+					y['id'] = "eventpost event"+k.toString()
+					console.log(y)
 					arr.push(y)
+					//console.log(y)
+					//console.log("THIS IS HERE")
 					k = k + 1
 					emailID = x.local.email
 				}
@@ -99,6 +103,7 @@ module.exports = function(app, passport,path,clientSockets) {
 				
 			}
 			console.log(arr)
+			console.log("PUSHED IN FOR TEMPLATING")
 			//notifications = [];
 			/*Notifications.find({'local.email' : emailID}, function(err,dat){
 				console.log('Notifications for this person in the following events')
@@ -353,18 +358,18 @@ module.exports = function(app, passport,path,clientSockets) {
 		email = req.body.user
 		eventData = req.body.eventData
 		title = req.body.title
-		DATETIME = req.body.timings
+		//DATETIME = req.body.timings
 		email = email.split('\n')
 		email = email[1].replace(/(\r\n|\n|\r|\t| )/gm,"");
 		eventData = eventData.replace(/(\r\n|\n|\r|\t)/gm,"");
 		//eventData = eventData.replace("...read more"," ");
-		DATETIME = DATETIME.replace(/(\r\n|\r|\t)/gm,"");
+		/*DATETIME = DATETIME.replace(/(\r\n|\r|\t)/gm,"");
 		DATETIME = DATETIME.split('\n')
 		DATE = DATETIME[0]
 		TIME = DATETIME[1]
 		TIME = TIME.replace("   ","")
 		LOCATION = DATETIME[2]
-		LOCATION = LOCATION.replace("   ","")
+		LOCATION = LOCATION.replace("   ","")*/
 		title = title.replace(/(\r\n|\n|\r|\t| )/gm,"");
 		//console.log(title)
 		//console.log(eventData)
@@ -397,18 +402,18 @@ module.exports = function(app, passport,path,clientSockets) {
 		email = req.body.user
 		eventData = req.body.eventData
 		title = req.body.title
-		DATETIME = req.body.timings
+		//DATETIME = req.body.timings
 		email = email.split('\n')
 		email = email[1].replace(/(\r\n|\n|\r|\t| )/gm,"");
 		eventData = eventData.replace(/(\r\n|\n|\r|\t)/gm,"");
 		eventData = eventData.replace("...read more"," ");
-		DATETIME = DATETIME.replace(/(\r\n|\r|\t)/gm,"");
+		/*DATETIME = DATETIME.replace(/(\r\n|\r|\t)/gm,"");
 		DATETIME = DATETIME.split('\n')
 		DATE = DATETIME[0]
 		TIME = DATETIME[1]
 		TIME = TIME.replace("   ","")
 		LOCATION = DATETIME[2]
-		LOCATION = LOCATION.replace("   ","")
+		LOCATION = LOCATION.replace("   ","")*/
 		title = title.replace(/(\r\n|\n|\r|\t| )/gm,"");
 		console.log("someone turned OFF notifications for "+ title + " "+ email)
 		//clientSockets[email].emit('notify', "You just turned off notifications for "+ title)
