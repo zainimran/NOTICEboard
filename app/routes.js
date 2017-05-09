@@ -357,7 +357,7 @@ module.exports = function(app, passport,path,clientSockets) {
 		email = email.split('\n')
 		email = email[1].replace(/(\r\n|\n|\r|\t| )/gm,"");
 		eventData = eventData.replace(/(\r\n|\n|\r|\t)/gm,"");
-		eventData = eventData.replace("...read more"," ");
+		//eventData = eventData.replace("...read more"," ");
 		DATETIME = DATETIME.replace(/(\r\n|\r|\t)/gm,"");
 		DATETIME = DATETIME.split('\n')
 		DATE = DATETIME[0]
@@ -366,9 +366,10 @@ module.exports = function(app, passport,path,clientSockets) {
 		LOCATION = DATETIME[2]
 		LOCATION = LOCATION.replace("   ","")
 		title = title.replace(/(\r\n|\n|\r|\t| )/gm,"");
+		//console.log(title)
+		//console.log(eventData)
 		console.log("someone turned on notifications for "+title + " " + email)
 		var newEvent            = new Notifications();
-		clientSockets[email].emit('notify', "You just turned on notifications for "+ title)
 		Events.findOne({'local.Title' : title, 'local.Description' : eventData }, function(err, events) {
 			if (err)
             	return done(err);
@@ -380,7 +381,12 @@ module.exports = function(app, passport,path,clientSockets) {
 			    	if (err)
 			        	throw err;
 			    	console.log("successfully saved notification data")
+			    	clientSockets[email].emit('notify', "You just turned on notifications for "+ title)
 				})
+            }
+            else {
+            	clientSockets[email].emit('notify', "You cant turn on notifications for unsubscribed "+ title + " because it doesnt exist")
+		
             }
 		})
 		res.send()			

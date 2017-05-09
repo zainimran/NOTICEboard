@@ -180,20 +180,37 @@ $('#addEvent').on('click', function() {
 	$('.addEvent_overlay').show()
 });
 $('.star').on('click', function() {
+	divs = $(this).closest('.eventinfo').children();
+	eventClass = $(this).closest('.eventpost').attr('class').split(' ')[1]
+	TEXT = $('.'+eventClass).find('.eInfo').text().split('...read more')
+	TEXT = TEXT[0] + ' '+ TEXT[1]
+	TEXT = TEXT.replace(/(\r\n|\r|\t)/gm,"")
+	console.log(TEXT)
+	/*console.log(TEXT)
+	console.log('blaaaaaaaa')
+	DATETIME = $('.'+eventClass).find('.eDateDetailed').text()
+	DATETIME = DATETIME.replace(/(\r\n|\r|\t)/gm,"")
+	DATETIME = DATETIME.split('\n')
+	console.log(DATETIME)
+	console.log('=============================')
+	console.log(divs[0].outerText)
+	console.log(divs[3].outerText)
+	console.log(divs[4].outerText)*/
+	console.log('=============================')
 	if ($(this).attr('class') === 'unfaved star') {
 		$(this).attr({
 			class: 'faved star',
 			src: 'star_on.png'
 		})
-		text = $('.eInfo').text()
+		text = TEXT
 		email = $('.profile_info').text()
 		title = $('.eTitle').text()
 		title2 = ""
 		for(var i =0;i<title.length/2;i++){
 			title2 = title2+title[i]
 		}
-		title = title2
-		DATETIME = $('.eDateDetailed').text()
+		title = divs[0].outerText
+		DATETIME = $('.'+eventClass).find('.eDateDetailed').text()
 		$.post("/star_on", {eventData: text, user: email, timings : DATETIME, title:title})
 		DATETIME = DATETIME.replace(/(\r\n|\r|\t)/gm,"");
 		DATETIME = DATETIME.split('\n')
@@ -216,19 +233,29 @@ $('.star').on('click', function() {
 	     });
 	}
 	else {
+		divs = $(this).closest('.eventinfo').children();
+		eventClass = $(this).closest('.eventpost').attr('class').split(' ')[1]
 		$(this).attr({
 			class: 'unfaved star',
 			src: 'star_off.png'
 		})
-		text = $('.eInfo').text()
+		TEXT = $('.'+eventClass).find('.eInfo').text().split('...read more')
+		TEXT = TEXT[0] + ' '+ TEXT[1]
+		TEXT = TEXT.replace(/(\r\n|\r|\t)/gm,"")
+		text = TEXT
 		email = $('.profile_info').text()
 		title = $('.eTitle').text()
 		title2 = ""
 		for(var i =0;i<title.length/2;i++){
 			title2 = title2+title[i]
 		}
-		title = title2
-		DATETIME = $('.eDateDetailed').text()
+		title = divs[0].outerText
+		DATETIME = $('.'+eventClass).find('.eDateDetailed').text()
+		//DATETIME = DATETIME.replace(/(\r\n|\r|\t)/gm,"");
+		//DATETIME = DATETIME.split('\n')
+		//DATE = DATETIME[0]
+		//TIME = DATETIME[1]
+		//TIME = TIME.replace("   ","")
 		SampleEvents = {"monthly" : []};
 		for (j = 0;j < sampleEvents.monthly.length;j++) {
 			if(sampleEvents.monthly[j].name === title){
