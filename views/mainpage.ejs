@@ -118,20 +118,18 @@
 					<a class="add" href="#"><img class="addlnf" src="1491100704_cancel.png"></a>
 				</div>
 				<div class="lnffeed">
-					<div class="lostnfound1">
-						<img class="lostnfoundpic" src="brain1.png">
-						<div class="lostnfoundinfo">
-							<div class="lfInfo">lost brain at khokha somewher. please help</div>
-							<div class="lf_maillink emailexpand">
-								<p class="emailhere">18100260@lums.edu.pk</p>
-								<img class="mailicon" src="outlook_icon.png">
+					<% LnF.forEach(function(x) { %>
+						<div class= <%=x.id%>>
+							<img class="lostnfoundpic" src= <%=x.img%>>
+							<div class="lostnfoundinfo">
+								<div class="lfInfo"><%= x.LostORFound+': '+x.LostItem+'. '+x.Description%></div>
+								<div class="lf_maillink emailexpand">
+									<p class="emailhere"><%=x.owner%></p>
+									<img class="mailicon" src="outlook_icon.png">
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="lostnfound2"></div>
-					<div class="lostnfound1"></div>
-					<div class="lostnfound2"></div>
-					<div class="lostnfound1"></div>
+					<% }); %>
 				</div>
 			</div>
 		</div>

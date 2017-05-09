@@ -62,3 +62,17 @@
 		</div>
 	</div>
 <% }); %>
+
+===========================================================================================
+<% Event.forEach(function(x) { %>
+	<div class= <%="lostnfound"+x.id%>>
+		<img class="lostnfoundpic" src= <%=x.img%>>
+		<div class="lostnfoundinfo">
+			<div class="lfInfo"><%= x.LostORFound+': '+x.Description%></div>
+			<div class="lf_maillink emailexpand">
+				<p class="emailhere"><%=x.owner%></p>
+				<img class="mailicon" src="outlook_icon.png">
+			</div>
+		</div>
+	</div>
+<% }); %>

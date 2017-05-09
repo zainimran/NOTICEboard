@@ -102,32 +102,37 @@ module.exports = function(app, passport,path,clientSockets) {
 			}
 			//console.log(arr)
 			console.log("PUSHED IN FOR TEMPLATING")
-			//notifications = [];
-			/*Notifications.find({'local.email' : emailID}, function(err,dat){
-				console.log('Notifications for this person in the following events')
-				console.log(emailID)
-				dat.forEach(x => {
-					console.log(x.local.event_id)
-					Events.findOne({'_id': x.local.event_id},function(err,d){
-						console.log("the event is as follows")
-						//console.log(d.local)
-						notifications.push({
-							"name": d.local.Title,
-							"startdate": d.local.DATETIME.toISOString().split('T')[0],
-							"enddate": d.local.DATETIME.toISOString().split('T')[0],
-							"starttime": d.local.DATETIME.toISOString().split('T')[1].split(':')[0] + ':' + d.local.DATETIME.toISOString().split('T')[1].split(':')[1],
-							"color": "#99CCCC"	
-						})
-						console.log(notifications)
-					})
-				})
-				console.log(clientSockets)
-				clientSockets[emailID].emit('calendarData',notifications)
-			})*/
-			res.render('mainpage.ejs', {
-				user : req.user, // get the user out of session and pass to template
-				Event: arr
-			});	
+			var arr2 = [];
+			k = 1
+			LnF.find({},function(err,data){
+				for(j = data.length-1; j>=data.length-6; j--){
+					x = data[j]
+					y = {}
+					if(j>=0){
+						y['Description'] = x.local.Description
+						y['LostORFound'] = x.local.LostORFound
+						y['img'] = x.local.image
+						y['owner'] = x.local.email
+						y['LostItem'] = x.local.LostItem
+						y['id'] = 'lostnfound'+k.toString()
+						console.log(y['id'], 'IWASHERERRRRRRRRRRR')
+						arr2.push(y)
+					}
+					k = k +	1
+					if( k === 3){
+						k = 1;
+					}
+				}
+				console.log('EVENT DATA')
+				console.log(arr)
+				console.log('LNF DATA')
+				console.log(arr2)
+				res.render('mainpage.ejs', {
+					user : req.user, // get the user out of session and pass to template
+					Event: arr,
+					LnF : arr2
+				});		
+			})
 		})
 	});
 
