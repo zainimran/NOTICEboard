@@ -10,10 +10,57 @@ $(window).on('load', function() {
 });
 
 socket.on('results',(msg)=>{
+	console.log(msg)
+	$(".search_feed").html('')
+	if(msg.length === 0){
+		msg = "No Results Found!"
+		$(".search_feed").prepend("<div><b>"+msg+"</b></div>")
+	}
+	else{
+		
+		for(i = 0; i<msg.length;i++){
+			//console.log(msg[i].image)
+			newdiv = document.createElement('div'); 
+			newdiv.className = "row searchResult"+(i+1);
+			child1 = document.createElement('div'); 
+			child1.className = "col-sm-2 eventpic_spg"
+			img = document.createElement('img');
+			img.src = "data/lums_pics.png"//"data/"+msg[i].image
+			child1.append(img)
+			newdiv.append(child1)
+			child2 = document.createElement('div'); 
+			child2.className = "col-md-8 eventInfo_spg"
+			h4 = document.createElement('h4');
+			h4.append(msg[i].Title) 
+			child2.append(h4)
+			p4 = document.createElement('p');
+			p4.append(msg[i].Description)
+			child2.append(p4)
+			newdiv.append(child2)
+			child3 = document.createElement('div');
+			child3.className = "col-sm-2 eventTime_spg"
+			child3Child = document.createElement('div')
+			child3Child.className = "row"
+			p = document.createElement('p');
+			p.className = "eventTime_spg"
+			b = document.createElement('br')
+			b1 = document.createElement('br')
+			p.append('Date: '+msg[i].DATETIME.split('T')[0])
+			p.append(b)
+			p.append('Time: '+msg[i].DATETIME.split('T')[1].split(':')[0] + ':' + msg[i].DATETIME.split('T')[1].split(':')[1])
+			p.append(b1)
+			p.append('Location: '+msg[i].LOCATION)
+			child3Child.append(p)
+			child3.append(child3Child)
+			newdiv.append(child3)
+			console.log(newdiv)
+			$(".search_feed").append(newdiv)
+		}
+	}
 	$('.overlay').show();
 	$('.cover').show();
 	$('.searchResult_overlay').show();
-	console.log(msg)
+
 })	
 
 socket.on('calendarData',(dat)=>{
@@ -46,11 +93,8 @@ $('#searchquery').on('submit', function(){
 	for(i =1; i<formData.length;i++){
 		searchfilterData.push(formData[i].split('=')[1])
 	}
-	if (queryData === ''){
-		alert('Please enter search query before submitting')
-	}
-	else if(searchfilterData.length === 0){
-		alert('Please select appropriate filters before search')
+	if (queryData === ' '){
+		//alert('Please enter search query before submitting')
 	}
 	else{
 		$.post('/search',{query : queryData, email:mail,searchfilter:searchfilterData})
@@ -82,9 +126,6 @@ $('#searchquery1').on('submit', function(data){
 	}
 	if (queryData === ''){
 		alert('Please enter search query before submitting')
-	}
-	else if(searchfilterData.length === 0){
-		alert('Please select appropriate filters before search')
 	}
 	else{
 		$.post('/search',{query : queryData, email:mail,searchfilter:searchfilterData})

@@ -16,6 +16,8 @@ var bodyParser = require('body-parser');
 var socketio = require('socket.io')
 var SocketIOFile = require('socket.io-file');
 app.use(express.static(__dirname + '\\views'));
+app.use(express.static(__dirname + '\\views\\data'));
+
 var Events            = require('./app/models/events');
 var Notifications = require('./app/models/notifications');
 
@@ -144,13 +146,17 @@ io.on('connection', function(socket) {
                     Events.findOne({'_id': x.local.event_id},function(err,d){
                         console.log("the event is as follows")
                         //console.log(d.local)
-                        notifications.push({
-                            "name": d.local.Title,
-                            "startdate": d.local.DATETIME.toISOString().split('T')[0],
-                            "enddate": d.local.DATETIME.toISOString().split('T')[0],
-                            "starttime": d.local.DATETIME.toISOString().split('T')[1].split(':')[0] + ':' + d.local.DATETIME.toISOString().split('T')[1].split(':')[1],
-                            "color": "#99CCCC"  
-                        })
+                        if(d!== null){
+                            notifications.push({
+                                "name": d.local.Title,
+                                "startdate": d.local.DATETIME.toISOString().split('T')[0],
+                                "enddate": d.local.DATETIME.toISOString().split('T')[0],
+                                "starttime": d.local.DATETIME.toISOString().split('T')[1].split(':')[0] + ':' + d.local.DATETIME.toISOString().split('T')[1].split(':')[1],
+                                "color": "#99CCCC"  
+                            })
+                            
+                        }
+                        
                         console.log(notifications)
                         resolve(notifications)
                     })
