@@ -99,7 +99,7 @@ module.exports = function(app, passport,path,clientSockets) {
 				
 			}
 			console.log(arr)
-			notifications = [];
+			//notifications = [];
 			/*Notifications.find({'local.email' : emailID}, function(err,dat){
 				console.log('Notifications for this person in the following events')
 				console.log(emailID)

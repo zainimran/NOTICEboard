@@ -66,7 +66,7 @@ socket.on('results',(msg)=>{
 socket.on('calendarData',(dat)=>{
 	sampleEvents.monthly = dat;
 	console.log('iwashereinthecalendar')
-	console.log(sampleEvents)
+	console.log(sampleEvents.monthly)
 
 	$('#mycalendar').html("");
 	$('#mycalendar').monthly({
@@ -224,7 +224,7 @@ $('.star').on('click', function() {
 			"starttime": "23:00",
 			"color": "#99CCCC"
 		})
-		console.log(sampleEvents)
+		//console.log(sampleEvents)
 		$('#mycalendar').html("");
 		$('#mycalendar').monthly({
 	    	mode: 'event',
@@ -264,7 +264,7 @@ $('.star').on('click', function() {
 				SampleEvents.monthly.push(sampleEvents.monthly[j])
 			}
 		}
-		console.log(title)
+		//console.log(title)
 		sampleEvents = SampleEvents;
 		$('#mycalendar').html("");
 		$('#mycalendar').monthly({

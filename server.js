@@ -156,13 +156,16 @@ io.on('connection', function(socket) {
                             })
                             
                         }
+                        
                         console.log(notifications)
                         resolve(notifications)
                     })
                 })    
             }).then((dat) =>{
+                console.log('Initializing calendar data for user. Sending...')
                 socket.emit('calendarData',dat)    
-            })       
+            })
+            
         })
         //console.log(clientSockets)
     })

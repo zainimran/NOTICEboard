@@ -1,0 +1,17 @@
+<% Event.forEach(function(x) { %>
+	<div class= "event1">
+		<img class="eventpic" src=<%="data/"+x.img%>>	 
+		<div class="eventinfo">
+			<div class="eTitle"><%=x.title%></div>
+			<div class="addtofav"><img id="star" class="unfaved" src="star_off.png"></div>
+			<div class="eInfo"><%=x.parsed%>...<p class="open_overlay"><b>read more</b></p></div>
+			<div class="eDateDetailed"><p>
+										<%=x.Date%>
+										<%=x.Time%>	
+										<%=x.location%>
+										</p>
+			</div>
+			<div class="eDate"><img src="Layer_6.png"></div>							
+		</div>
+	</div>
+<% }); %>
