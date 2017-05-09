@@ -14,7 +14,7 @@ socket.on('results',(msg)=>{
 	$('.cover').show();
 	$('.searchResult_overlay').show();
 	console.log(msg)
-})	
+})
 
 socket.on('calendarData',(dat)=>{
 	sampleEvents.monthly = dat;
@@ -28,7 +28,7 @@ socket.on('calendarData',(dat)=>{
 		events: sampleEvents
      });
 })
-		
+
 $('#searchquery').on('submit', function(){
 	mail = $('.profile_info').text()
 	mail = mail.split('\n')
@@ -58,7 +58,7 @@ $('#searchquery').on('submit', function(){
 		$("#resultQuery").text(queryData);
 		 document.getElementById("searchquery").reset();
 		 $('.filter_dropdown').toggle();
-	}	
+	}
 });
 
 $('#searchquery1').on('submit', function(data){
@@ -88,10 +88,10 @@ $('#searchquery1').on('submit', function(data){
 	}
 	else{
 		$.post('/search',{query : queryData, email:mail,searchfilter:searchfilterData})
-		$("#resultQuery").text(queryData);	
+		$("#resultQuery").text(queryData);
 		document.getElementById("searchquery1").reset();
 		document.getElementById("searchquery2").reset();
-	}	
+	}
 });
 
 
@@ -110,7 +110,8 @@ $('.emailexpand').on('click', function() {
 $('.open_overlay').on('click', function() {
 	$('.overlay').show();
 	$('.cover').show();
-	$('.event_overlay').show()
+	var eventNum = $(this).closest('.eventpost').attr('class').split(' ')[1];
+	$('.' + eventNum).show();
 });
 $('.cover').on('click', function() {
 	$('.overlay').hide();
@@ -163,7 +164,7 @@ $('.star').on('click', function() {
 			"startdate": "2017-5-03",
 			"enddate": "2017-5-3",
 			"starttime": "23:00",
-			"color": "#99CCCC"	
+			"color": "#99CCCC"
 		})
 		console.log(sampleEvents)
 		$('#mycalendar').html("");
