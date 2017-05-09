@@ -16,6 +16,8 @@ var bodyParser = require('body-parser');
 var socketio = require('socket.io')
 var SocketIOFile = require('socket.io-file');
 app.use(express.static(__dirname + '\\views'));
+var Events            = require('./app/models/events');
+var Notifications = require('./app/models/notifications');
 
 var configDB = require('./config/database.js');
 var MongoStore = require('connect-mongo')(session);
@@ -133,6 +135,31 @@ io.on('connection', function(socket) {
             console.log('people online are '+key)
         }
         clientSockets[msg['email']] = socket;
+        notifications = []
+        Notifications.find({'local.email' : msg['email']}, function(err,dat){
+            console.log('Notifications for this person in the following events')
+            myarr = new Promise ((resolve) => {
+                dat.forEach(x => {
+                    console.log(x.local.event_id)
+                    Events.findOne({'_id': x.local.event_id},function(err,d){
+                        console.log("the event is as follows")
+                        //console.log(d.local)
+                        notifications.push({
+                            "name": d.local.Title,
+                            "startdate": d.local.DATETIME.toISOString().split('T')[0],
+                            "enddate": d.local.DATETIME.toISOString().split('T')[0],
+                            "starttime": d.local.DATETIME.toISOString().split('T')[1].split(':')[0] + ':' + d.local.DATETIME.toISOString().split('T')[1].split(':')[1],
+                            "color": "#99CCCC"  
+                        })
+                        console.log(notifications)
+                        resolve(notifications)
+                    })
+                })    
+            }).then((dat) =>{
+                socket.emit('calendarData',dat)    
+            })
+            
+        })
         //console.log(clientSockets)
     })
     socket.on('disconnect', function() {
@@ -147,6 +174,8 @@ io.on('connection', function(socket) {
             console.log('people online are '+key)
         }
     });
+
+    
 });
 
 

@@ -11,7 +11,7 @@ module.exports = function(app, passport,path,clientSockets) {
 	// =====================================
 	app.get('/', function(req, res) {
 		//res.render('index.ejs'); // load the index.ejs file
-		res.render(path.join(path.dirname(__dirname) + '/views/landingpage.ejs'),{ message: req.flash('loginMessage') });
+		res.render(path.join(path.dirname(__dirname) + '/views/landingpage.ejs'),{ message1: req.flash('loginMessage'),message2: req.flash('signupMessage') });
 	});
 
 	// =====================================
@@ -38,7 +38,7 @@ module.exports = function(app, passport,path,clientSockets) {
 	app.get('/signup', function(req, res) {
 
 		// render the page and pass in any flash data if it exists
-		res.render(path.join(path.dirname(__dirname) + '/views/landingpage.ejs'),{ message: req.flash('signupMessage') });
+		res.render(path.join(path.dirname(__dirname) + '/views/landingpage.ejs'),{ message1: req.flash('loginMessage'),message2: req.flash('signupMessage') });
 		//res.render('signup.ejs', { message: req.flash('signupMessage') });
 	});
 
@@ -56,45 +56,71 @@ module.exports = function(app, passport,path,clientSockets) {
 	// we will use route middleware to verify this (the isLoggedIn function)
 	app.get('/mainpage', isLoggedIn, function(req, res) {
 		Events.find({},function(err,data){
-			//console.log(data)
+			console.log(data)
 			var arr = [];
 			var k = 1;
+			emailID = "";
 			for(j = data.length-1; j>=data.length-6; j--){
 				x = data[j]
 				y = {}
-				console.log(x)
-				y['Date'] = x.local.DATETIME.toISOString().split('T')[0]
-				y['Time'] = x.local.DATETIME.toISOString().split('T')[1].split(':')[0] + ':' + x.local.DATETIME.toISOString().split('T')[1].split(':')[1]
-				if (parseInt(x.local.DATETIME.toISOString().split('T')[1].split(':')[0]) >=12){
-					y['Time'] = y['Time']+ "PM"
-				}
-				else{
-					y['Time'] = y['Time']+ "AM"
-				}
-				y['Description'] = x.local.Description
-				var tmp = x.local.Description.split(' ')
-				var bla = "";
-				i = 0;
-				tmp.forEach(p => {
-					if(i < 9){
-						bla = bla + p + " ";
+				if(j>0){
+					y['Date'] = x.local.DATETIME.toISOString().split('T')[0]
+					y['Time'] = x.local.DATETIME.toISOString().split('T')[1].split(':')[0] + ':' + x.local.DATETIME.toISOString().split('T')[1].split(':')[1]
+					if (parseInt(x.local.DATETIME.toISOString().split('T')[1].split(':')[0]) >=12){
+						y['Time'] = y['Time']+ "PM"
 					}
-					else if(i == 10){
-						bla = bla + p;
+					else{
+						y['Time'] = y['Time']+ "AM"
 					}
-					i = i + 1
-				})
-				y['parsed'] = bla
-				y['title'] = x.local.Title
-				y['location'] = x.local.LOCATION
-				y['img'] = x.local.image
-				y['email'] = x.local.email
-				y['id'] = k
-				arr.push(y)
-				k = k + 1
+					y['Description'] = x.local.Description
+					var tmp = x.local.Description.split(' ')
+					var bla = "";
+					i = 0;
+					tmp.forEach(p => {
+						if(i < 9){
+							bla = bla + p + " ";
+						}
+						else if(i == 10){
+							bla = bla + p;
+						}
+						i = i + 1
+					})
+					y['parsed'] = bla
+					y['title'] = x.local.Title
+					y['location'] = x.local.LOCATION
+					y['img'] = x.local.image
+					y['email'] = x.local.email
+					y['id'] = k
+					arr.push(y)
+					k = k + 1
+					emailID = x.local.email
+				}
+				
 				
 			}
 			console.log(arr)
+			notifications = [];
+			/*Notifications.find({'local.email' : emailID}, function(err,dat){
+				console.log('Notifications for this person in the following events')
+				console.log(emailID)
+				dat.forEach(x => {
+					console.log(x.local.event_id)
+					Events.findOne({'_id': x.local.event_id},function(err,d){
+						console.log("the event is as follows")
+						//console.log(d.local)
+						notifications.push({
+							"name": d.local.Title,
+							"startdate": d.local.DATETIME.toISOString().split('T')[0],
+							"enddate": d.local.DATETIME.toISOString().split('T')[0],
+							"starttime": d.local.DATETIME.toISOString().split('T')[1].split(':')[0] + ':' + d.local.DATETIME.toISOString().split('T')[1].split(':')[1],
+							"color": "#99CCCC"	
+						})
+						console.log(notifications)
+					})
+				})
+				console.log(clientSockets)
+				clientSockets[emailID].emit('calendarData',notifications)
+			})*/
 			res.render('mainpage.ejs', {
 				user : req.user, // get the user out of session and pass to template
 				Event: arr
@@ -218,6 +244,8 @@ module.exports = function(app, passport,path,clientSockets) {
 	app.post('/search', isLoggedIn, function(req, res) {
 		//let x = req.body.searchfilter
 		let query = req.body.query
+		//console.log(query)
+		email = req.body.email
 		//console.log(x)
 		//console.log(req.body)
 		//let json = [];
@@ -275,11 +303,21 @@ module.exports = function(app, passport,path,clientSockets) {
 				})
 			}
 		})
-
+		y = [];
 		dat.then(val => {
-			val.forEach(x=> console.log(x))
+			val.forEach(x=> {
+				x.forEach(z => {
+					console.log(z.local)
+					y.push(z.local)
+				})
+				//console.log(x[0].local)
+				//console.log(x)
+			})
+			clientSockets[email].emit('results', y)
 			//need to send response to client from here
 		})
+		
+		res.send()
 		//console.log('array')
 		//db.getCollection('events').find({"$text":{"$search": "hosted"}},{ textScore: {$meta: "textScore"}}).sort({textScore: {$meta: "textScore"}})
 	})
@@ -317,7 +355,8 @@ module.exports = function(app, passport,path,clientSockets) {
 			    	console.log("successfully saved notification data")
 				})
             }
-		})			
+		})
+		res.send()			
 	})
 
 	app.post('/star_off', isLoggedIn, function(req, res) {
@@ -359,7 +398,8 @@ module.exports = function(app, passport,path,clientSockets) {
             else {
             	clientSockets[email].emit('notify1', "You cant turn off notifications for unsubscribed "+ title + " because it doesnt exist")
             }
-		})			
+		})
+		res.send()			
 	})
 };
 

@@ -52,7 +52,7 @@
 <div class="row mainrow">
 	<div class="feed">
 		<div class="searchbar">
-			<form action = "/search" method = "post">
+			<form id="searchquery">
 				<md-input-container md-no-float class="md-block">
 					<input type = "text" class="searchinput" placeholder="looking for something" name = "query">
 					<div class="filterbtn"><img src="hamburger_btn_for_search.png"></div>
@@ -90,7 +90,7 @@
 				<a class="add" href="#"><img class="addevent" id="addEvent" src="1491100704_cancel.png"></a>
 		  	</div>
 			<div class="eventfeed">
-				<div class="event1">
+				<div class="eventpost event1">
 					<img class="eventpic" src="Bild-Berlin-1.png">
 					<div class="eventinfo">
 						<div class="eTitle">RUNG</div>
@@ -104,11 +104,11 @@
 						<div class="eDate"><img src="Layer_6.png"></div>							
 					</div>
 				</div>
-				<div class="event1"></div>
-				<div class="event1"></div>
-				<div class="event1"></div>
-				<div class="event1"></div>
-				<div class="event1"></div>
+				<div class="eventpost event2"></div>
+				<div class="eventpost event3"></div>
+				<div class="eventpost event4"></div>
+				<div class="eventpost event5"></div>
+				<div class="eventpost event6"></div>
 			</div>
 	  	</div>
 		<div class="rightcol">
@@ -206,7 +206,7 @@
 		</div>
 	</div>
 	<div class="overlay">
-		<div class="event1_overlay alloverlays">
+		<div class="event_overlay alloverlays event1">
 			<img class="eventpic" src="Bild-Berlin-1.png">
 			<div class="eventinfo">
 				<div class="eTitle">RUNG</div>
@@ -287,9 +287,9 @@
       <div class="addLnf_overlay alloverlays">
 		<form action ="/lostandFound" method = "post" id = "lnfform">
 			<div class="input-group">
-		  	  <span class="input-group-addon"><input type="radio" name="choiceLost"></span>
+		  	  <span class="input-group-addon"><input type="radio" id="choiceLost" name="choice"></span><!--the name of a group of radio button inputs have to be the same-->
 				<label for="input" class="form-control">Lost</label>
-			  <span class="input-group-addon"><input type="radio" name="choiceFound"></span>
+			  <span class="input-group-addon"><input type="radio" id="choiceFound" name="choice"></span>
 				<label for="input" class="form-control">Found</label>
 			</div>
 		  <label for="textfield">ITEM:</label>
@@ -343,14 +343,16 @@
 	   </div>
 	   <div class="searchResult_overlay alloverlays container-fluid">
 	   		<div class="row">
-		   		<h1 class="searchHeading">Search Results for: <span style="color:#0D98E8;">something</span></h1>
+		   		<h1 class="searchHeading">Search Results for: <span style="color:#0D98E8;" id = "resultQuery">something</span></h1>
 				<div class="col-md-9">
 					<div class="row">
-						<div class="searchbar_spg">
-							<md-input-container md-no-float class="md-block">
-								<input class="searchinput" placeholder="looking for something">
-							</md-input-container>
-						</div>
+						<form id="searchquery1">
+							<div class="searchbar_spg">
+								<md-input-container md-no-float class="md-block">
+									<input class="searchinput" placeholder="looking for something" name = "query">
+								</md-input-container>
+							</div>
+						</form>
 					</div>
 					<div class="row">
 						<div class="search_feed">
@@ -362,91 +364,6 @@
 								</div>
 								<div class="col-sm-2 eventTime_spg">
 									<div class="row">
-										<div class="col-lg-6"><img src="Layer_6.png"></div>
-										<div class="col-lg-6"><img class="faved star" src="star_on_copy.png"></div>
-									</div>
-									<div class="row">
-										<p class="eventTime_spg">31 March - 2 June<br>
-										3:30pm - 6:30pm<br>
-										Bedian road, Lahore</p>
-									</div>
-								</div>
-							</div>
-							<div class="row searchResult2">
-								<div class="col-md-5 bookLeft_spg">
-									<div class="row">
-										<div class="col-md-3"><h4 class="bookSubheading_spg">Have Book:</h4></div>
-										<div class="col-md-9">
-											<p class="bookInfo_spg">Software Engineering<br>
-											Author: Mr. Google<br>
-											Edition: First Edition</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-7 bookRight_spg">
-									<div class="row">
-										<div class="col-md-3"><h4 class="bookSubheading_spg">Need Book:</h4></div>
-										<div class="col-md-5">
-											<p class="bookInfo_spg">What is political science<br>
-											Author: Mr. Meow<br>
-											Edition: Latest Edition</p>
-										</div>
-										<div class="col-md-4">
-											<div class="emailtag_spg">
-												<div class="row">
-													<div class="col-md-8"><h6 class="email_spg">18100260@lums.edu.pk</h6></div>
-													<div class="col-md-1 emailpic_spg"><img src="outlook_icon.png"></div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row searchResult3">
-								<div class="col-sm-2 lnfpic_spg"><img src="love.png"></div>
-								<div class="col-md-7 eventInfo_spg">
-									<h4><span style="color: #0d98e8">Found:</span> Ice Cream</h4>
-									<p>I found an ice cream on the khokha table yesterday that looks like this. Please let me know if it was your, because I ate it.</p>
-								</div>
-								<div class="col-md-3">
-									<div class="lnfemailtag_spg">
-										<div class="row">
-											<div class="col-md-8"><h6 class="email_spg">18100260@lums.edu.pk</h6></div>
-											<div class="col-md-1 emailpic_spg"><img src="outlook_icon.png"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row searchResult1">
-								<div class="col-sm-2 eventpic_spg"><img src="lums_pics.png"></div>
-								<div class="col-md-8 eventInfo_spg">
-									<h4>CSO: Internship seminar</h4>
-									<p>Seminar for all student related FAQs. Please be on time...<span style="color: blue">read more</span></p>
-								</div>
-								<div class="col-sm-2 eventTime_spg">
-									<div class="row">
-										<div class="col-lg-6"><img src="Layer_6.png"></div>
-										<div class="col-lg-6"><img class="faved star" src="star_on_copy.png"></div>
-									</div>
-									<div class="row">
-										<p class="eventTime_spg">31 March - 2 June<br>
-										3:30pm - 6:30pm<br>
-										Bedian road, Lahore</p>
-									</div>
-								</div>
-							</div>
-							<div class="row searchResult1">
-								<div class="col-sm-2 eventpic_spg"><img src="lums_pics.png"></div>
-								<div class="col-md-8 eventInfo_spg">
-									<h4>CSO: Internship seminar</h4>
-									<p>Seminar for all student related FAQs. Please be on time...<span style="color: blue">read more</span></p>
-								</div>
-								<div class="col-sm-2 eventTime_spg">
-									<div class="row">
-										<div class="col-lg-6"><img src="Layer_6.png"></div>
-										<div class="col-lg-6"><img class="faved star" src="star_on_copy.png"></div>
-									</div>
-									<div class="row">
 										<p class="eventTime_spg">31 March - 2 June<br>
 										3:30pm - 6:30pm<br>
 										Bedian road, Lahore</p>
@@ -456,26 +373,28 @@
 						</div>
 					</div>
    				</div>
-	   			<div class="col-md-3">
+   				<div class="col-md-3">
 	   				<div class="filter_dropdown_spg">
-					  <h6>Filter by:</h6>
-						<label>
-							<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_0s">
-							Events</label>
-						<br>
-						<label>
-							<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_1s">
-							Lost & Found</label>
-						<br>
-						<label>
-							<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_2s">
-							Book Swaps</label>
-						<br>
-						<label>
-							<input type="checkbox" name="Search filter" value="checkbox" id="Searchfilter_3s">
-							Course Swaps</label>
+					  <form id = "searchquery2">
+						  <h6>Filter by:</h6>
+							<label>
+								<input type="checkbox" name="searchfilter" value="Events" id="Searchfilter_0">
+								Events</label>
+							<br>
+							<label>
+								<input type="checkbox" name="searchfilter" value="LostAndFound" id="Searchfilter_1">
+								Lost & Found</label>
+							<br>
+							<label>
+								<input type="checkbox" name="searchfilter" value="BookSwap" id="Searchfilter_2">
+								Book Swaps</label>
+							<br>
+							<label>
+								<input type="checkbox" name="searchfilter" value="CourseSwap" id="Searchfilter_3">
+								Course Swaps</label>
+					  </form>			   		
 					</div>
-	   			</div>						   		
+	   			</div>	
 		   	</div>
 	   </div>
 	</div>
@@ -486,8 +405,8 @@
 <div class="container-fluid footer">
  <div class="navbar-footer">
 	<ul class="nav navbar-nav navbar-right">
-        <li><a class="footerlink firstlink" href="landingpage.html">HOME</a></li>
-        <li><a class="footerlink" href="landingpage.html">CONTACT</a></li>
+        <li><a class="footerlink firstlink" href="/">HOME</a></li>
+        <li><a class="footerlink" href="/">CONTACT</a></li>
         <li><a class="footerlink" href="tos.html">TERMS OF SERVICE</a></li>
 	 </ul>
  </div> 

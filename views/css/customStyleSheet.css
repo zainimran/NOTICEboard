@@ -268,7 +268,7 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 	overflow-y: auto;
 }
 
-.event1{
+.eventpost{
 	margin-top: 8px;
 	padding: 9px;
 	width: 620px;
@@ -549,7 +549,7 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 }
 
 .overlay {
-	/*display: none;*/
+	display: none;
 	z-index: 10;
 	position: absolute;
 	top: 30%;
@@ -559,9 +559,7 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 }
 
 .cover {
-/*
 	display: none;
-*/
 	position:fixed;
 	top: 0;
 	left: 0;
@@ -571,7 +569,7 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 	height: 100%; 
 }
 
-.event1_overlay {
+.event_overlay {
 	display: none;
 	z-index: 10;
 	padding: 9px;
@@ -682,7 +680,7 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 }
 
 .searchResult_overlay {
-	/*display: none;*/
+	display: none;
 	margin-top: -100px;
 	margin-left: -150px;
 	z-index: 10;
