@@ -284,12 +284,10 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 }
 
 .button12 {
-	position:absolute;
+	position: relative;
     /*transition: .5s ease;*/
-    top: 0px;
-	left: 510px;
-	right: -420px;
-	bottom: 212px;
+    top: -76px;
+	right: -69px;
 	border: none;
 	color: white;
 	background-color: grey;
@@ -309,12 +307,10 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
     color: white;
 }
 .button13 {
-	position:absolute;
+	position:relative;
     /*transition: .5s ease;*/
-    top: 0px;
-	left: 640px;
-	right: -420px;
-	bottom: 212px;
+    top: -76px;
+	right: -434px;
 	border: none;
 	color: white;
 	background-color: grey;
@@ -333,6 +329,44 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
      background-color:rgba(0,170,150,0.7);
     color: white;
 }
+
+.button14 {
+	position: relative;
+    /*transition: .5s ease;*/
+    top: -76px;
+	right: -499px;
+	border: none;
+	color: white;
+	background-color: grey;
+	padding: 2px 4px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 10px;
+	transition-duration: 0.4s;
+	margin: 2px 2px;
+	cursor: pointer;
+}
+
+.button15 {
+	position: relative;
+    /*transition: .5s ease;*/
+    top: -76px;
+	right:-275px;
+	z-index: 10;
+	border: none;
+	color: white;
+	background-color: grey;
+	padding: 2px 4px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 10px;
+	transition-duration: 0.4s;
+	margin: 2px 2px;
+	cursor: pointer;
+}
+
 .submit12 {
 	border: none;
 	color: white;
@@ -679,7 +713,7 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 	z-index: 10;
 	padding: 9px;
 	width: 530px;
-	height: 316px;
+	height: 516px;
 	border-radius: 2px;
 	background-color: #f4f4f4;
 }
@@ -736,7 +770,7 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 }
 
 .addEvent_overlay textarea {
-	resize: none;
+	max-height: 150px;
 }
 
 .addEvent_overlay {
@@ -744,7 +778,7 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 	z-index: 10;
 	padding: 9px 40px 9px 15px;
 	width: 660px;
-	height: 300px;
+	height: 600px;
 	border-radius: 2px;
 	background-color: #f4f4f4;
 }
@@ -898,4 +932,10 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 .event_editbtn {
 	width: 17px;
 	height: 16px;
+}
+
+md-toast {
+	position: relative;
+	margin-top: 420px;
+	margin-right: 420px;
 }
