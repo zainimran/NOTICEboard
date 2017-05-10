@@ -54,7 +54,7 @@
 		<div class="searchbar">
 			<form id="searchquery">
 				<md-input-container md-no-float class="md-block">
-					<input type = "text" class="searchinput" placeholder="looking for something" name = "query">
+					<input type="text" class="searchinput" placeholder="looking for something" name="query">
 					<div class="filterbtn"><img src="hamburger_btn_for_search.png"></div>
 				</md-input-container>
 				<div class="filter_dropdown">
@@ -90,24 +90,38 @@
 				<a class="add" href="#"><img class="addevent" id="addEvent" src="1491100704_cancel.png"></a>
 		  	</div>
 			<div class="eventfeed">
-				<% Event.forEach(function(x) { %>
-					<div class="eventpost">
-						<img class="eventpic" src=<%="data/"+x.img%>>
-						<div class="eventinfo">
-							<div class="eTitle"><%=x.title%></div>
-							<div class="addtofav"><img class="unfaved star" src="star_off.png"></div>
-							<div class="editpost"><img class="event_editbtn" src="pencil.png"></div>
-							<div class="eInfo"><%=x['parsed']%>...<p class="open_overlay"><b>read more</b></p></div>
-							<div class="eDateDetailed"><p>
-														<%="Date: "+x.Date%></br>
-														<%="Time: "+x.Time%></br>	
-														<%="Location: "+x.location%></br>
-														</p>
-							</div>
-							<div class="eDate"><img src="Layer_6.png"></div>
+				<div class="eventpost event1">
+					<img class="eventpic" src="Bild-Berlin-1.png">
+					<div class="eventinfo">
+						<div class="eTitle">RUNG</div>
+						<div class="addtofav"><img class="unfaved star" src="star_off.png"></div>
+						<div class="editpost"><img class="event_editbtn" src="pencil.png"></div>
+						<div class="eInfo">Named after the festival of Holi, Rung is one of the major events of LUMS...<p class="open_overlay"><b>read more</b></p></div>
+						<div class="eDateDetailed">31 March - 2 June
+													   3:30pm - 6:30pm
+													   Bedian road Lahore
 						</div>
+						<div class="eDate"><img src="Layer_6.png"></div>
 					</div>
-				<% }); %>
+				</div>
+				<div class="eventpost event2">
+					<img class="eventpic" src="Bild-Berlin-1.png">
+					<div class="eventinfo">
+						<div class="eTitle">RUNG v2</div>
+						<div class="addtofav"><img class="unfaved star" src="star_off.png"></div>
+						<div class="editpost"><img class="event_editbtn" src="pencil.png"></div>
+						<div class="eInfo">Rung is one of the major events of LUMS...<p class="open_overlay"><b>read more</b></p></div>
+						<div class="eDateDetailed">31 March - 2 June
+													   3:30pm - 6:30pm
+													   Bedian road Lahore
+						</div>
+						<div class="eDate"><img src="Layer_6.png"></div>
+					</div>
+				</div>
+				<div class="eventpost"></div>
+				<div class="eventpost"></div>
+				<div class="eventpost"></div>
+				<div class="eventpost"></div>
 			</div>
 	  	</div>
 		<div class="rightcol">
@@ -118,18 +132,20 @@
 					<a class="add" href="#"><img class="addlnf" src="1491100704_cancel.png"></a>
 				</div>
 				<div class="lnffeed">
-					<% LnF.forEach(function(x) { %>
-						<div class= <%=x.id%>>
-							<img class="lostnfoundpic" src= <%=x.img%>>
-							<div class="lostnfoundinfo">
-								<div class="lfInfo"><%= x.LostORFound+': '+x.LostItem+'. '+x.Description%></div>
-								<div class="lf_maillink emailexpand">
-									<p class="emailhere"><%=x.owner%></p>
-									<img class="mailicon" src="outlook_icon.png">
-								</div>
+					<div class="lostnfound1">
+						<img class="lostnfoundpic" src="brain1.png">
+						<div class="lostnfoundinfo">
+							<div class="lfInfo">lost brain at khokha somewher. please help</div>
+							<div class="lf_maillink emailexpand">
+								<p class="emailhere">18100260@lums.edu.pk</p>
+								<img class="mailicon" src="outlook_icon.png">
 							</div>
 						</div>
-					<% }); %>
+					</div>
+					<div class="lostnfound2"></div>
+					<div class="lostnfound1"></div>
+					<div class="lostnfound2"></div>
+					<div class="lostnfound1"></div>
 				</div>
 			</div>
 		</div>
@@ -139,22 +155,32 @@
 				<a class="add" href="#"><img class="addevent" id="addCourse" src="1491100704_cancel.png"></a>
 			</div>
 			<div class="csfeed">
-				<% Courses.forEach(function(x) { %>
-					<div class="courseSwap1">
-						<div class="courseSwap1a"><%="Have: "+x.CourseOffered + " by "+ x.InstructorOffered%><br>
-												  		<%="at "+ x.TimingsOffered%>
+				<div class="courseSwap1">
+					<div class="courseSwap1a">Have: Anthropology by meow boy <br>
+											  		10:20 - 5:20
+					</div>
+					<div class="courseSwap1b">
+						<div class="courseNeed">Need: political science pol sci 299 by mr meow <br>
+													12:30-3:30 Mon Fri
 						</div>
-						<div class="courseSwap1b">
-							<div class="courseNeed"><%="Have: "+x.CourseRequired + " by "+ x.InstructorRequired%><br>
-														<%="at "+ x.TimingsRequired%>
-							</div>
-							<div class="cs_maillink emailexpand">
-								<p class="emailhere"><%=x.owner%></p>
-								<img class="mailicon" src="outlook_icon.png">
-							</div>
+						<div class="cs_maillink emailexpand">
+							<p class="emailhere">18100260@lums.edu.pk</p>
+							<img class="mailicon" src="outlook_icon.png">
 						</div>
 					</div>
-				<% }); %>
+				</div>
+				<div class="courseSwap1">
+					<div class="courseSwap1a"></div>
+					<div class="courseSwap1b"></div>
+				</div>
+				<div class="courseSwap1">
+					<div class="courseSwap1a"></div>
+					<div class="courseSwap1b"></div>
+				</div>
+				<div class="courseSwap1">
+					<div class="courseSwap1a"></div>
+					<div class="courseSwap1b"></div>
+				</div>
 			</div>
 		</div>
 		<div class="bookSwaps">
@@ -163,157 +189,296 @@
 				<a class="add" href="#"><img class="addevent" id="addBook" src="1491100704_cancel.png"></a>
 			</div>
 			<div class="csfeed">
-				<% Books.forEach(function(x) { %>
-					<div class="courseSwap1">
-						<div class="courseSwap1a"><%="Have: "+x.BookOffered + " by "+ x.BookOffAuthor%><br>
+				<div class="courseSwap1">
+					<div class="courseSwap1a">Have: what is political science by mr meow <br>
+											  		first edition
+					</div>
+					<div class="courseSwap1b">
+						<div class="courseNeed">Need: book of love by zain imran lover boy <br>
+													latest edition
 						</div>
-						<div class="courseSwap1b">
-							<div class="courseNeed"><%="Have: "+x.BookRequired + " by "+ x.BookReqAuthor%><br>
-							</div>
-							<div class="cs_maillink emailexpand">
-								<p class="emailhere"><%=x.owner%></p>
-								<img class="mailicon" src="outlook_icon.png">
-							</div>
+						<div class="cs_maillink emailexpand">
+							<p class="emailhere">18100260@lums.edu.pk</p>
+							<img class="mailicon" src="outlook_icon.png">
 						</div>
 					</div>
-				<% }); %>
+				</div>
+				<div class="courseSwap1">
+					<div class="courseSwap1a"></div>
+					<div class="courseSwap1b"></div>
+				</div>
+				<div class="courseSwap1">
+					<div class="courseSwap1a"></div>
+					<div class="courseSwap1b"></div>
+				</div>
+				<div class="courseSwap1">
+					<div class="courseSwap1a"></div>
+					<div class="courseSwap1b"></div>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div class="overlay">
-		<% Event.forEach(function(x) { %>
-			<div class="event_overlay">
-				<img class="eventpic" src=<%="data/"+x.img%>>
-				<div class="eventinfo">
-					<div class="eTitle"><%=x.title%></div>
-					<div class="addtofav"><img class="unfaved star" src="star_off.png"></div>
-					<div class="deleteEvent"><img src="garbage.png"></div>
-					<div class="eInfo"><%=x['Description']%></div>
-					<div class="eDateDetailed"><p>
-												<%="Date: "+x.Date%></br>
-												<%="Time: "+x.Time%></br>	
-												<%="Location: "+x.location%></br>
-												</p>
-					</div>
-					<div class="eDate_overlay"><img src="Layer_6.png"></div>
+		<div class="event_overlay alloverlays event1">
+			<img class="eventpic" src="Bild-Berlin-1.png">
+			<div class="eventinfo">
+				<div class="eTitle">RUNG</div>
+				<div class="addtofav"><img class="unfaved star" src="star_off.png"></div>
+				<div class="deleteEvent"><img src="garbage.png"></div>
+				<div class="eInfo">named after the festival of holi rug is one
+					of the major events of lumsnamed after the festival of holi rug is one
+					of the major events of lumsnamed after the festival of holi rug is one
+					of the major events of lums..vnamed after the festival of holi rug is one
+					of the major events of lums..vnamnanamed after the festival of holi rug is one
+					of the major events of lumsnamed after the festival of holi rug is one
+					of the major events of lumsnamed after the festival of holi rug is one
+					of the major events of lums
 				</div>
+				<div class="eDateDetailed_overlay">31 March - 2 June
+											   3:30pm - 6:30pm
+											   Bedian road Lahore
+				</div>
+				<div class="eDate_overlay"><img src="Layer_6.png"></div>
 			</div>
-		<% }); %>
+		</div>
+		<div class="event_overlay alloverlays event2">
+			<img class="eventpic" src="Bild-Berlin-1.png">
+			<div class="eventinfo">
+				<div class="eTitle">RUNG</div>
+				<div class="addtofav"><img class="unfaved star" src="star_off.png"></div>
+				<div class="deleteEvent"><img src="garbage.png"></div>
+				<div class="eInfo">named after the festival of holi rug is one
+					ac ac aac aac acaacacacaa
+				</div>
+				<div class="eDateDetailed_overlay">31 March - 2 June
+											   3:30pm - 6:30pm
+											   Bedian road Lahore
+				</div>
+				<div class="eDate_overlay"><img src="Layer_6.png"></div>
+			</div>
+		</div>
 	  <div class="addBook_overlay alloverlays">
 		<form action = "/bookSwapInsert" method = "post">
-			<label for="textfield">I HAVE THIS BOOK:</label>
-           	<br>
-            	<input type="text" name= "bookoffered">
-            <br>
-            <label for="textfield">AUTHOR:</label>
-            <br>
-            	<input type="text" name="bookoffauthor">
-            <br>
-            <label for="textfield">CONTACT NUMBER:</label>
-            <br>
-            	<input type="number" name="contact">
-            <br>
-            <label for="textfield">UPLOAD IMAGE</label>
-            <br>
-            	<input type="file">
-            <br>
-            <br>
-            <input type="submit" value="POST">
+			<md-toolbar class="md-warn">
+				<div class="md-toolbar-tools">
+				  <h2 class="md-flex">New Book Swap Post</h2>
+				</div>
+			</md-toolbar>
+			<button class="button15" type="button" onclick="myfunc()">X</button>
+			<div class="courseform_left2">
+				<md-input-container>
+					<label for="textfield">Have Book</label>
+					<input name= "bookoffered">
+				</md-input-container>
+				<md-input-container>
+					<label for="textfield">Author:</label>			
+	            	<input name="bookoffauthor">
+	            </md-input-container>
+	            <md-input-container>
+	            	<label>Contact Number:</label>
+	            	<input type="number" name="contact">
+	            </md-input-container>
+	            <md-input-container>
+	            	<label>Upload image</label>
+	            	<br>
+	            	<input type="file">
+	            </md-input-container>
+	        </div>
+	        <div class="courseform_right2">
+				<md-input-container>
+					<label>Need Book</label>
+	            	<input name= "bookrequired">
+	            </md-input-container>
+	            <md-input-container>
+	            	<label>Author</label>
+	            	<input name="bookrequired">
+	            </md-input-container>
+	            <md-input-container>
+	            	<label>Contact Number:</label>>
+	            	<input type="number" name="contactgiven">
+				</md-input-container>
+            	<md-input-container>
+	            	<label>Upload image</label>
+	            	<br>
+	            	<input type="file">
+	          	</md-input-container>  
+	            <input type="submit" class= "submit12" value="POST">
+	    	  </div>
 		</form>
 	   </div>
 	   <div class="createCourse_overlay alloverlays">
 		<form action = "/courseSwapInsert" method = "post">
-			<div class="courseform_left">
-				<label for="textfield">I HAVE THIS COURSE:</label>
-				<br>
-					<input type="text" name="courseoffered">
-				<br>
-				<label for="textfield">TIME:</label>
-				<br>
-					<input type="time" name = "timingsoffered">
-				<br>
-				<br>
-				<label for="textfield">INSTRUCTOR:</label>
-				<br>
-					<input type="text" name="instructoroffered">
+		<md-toolbar class="md-warn">
+			<div class="md-toolbar-tools">
+			  <h2 class="md-flex">New Course Swap Post</h2>
+			</div>
+		</md-toolbar>
+		<button class="button12" type="button" onclick="myfunc()">X</button>
+			<div layout="row" class="courseform_left">
+				<md-input-container>
+					<label>Have Course</label>
+					<input name="courseoffered">
+				</md-input-container>
+				<md-input-container>
+					<label>Time</label>
+					<input type="time">
+				</md-input-container>
+				<md-input-container>
+					<label>Instructor</label>
+					<input name="instructoroffered">
+          		</md-input-container>
             </div>
-            <div class="courseform_right">
-            	<label for="textfield">I NEED THIS COURSE:</label>
-				<br>
-					<input type="text" name="courserequired">
-				<br>
-				<label for="textfield">TIME:</label>
-				<br>
-					<input type="time" name = "timingsrequired">
-				<br>
-				<label for="textfield">INSTRUCTOR:</label>
-				<br>
-					<input type="text" name="instructorrequired">
+            <div layout="row" class="courseform_right">
+            	<md-input-container>
+            		<label>Need Course</label>            	
+					<input name="courserequired">
+				</md-input-container>
+				<md-input-container>
+					<label>Time</label>
+					<input type="time" name="timingsrequired">
+				</md-input-container>
+				<md-input-container>
+					<label>Instructor</label>
+					<input name="instructorrequired">
+           		</md-input-container>
             	<br>
 				<br>
-				<input type="submit" value="POST">
+				<input type="submit" class = "submit12" value="POST">
             </div>
 		</form>
 	  </div>
       <div class="addLnf_overlay alloverlays">
 		<form action ="/lostandFound" method = "post" id = "lnfform">
-			<div class="input-group">
-		  	  <span class="input-group-addon"><input type="radio" id="choiceLost" name="choice1"></span>
-				<label for="input" class="form-control">Lost</label>
-			  <span class="input-group-addon"><input type="radio" id="choiceFound" name="choice2"></span>
-				<label for="input" class="form-control">Found</label>
-			</div>
-		  <label for="textfield">ITEM:</label>
-           	<br>
+			<!--<div class="input-group">
+		  	  <span class="input-group-addon"><input type="radio" id= "choiceLost" name="choice" checked>  Lost</span>
+				
+			  <span class="input-group-addon"><input type="radio" id="choiceFound" name="choice"> Found</span>
+			</div>-->
+			<!--<md-radio-group ng-model="data.group1">
+		  		<md-radio-button value="lost" class="md-primary" id="choiceLost" name="choice">Lost</md-radio-button>
+		  		<md-radio-button value="found" id="choiceFound" name="choice">Found</md-radio-button>
+		  	</md-radio-group>-->
+		  	<md-toolbar class="md-warn">
+				<div class="md-toolbar-tools">
+				  <h2 class="md-flex">New Lost & Found Post</h2>
+				</div>
+			</md-toolbar>
+		  	<button class="button14" type="button" onclick="myfunc()">X</button>
+		  	<md-content>
+				<md-tabs md-dynamic-height md-border-bottom>
+			  		<md-tab label="Lost" id="choiceLost">
+			  			<md-input-container>	
+					  		<label>Item</label>
+							<input name="lostitem">
+						</md-input-container>
+						<md-input-container>
+							<label>Description</label>
+							<textarea md-maxlength='150' rows="4" cols="50" name = "description" md-select-on-focus></textarea>
+						</md-input-container>
+						<md-input-container>
+							<label>Upload Image</label>
+							<br>
+							<input type="file" id='fileevent1' name='image'>
+						</md-input-container>
+						<br>
+						<br>
+						<br>
+						<input type="submit" class="submit12" value="POST">
+			  		</md-tab>
+			  		<md-tab label="Found" id="choiceFound">
+			  			<md-input-container>	
+					  		<label>Item</label>
+							<input name="lostitem">
+						</md-input-container>
+						<md-input-container>
+							<label>Description</label>
+							<textarea md-maxlength='150' rows="4" cols="50" name = "description" md-select-on-focus></textarea>
+						</md-input-container>
+						<md-input-container>
+							<label>Upload Image</label>
+							<br>
+							<input type="file" id='fileevent1' name='image'>
+						</md-input-container>
+						<br>
+						<br>
+						<br>
+						<input type="submit" class="submit12" value="POST">
+			  		</md-tab>
+			  	</md-tabs>
+			</md-content>
+			  
+			<!--<br>
+		  <label for="textfield">Item:</label>
+
+           	
             	<input type="text" name="lostitem">
             <br>
-            <label for="textfield">DESCRIPTION:</label>
+            <br>
+            <label for="textfield">Description:</label>
             <br>
             	<textarea rows="4" cols="50" name = "description"></textarea>
             <br>
-            <label for="textfield">UPLOAD IMAGE</label>
             <br>
-            	<input type="file" id = "fileevent1" name = "image">
+            
+            <label for="textfield">Upload Image</label>
+            <br>
+            	<input type="file"  id = 'fileevent1' name = 'image'>
             <br>
             <br>
-            <input type="submit" value="POST">
+            <input type="submit" class="submit12" value="POST">-->
 		</form>
 	   </div>
 	   <div class="addEvent_overlay alloverlays">
 		<form action="/eventsInsert" method="post" id = "eventform">
+			<md-toolbar class="md-warn">
+				<div class="md-toolbar-tools">
+				  <h2 class="md-flex">New Event Post</h2>
+				</div>
+			</md-toolbar>
+			<button class="button13" type="button" onclick="myfunc()">X</button>
 			<div class="courseform_left">
-				<label for="textfield">EVENT NAME:</label>
+				<md-input-container>
+					<label>Event name</label>
+					<input ng-model="eventname" name="eventname">
+				</md-input-container>
 				<br>
-					<input type="text" name="eventname">
 				<br>
-				<label for="textfield">DESCRIPTION:</label>
+				<md-input-container>
+				  <label>Description</label>
+				  <textarea ng-model="description" name="description" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+				</md-input-container>
 				<br>
-            		<textarea rows="4" cols="40" name = "description"></textarea>
 				<br>
-				<label for="textfield">EVENT DATE:</label>
+				<md-input-container>
+					<label>Event date</label>
+					<md-datepicker ng-model="date" name="date"></md-datepicker>
+				</md-input-container>				
 				<br>
-					<input type="date" name = "date">
 				<br>
-				<label for="textfield">VENUE:</label>
-				<br>
-					<input type="text" name= "venue">
+				<md-input-container>
+					<label>Venue</label>
+					<input ng-model="venue" name="venue">
+				</md-input-container>
             </div>
             <div class="courseform_right">
-            	<label for="textfield">UPLOAD IMAGE:</label>
+            	<md-input-container>
+					<label>Upload Image</label>
+					<br>
+					<input type="file" name="image" id='fileevent'>
+				</md-input-container>
 				<br>
-            		<input type="file" name = "image" id = "fileevent">
+				<md-input-container>
+					<label>Time</label>
+					<input type="time" name="time">
+				</md-input-container>
 				<br>
-				<label for="textfield">TIME:</label>
 				<br>
-					<input type="time" name = "time">
-				<br>
-				<br>
-				<input type="submit" value="POST">
+				<input type="submit" class = "submit12" value="POST">
             </div>
 		</form>
 	   </div>
 	   <div class="searchResult_overlay alloverlays container-fluid">
-	   		<div class="row">
+	   		<div class="row">	
 		   		<h1 class="searchHeading">Search Results for: <span style="color:#0D98E8;" id = "resultQuery">something</span></h1>
 				<div class="col-md-9">
 					<div class="row">
@@ -361,7 +526,7 @@
 <div class="container-fluid footer">
  <div class="navbar-footer">
 	<ul class="nav navbar-nav navbar-right">
-        <li><a class="footerlink firstlink" href="/mainpage">HOME</a></li>
+        <li><a class="footerlink firstlink" href="/">HOME</a></li>
         <li><a class="footerlink" href="/">CONTACT</a></li>
         <li><a class="footerlink" href="tos.html">TERMS OF SERVICE</a></li>
 	 </ul>
@@ -379,6 +544,14 @@
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+<script>
+function myfunc(){
+		$('.overlay').hide();
+		$('.cover').hide();
+		$('.alloverlays').hide();
+	}
+</script>
 
 <!-- Angular Material Library -->
 <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
