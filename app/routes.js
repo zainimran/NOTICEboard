@@ -4,8 +4,16 @@ var Books             = require('../app/models/books');
 var Courses             = require('../app/models/courses');
 var LnF             = require('../app/models/lostandfound');
 var Notifications = require('../app/models/notifications');
-module.exports = function(app, passport,path,clientSockets) {
-
+module.exports = function(app, passport,path,clientSockets,nodemailer) {
+	
+	var smtpTransport = nodemailer.createTransport("SMTP",{
+	    service: "Gmail",
+	    auth: {
+	        user: "noticeboardlums@gmail.com",
+	        pass: "Software2017"
+	    }
+	});
+	var rand,mailOptions,host,link;
 	// =====================================
 	// HOME PAGE (with login links) ========
 	// =====================================
@@ -23,7 +31,12 @@ module.exports = function(app, passport,path,clientSockets) {
 		// render the page and pass in any flash data if it exists
 		res.render('login.ejs', { message: req.flash('loginMessage') });
 	});*/
+	app.get('/signup', function(req, res) {
 
+		// render the page and pass in any flash data if it exists
+		res.render(path.join(path.dirname(__dirname) + '/views/landingpage.ejs'),{ message1: req.flash('loginMessage'),message2: req.flash('signupMessage') });
+		//res.render('signup.ejs', { message: req.flash('signupMessage') });
+	});
 	// process the login form
 	app.post('/login', passport.authenticate('local-login', {
 		successRedirect : '/mainpage', // redirect to the secure profile section
@@ -35,16 +48,54 @@ module.exports = function(app, passport,path,clientSockets) {
 	// SIGNUP ==============================
 	// =====================================
 	// show the signup form
-	app.get('/signup', function(req, res) {
-
-		// render the page and pass in any flash data if it exists
-		res.render(path.join(path.dirname(__dirname) + '/views/landingpage.ejs'),{ message1: req.flash('loginMessage'),message2: req.flash('signupMessage') });
-		//res.render('signup.ejs', { message: req.flash('signupMessage') });
+	app.get('/verification', function(req, res) {
+		console.log(req)
+		//res.render(path.join(path.dirname(__dirname) + '/views/landingpage.ejs'),{ message1: req.flash('loginMessage'),message2: req.flash('signupMessage') });
+		rand=Math.floor((Math.random() * 100) + 54);
+		host=req.get('host');
+		link="http://"+req.get('host')+"/verify?id="+rand;
+		mailOptions={
+			to : req.user.local.email,
+			subject : "Please confirm your Email account",
+			html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"	
+		}
+		console.log(mailOptions);
+		smtpTransport.sendMail(mailOptions, function(error, response){
+		   	 if(error){
+		        	console.log(error);
+				res.end("error");
+			 }else{
+		        	console.log("Message sent: " + response.message);
+				res.end("A verification email has been sent to this account. Please click on the link in the email to finish signup");
+		    }
+		});
 	});
 
+	app.get('/verify',function(req,res){
+		console.log(req.protocol+":/"+req.get('host'));
+		if((req.protocol+"://"+req.get('host'))==("http://"+host))
+		{
+			console.log("Domain is matched. Information is from Authentic email");
+			if(req.query.id==rand)
+			{
+				console.log("email is verified");
+				res.redirect('/mainpage')
+				//res.render(path.join(path.dirname(__dirname) + '/views/landingpage.ejs'),{ message1: req.flash('loginMessage'),message2: req.flash('signupMessage') });
+			}
+			else
+			{
+				console.log("email is not verified");
+				res.end("<h1>Bad Request</h1>");
+			}
+		}
+		else
+		{
+			res.end("<h1>Request is from unknown source");
+		}
+	});
 	// process the signup form
 	app.post('/signup', passport.authenticate('local-signup', {
-		successRedirect : '/mainpage', // redirect to the secure profile section
+		successRedirect : '/verification', // redirect to the secure profile section
 		failureRedirect : '/signup', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages
 	}));

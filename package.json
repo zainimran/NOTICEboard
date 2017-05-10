@@ -10,6 +10,7 @@
     "delivery": "0.0.6",
     "ejs": "~0.8.5",
     "express": "~3.4.4",
+    "nodemailer": "~0.7.1",
     "express-session": "^1.15.2",
     "mongodb": "^2.2.25",
     "mongodb-autoincrement": "^1.0.1",

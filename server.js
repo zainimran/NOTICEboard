@@ -15,6 +15,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var socketio = require('socket.io')
 var SocketIOFile = require('socket.io-file');
+var nodemailer = require("nodemailer");
 app.use(express.static(__dirname + '\\views'));
 app.use(express.static(__dirname + '\\views\\data'));
 
@@ -208,7 +209,7 @@ io.on('connection', function(socket) {
 
 
 // routes ======================================================================
-require('./app/routes.js')(app, passport,path,clientSockets); // load our routes and pass in our app and fully configured passport
+require('./app/routes.js')(app, passport,path,clientSockets,nodemailer); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
 server.listen(port);
