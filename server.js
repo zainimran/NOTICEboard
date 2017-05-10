@@ -141,10 +141,11 @@ io.on('connection', function(socket) {
         Notifications.find({'local.email' : msg['email']}, function(err,dat){
             console.log('Notifications for this person in the following events')
             myarr = new Promise ((resolve) => {
+                p = 0
                 dat.forEach(x => {
-                    console.log(x.local.event_id)
+                    //console.log(x.local.event_id)
                     Events.findOne({'_id': x.local.event_id},function(err,d){
-                        console.log("the event is as follows")
+                        //console.log("the event is as follows")
                         //console.log(d.local)
                         if(d!== null){
                             notifications.push({
@@ -156,14 +157,18 @@ io.on('connection', function(socket) {
                             })
                             
                         }
-                        
+                        p = p + 1
                         console.log(notifications)
-                        resolve(notifications)
+                        if(p === dat.length){
+                            resolve(notifications)    
+                        }
                     })
                 })    
             }).then((dat) =>{
+                socket.emit('calendarData',dat)  
                 console.log('Initializing calendar data for user. Sending...')
-                socket.emit('calendarData',dat)    
+                console.log(dat)
+                  
             })
             
         })

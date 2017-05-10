@@ -198,9 +198,8 @@ socket.on('results',(msg)=>{
 
 socket.on('calendarData',(dat)=>{
 	sampleEvents.monthly = dat;
-	console.log('iwashereinthecalendar')
+	console.log('iwashereinthecalendar',dat)
 	console.log(sampleEvents.monthly)
-
 	$('#mycalendar').html("");
 	$('#mycalendar').monthly({
     	mode: 'event',

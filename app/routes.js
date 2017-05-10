@@ -447,10 +447,14 @@ module.exports = function(app, passport,path,clientSockets) {
             	newEvent.local.email    = email;
             	newEvent.local.event_id = events._id
             	newEvent.save(function(err) {
-			    	if (err)
-			        	throw err;
-			    	console.log("successfully saved notification data")
-			    	clientSockets[email].emit('notify', "You just turned on notifications for "+ title)
+			    	if (err){
+			    		throw err;
+			    	}
+			        else {
+			        	console.log("successfully saved notification data")
+			    		clientSockets[email].emit('notify', "You just turned on notifications for "+ title)	
+			        }	
+			    	
 				})
             }
             else {
