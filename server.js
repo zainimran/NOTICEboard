@@ -167,7 +167,23 @@ io.on('connection', function(socket) {
             })
             
         })
-        //console.log(clientSockets)
+    })
+    socket.on('updateEvent', (y)=>{
+        console.log('UPDATE THE DATA FOR EVENT')
+        socket.emit('updateNotify', "Your update has been successfull!")
+        console.log(y)
+        id = y['id']
+        console.log(id)
+        delete y['id']
+
+        Events.findOneAndUpdate({'_id' : id}, y,function (err,data){
+            //console.log('I TRIED UPDATINGGGGGGGGGGGGGGG')
+            console.log(y)
+            if(err)
+                throw err
+            console.log(err)
+            console.log(data)
+        })
     })
     socket.on('disconnect', function() {
         console.log('user disconnected');

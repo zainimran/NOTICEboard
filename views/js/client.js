@@ -70,3 +70,9 @@ form2.onsubmit = function(ev) {
 	var uploadIds = uploader.upload(fileEl.files);
 	return true
 };
+
+
+socket.on('updateNotify',(msg)=>{
+	console.log(msg)
+	form3.submit()
+})

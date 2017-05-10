@@ -307,6 +307,13 @@ $('.addlnf').on('click', function() {
 	$('.cover').show();
 	$('.addLnf_overlay').show()
 });
+
+$('.addlnf').on('click', function() {
+	$('.overlay').show();
+	$('.cover').show();
+	$('.addLnf_overlay').show()
+});
+
 $('#addEvent').on('click', function() {
 	$('.overlay').show();
 	$('.cover').show();
@@ -425,11 +432,90 @@ $('.star').on('click', function() {
 		$.post("/star_off", {eventData: text, user: email, timings : DATETIME, title:title})
 	}
 });
+owner = ""
+event_id = ""
+
 $('.event_editbtn').on('click', function() {
-	$('.overlay').show();
-	$('.cover').show();
-	$('.addEvent_overlay').show();
+	divs = $(this).closest('.eventinfo').children();
+	//console.log(divs)
+	owner = divs[5].defaultValue
+	mail = $('.profile_info').text()
+	mail = mail.split('\n')
+	mail = mail[1].replace(/(\r\n|\n|\r|\t| )/gm,"");
+	if(mail === owner){
+		$('.overlay').show();
+		$('.cover').show();
+		$('.editEvent_overlay').show();
+		event_id = divs[6].defaultValue
+		owner = ""
+	}
+	else{
+		alert('You are not the owner of this post')
+	}
+	
 })
+
+$('.deleteEvent').on('click', function() {
+	divs = $(this).closest('.eventinfo').children();
+	//console.log(divs)
+	owner = divs[5].defaultValue
+	console.log(owner)
+	mail = $('.profile_info').text()
+	mail = mail.split('\n')
+	mail = mail[1].replace(/(\r\n|\n|\r|\t| )/gm,"");
+	if(mail === owner){
+		console.log('Person can delete')
+		event_id = divs[6].defaultValue
+		$.post("/deleteEvent",{id : event_id})
+	/*	$('.overlay').show();
+		$('.cover').show();
+		$('.editEvent_overlay').show();
+		event_id = divs[6].defaultValue
+		owner = ""*/
+	}
+	else{
+		alert('You are not the owner of this post')
+	}
+	
+})
+
+var form3 = document.getElementById('eventform_edit');
+form3.onsubmit = function(ev) {
+	ev.preventDefault();
+	// Send File Element to upload
+	var formData = $('#eventform_edit').serializeArray()
+	//console.log('iwashere')
+	//console.log($('#eventform_edit').closest('.eventinfo').children());
+	y = {}
+	DATETIME = ""
+	for (i = 0; i<formData.length;i++){
+		key = formData[i].name
+		if(formData[i].value!==''){
+			if(key === "eventname"){
+				y['local.Title'] = formData[i].value	
+			}
+			else if(key === "description"){
+				y['local.Description'] = formData[i].value
+			}
+			else if(key === "venue"){
+				y['local.LOCATION'] = formData[i].value
+			}
+			else if(key === "date"){
+				DATETIME = formData[i].value
+			}
+			else if(key === "time"){
+				DATETIME = DATETIME +'T'+formData[i].value
+			}
+		}
+	}
+	y['local.DATETIME'] = DATETIME
+	y['id'] = event_id
+	event_id = ""
+	socket.emit('updateEvent',y)
+	//console.log(formData)
+	return true
+};
+
 $(window).on("load",function(){
 	$(".eventfeed").mCustomScrollbar({
 		theme: "minimal-dark"

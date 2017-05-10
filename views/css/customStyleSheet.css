@@ -749,6 +749,20 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 	background-color: #f4f4f4;
 }
 
+.editEvent_overlay textarea {
+	resize: none;
+}
+
+.editEvent_overlay {
+	display: none;
+	z-index: 10;
+	padding: 9px 40px 9px 15px;
+	width: 660px;
+	height: 300px;
+	border-radius: 2px;
+	background-color: #f4f4f4;
+}
+
 .searchinput:focus {
 	padding-top: 0px;
 }

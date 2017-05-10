@@ -54,7 +54,21 @@ module.exports = function(app, passport,path,clientSockets) {
 	// =====================================
 	// we will want this protected so you have to be logged in to visit
 	// we will use route middleware to verify this (the isLoggedIn function)
+	app.post('/edit',isLoggedIn,function(req,res){
+		res.redirect('/mainpage')
+	})
+	app.post('/deleteEvent',isLoggedIn,function(req,res){
+		console.log('DELETING EVENTTTTTTTTTTTTTTT')
+		console.log(req.body.id)
+		Events.remove({'_id' : req.body.id},function(err){
+			console.log(err)
+			res.redirect('/mainpage')
+		}).exec()
+		
+
+	})
 	app.get('/mainpage', isLoggedIn, function(req, res) {
+		//console.log('trying to redirect')
 		Events.find({},function(err,data){
 			//console.log(data)
 			var arr = [];
@@ -92,6 +106,7 @@ module.exports = function(app, passport,path,clientSockets) {
 					y['img'] = x.local.image
 					y['email'] = x.local.email
 					y['id'] = "eventpost event"+k.toString()
+					y['event_id'] = x._id
 					//console.log(y)
 					arr.push(y)
 					//console.log(y)
@@ -101,7 +116,7 @@ module.exports = function(app, passport,path,clientSockets) {
 				}	
 			}
 			//console.log(arr)
-			console.log("PUSHED IN FOR TEMPLATING")
+			//console.log("PUSHED IN FOR TEMPLATING")
 			var arr2 = [];
 			k = 1
 			LnF.find({},function(err,data){
@@ -115,7 +130,7 @@ module.exports = function(app, passport,path,clientSockets) {
 						y['owner'] = x.local.email
 						y['LostItem'] = x.local.LostItem
 						y['id'] = 'lostnfound'+k.toString()
-						console.log(y['id'], 'IWASHERERRRRRRRRRRR')
+						//console.log(y['id'], 'IWASHERERRRRRRRRRRR')
 						arr2.push(y)
 					}
 					k = k +	1
@@ -162,8 +177,8 @@ module.exports = function(app, passport,path,clientSockets) {
 								k = 1;
 							}
 						}
-						console.log("THIS IS ARRAY4")
-						console.log(arr4)
+						//console.log("THIS IS ARRAY4")
+						//console.log(arr4)
 						res.render('mainpage.ejs', {
 							user : req.user, // get the user out of session and pass to template
 							Event: arr,
@@ -271,11 +286,12 @@ module.exports = function(app, passport,path,clientSockets) {
 		newEvent.local.Description = req.body.description;
 		newEvent.local.image = req.body.image
 		console.log(req.body)
-		console.log(req.body.choice1)
-		console.log(req.body.choice2)
-		if (req.body.choice1 === 'on')
+		//console.log(req.body.choice1)
+		//console.log(req.body.choice2)
+		console.log(req.body.option)
+		if (req.body.choice === 'choiceLost')
 			newEvent.local.LostORFound    = 'Lost';
-		else if(req.body.choice2 === 'on')
+		else if(req.body.choice === 'choiceFound')
 			newEvent.local.LostORFound    = 'Found';
 		else
 			console.log("THIS IS AN ERROR")

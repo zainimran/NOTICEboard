@@ -104,6 +104,8 @@
 														<%="Location: "+x.location%></br>
 														</p>
 							</div>
+							<input type = "hidden" id = "owner" value = <%=x.email%>>
+							<input type = "hidden" id = "eventid" value = <%=x.event_id%>>
 							<div class="eDate"><img src="Layer_6.png"></div>
 						</div>
 					</div>
@@ -195,30 +197,43 @@
 												<%="Location: "+x.location%></br>
 												</p>
 					</div>
+					<input type = "hidden" id = "owner" value = <%=x.email%>>
+					<input type = "hidden" id = "eventid" value = <%=x.event_id%>>
 					<div class="eDate_overlay"><img src="Layer_6.png"></div>
 				</div>
 			</div>
 		<% }); %>
 	  <div class="addBook_overlay alloverlays">
 		<form action = "/bookSwapInsert" method = "post">
-			<label for="textfield">I HAVE THIS BOOK:</label>
-           	<br>
-            	<input type="text" name= "bookoffered">
-            <br>
-            <label for="textfield">AUTHOR:</label>
-            <br>
-            	<input type="text" name="bookoffauthor">
-            <br>
-            <label for="textfield">CONTACT NUMBER:</label>
-            <br>
-            	<input type="number" name="contact">
-            <br>
-            <label for="textfield">UPLOAD IMAGE</label>
-            <br>
-            	<input type="file">
-            <br>
-            <br>
-            <input type="submit" value="POST">
+			
+			<div class="courseform_left2">
+				<label for="textfield">HAVE BOOK:</label>
+	           	<br>
+	            	<input type="text" name= "bookoffered">
+	            <br>
+	            <label for="textfield">AUTHOR:</label>
+	            <br>
+	            	<input type="text" name="bookoffauthor">
+	            <br>
+	            <label for="textfield">CONTACT NUMBER:</label>
+	            <br>
+	            	<input type="number" name="contact">
+	            <br>
+	            <br>
+            </div>
+            <div class="courseform_right2">
+	            <label for="textfield">NEED BOOK:</label>
+	           	<br>
+	            	<input type="text" name= "bookrequired">
+	            <br>
+	            <label for="textfield">AUTHOR:</label>
+	            <br>
+	            	<input type="text" name="bookreqauthor">
+	            <br>
+	            
+	            <br>
+	            <input type="submit" value="POST">
+	        </div>
 		</form>
 	   </div>
 	   <div class="createCourse_overlay alloverlays">
@@ -258,9 +273,9 @@
       <div class="addLnf_overlay alloverlays">
 		<form action ="/lostandFound" method = "post" id = "lnfform">
 			<div class="input-group">
-		  	  <span class="input-group-addon"><input type="radio" id="choiceLost" name="choice1"></span>
+		  	  <span class="input-group-addon"><input type="radio" value="choiceLost" name="choice"></span>
 				<label for="input" class="form-control">Lost</label>
-			  <span class="input-group-addon"><input type="radio" id="choiceFound" name="choice2"></span>
+			  <span class="input-group-addon"><input type="radio" value="choiceFound" name="choice"></span>
 				<label for="input" class="form-control">Found</label>
 			</div>
 		  <label for="textfield">ITEM:</label>
@@ -304,6 +319,35 @@
             		<input type="file" name = "image" id = "fileevent">
 				<br>
 				<label for="textfield">TIME:</label>
+				<br>
+					<input type="time" name = "time">
+				<br>
+				<br>
+				<input type="submit" value="POST">
+            </div>
+		</form>
+	   </div>
+	   <div class="editEvent_overlay alloverlays">
+		<form action="/edit" method="post" id = "eventform_edit">
+			<div class="courseform_left">
+				<label for="textfield">EVENT NAME:</label>
+				<br>
+					<input type="text" name="eventname">
+				<br>
+				<label for="textfield">DESCRIPTION:</label>
+				<br>
+            		<textarea rows="4" cols="40" name = "description"></textarea>
+				<br>
+				<label for="textfield">EVENT DATE:</label>
+				<br>
+					<input type="date" name = "date">
+				<br>
+				<label for="textfield">VENUE:</label>
+				<br>
+					<input type="text" name= "venue">
+            </div>
+            <div class="courseform_right">
+            	<label for="textfield">TIME:</label>
 				<br>
 					<input type="time" name = "time">
 				<br>
