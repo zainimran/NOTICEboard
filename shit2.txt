@@ -64,12 +64,62 @@
 <% }); %>
 
 ===========================================================================================
-<% Event.forEach(function(x) { %>
+<% LnF.forEach(function(x) { %>
 	<div class= <%="lostnfound"+x.id%>>
 		<img class="lostnfoundpic" src= <%=x.img%>>
 		<div class="lostnfoundinfo">
-			<div class="lfInfo"><%= x.LostORFound+': '+x.Description%></div>
+			<div class="lfInfo"><%= x.LostORFound+': '+x.LostItem+'. '+x.Description%></div>
 			<div class="lf_maillink emailexpand">
+				<p class="emailhere"><%=x.owner%></p>
+				<img class="mailicon" src="outlook_icon.png">
+			</div>
+		</div>
+	</div>
+<% }); %>
+============================================================================================
+<% Courses.forEach(function(x) { %>
+	<div class="courseSwap1">
+		<div class="courseSwap1a"><%="Have: "+x.CourseOffered + " by "+ x.InstructorOffered +"at "+ x.TimingsOffered%></br>
+		</div>
+		<div class="courseSwap1b">
+			<div class="courseNeed"><%="Have: "+x.CourseRequired + " by "+ x.InstructorRequired+ "at "+ x.TimingsRequired%></br>
+			</div>
+			<div class="cs_maillink emailexpand">
+				<p class="emailhere"><%=x.owner%></p>
+				<img class="mailicon" src="outlook_icon.png">
+			</div>
+		</div>
+	</div>
+<% }); %>
+
+<% Courses.forEach(function(x) { %>
+	<div class="courseSwap1">
+		<div class="courseSwap1a">Have: Anthropology by meow boy <br>
+								  		10:20 - 5:20
+		</div>
+		<div class="courseSwap1b">
+			<div class="courseNeed">Need: political science pol sci 299 by mr meow <br>
+										12:30-3:30 Mon Fri
+			</div>
+			<div class="cs_maillink emailexpand">
+				<p class="emailhere">18100260@lums.edu.pk</p>
+				<img class="mailicon" src="outlook_icon.png">
+			</div>
+		</div>
+	</div>
+<% }); %>
+=================================================================================================
+
+<% Courses.forEach(function(x) { %>
+	<div class="courseSwap1">
+		<div class="courseSwap1a">Have: what is political science by mr meow <br>
+								  		first edition
+		</div>
+		<div class="courseSwap1b">
+			<div class="courseNeed">Need: book of love by zain imran lover boy <br>
+										latest edition
+			</div>
+			<div class="cs_maillink emailexpand">
 				<p class="emailhere"><%=x.owner%></p>
 				<img class="mailicon" src="outlook_icon.png">
 			</div>

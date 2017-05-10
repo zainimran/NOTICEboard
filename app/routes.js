@@ -123,15 +123,57 @@ module.exports = function(app, passport,path,clientSockets) {
 						k = 1;
 					}
 				}
-				console.log('EVENT DATA')
+				/*console.log('EVENT DATA')
 				console.log(arr)
 				console.log('LNF DATA')
-				console.log(arr2)
-				res.render('mainpage.ejs', {
-					user : req.user, // get the user out of session and pass to template
-					Event: arr,
-					LnF : arr2
-				});		
+				console.log(arr2)*/
+				var arr3 = [];
+				Courses.find({},function(err,data){
+					for(j = data.length-1; j>=data.length-6; j--){
+						x = data[j]
+						y = {}
+						if(j>=0){
+							y['owner'] = x.local.email
+							y['CourseOffered'] = x.local.CourseOffered
+							y['TimingsOffered'] = x.local.TimingsOffered
+							y['InstructorOffered'] = x.local.InstructorOffered
+							y['CourseRequired'] = x.local.CourseRequired
+							y['TimingsRequired'] = x.local.TimingsRequired
+							y['InstructorRequired'] = x.local.InstructorRequired
+							arr3.push(y)
+						}
+					}
+					var arr4 = [];
+					Books.find({},function(err,data){
+						for(j = data.length-1; j>=data.length-6; j--){
+							x = data[j]
+							y = {}
+							if(j>=0){
+								y['owner'] = x.local.email
+								y['BookOffered'] = x.local.BookOffered
+								y['BookOffAuthor'] = x.local.BookOffAuthor
+								y['BookRequired'] = x.local.BookRequired
+								y['BookReqAuthor'] = x.local.BookReqAuthor
+								y['ContactNumber'] = x.local.ContactNumber
+								arr4.push(y)
+							}
+							k = k +	1
+							if( k === 3){
+								k = 1;
+							}
+						}
+						console.log("THIS IS ARRAY4")
+						console.log(arr4)
+						res.render('mainpage.ejs', {
+							user : req.user, // get the user out of session and pass to template
+							Event: arr,
+							LnF : arr2,
+							Courses : arr3,
+							Books : arr4
+						});	
+					})
+					
+				})	
 			})
 		})
 	});
@@ -205,7 +247,7 @@ module.exports = function(app, passport,path,clientSockets) {
 		newEvent.local.TimingsRequired    = req.body.timingsrequired;
 		newEvent.local.InstructorRequired    = req.body.instructorrequired;
 		newEvent.local.Description = req.body.courseoffered + ' ' + req.body.instructoroffered; + ' ' + req.body.courserequired + ' ' + req.body.instructorrequired;
-		console.log(newEvent.local.Description)
+		console.log(newEvent.local.TimingsOffered)
 		//newEvent.local.Name    = req.body.Name;
 		// save the user
 		// set the user's local credentials

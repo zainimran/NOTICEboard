@@ -139,32 +139,22 @@
 				<a class="add" href="#"><img class="addevent" id="addCourse" src="1491100704_cancel.png"></a>
 			</div>
 			<div class="csfeed">
-				<div class="courseSwap1">
-					<div class="courseSwap1a">Have: Anthropology by meow boy <br>
-											  		10:20 - 5:20
-					</div>
-					<div class="courseSwap1b">
-						<div class="courseNeed">Need: political science pol sci 299 by mr meow <br>
-													12:30-3:30 Mon Fri
+				<% Courses.forEach(function(x) { %>
+					<div class="courseSwap1">
+						<div class="courseSwap1a"><%="Have: "+x.CourseOffered + " by "+ x.InstructorOffered%><br>
+												  		<%="at "+ x.TimingsOffered%>
 						</div>
-						<div class="cs_maillink emailexpand">
-							<p class="emailhere">18100260@lums.edu.pk</p>
-							<img class="mailicon" src="outlook_icon.png">
+						<div class="courseSwap1b">
+							<div class="courseNeed"><%="Have: "+x.CourseRequired + " by "+ x.InstructorRequired%><br>
+														<%="at "+ x.TimingsRequired%>
+							</div>
+							<div class="cs_maillink emailexpand">
+								<p class="emailhere"><%=x.owner%></p>
+								<img class="mailicon" src="outlook_icon.png">
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="courseSwap1">
-					<div class="courseSwap1a"></div>
-					<div class="courseSwap1b"></div>
-				</div>
-				<div class="courseSwap1">
-					<div class="courseSwap1a"></div>
-					<div class="courseSwap1b"></div>
-				</div>
-				<div class="courseSwap1">
-					<div class="courseSwap1a"></div>
-					<div class="courseSwap1b"></div>
-				</div>
+				<% }); %>
 			</div>
 		</div>
 		<div class="bookSwaps">
@@ -173,32 +163,20 @@
 				<a class="add" href="#"><img class="addevent" id="addBook" src="1491100704_cancel.png"></a>
 			</div>
 			<div class="csfeed">
-				<div class="courseSwap1">
-					<div class="courseSwap1a">Have: what is political science by mr meow <br>
-											  		first edition
-					</div>
-					<div class="courseSwap1b">
-						<div class="courseNeed">Need: book of love by zain imran lover boy <br>
-													latest edition
+				<% Books.forEach(function(x) { %>
+					<div class="courseSwap1">
+						<div class="courseSwap1a"><%="Have: "+x.BookOffered + " by "+ x.BookOffAuthor%><br>
 						</div>
-						<div class="cs_maillink emailexpand">
-							<p class="emailhere">18100260@lums.edu.pk</p>
-							<img class="mailicon" src="outlook_icon.png">
+						<div class="courseSwap1b">
+							<div class="courseNeed"><%="Have: "+x.BookRequired + " by "+ x.BookReqAuthor%><br>
+							</div>
+							<div class="cs_maillink emailexpand">
+								<p class="emailhere"><%=x.owner%></p>
+								<img class="mailicon" src="outlook_icon.png">
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="courseSwap1">
-					<div class="courseSwap1a"></div>
-					<div class="courseSwap1b"></div>
-				</div>
-				<div class="courseSwap1">
-					<div class="courseSwap1a"></div>
-					<div class="courseSwap1b"></div>
-				</div>
-				<div class="courseSwap1">
-					<div class="courseSwap1a"></div>
-					<div class="courseSwap1b"></div>
-				</div>
+				<% }); %>
 			</div>
 		</div>
 	</div>
