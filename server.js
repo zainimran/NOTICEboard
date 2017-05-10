@@ -48,7 +48,8 @@ app.configure(function() {
 		secret: 'ilovescotchscotchyscotchscotch',
 		clear_interval: 900,
 		cookie: { maxAge: 2 * 60 * 60 * 1000 },
-		store: mongoStore
+		store: mongoStore,
+        resave: false
     })); // session secret
 	app.use(passport.initialize());
 	app.use(passport.session()); // persistent login sessions

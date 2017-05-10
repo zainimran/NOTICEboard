@@ -50,7 +50,6 @@ module.exports = function(app, passport,path,clientSockets,nodemailer) {
 	// show the signup form
 	app.get('/verification', function(req, res) {
 		console.log(req)
-		//res.render(path.join(path.dirname(__dirname) + '/views/landingpage.ejs'),{ message1: req.flash('loginMessage'),message2: req.flash('signupMessage') });
 		rand=Math.floor((Math.random() * 100) + 54);
 		host=req.get('host');
 		link="http://"+req.get('host')+"/verify?id="+rand;
