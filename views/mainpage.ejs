@@ -170,8 +170,8 @@
 						<div class="courseSwap1a"><%="Have: "+x.BookOffered + " by "+ x.BookOffAuthor%><br>
 						</div>
 						<div class="courseSwap1b">
-							<div class="courseNeed"><%="Have: "+x.BookRequired + " by "+ x.BookReqAuthor%><br>
-							</div>
+							<div class="courseNeed"><%="Have: "+x.BookRequired + " by "+ x.BookReqAuthor%><br></div>
+							<br>
 							<div class="cs_maillink emailexpand">
 								<p class="emailhere"><%=x.owner%></p>
 								<img class="mailicon" src="outlook_icon.png">
@@ -274,9 +274,9 @@
       <div class="addLnf_overlay alloverlays">
 		<form action ="/lostandFound" method = "post" id = "lnfform">
 			<div class="input-group">
-		  	  <span class="input-group-addon"><input type="radio" id= "choiceLost" name="choice" checked>  Lost</span>
+		  	  <span class="input-group-addon"><input type="radio" value= "choiceLost" name="choice" checked>  Lost</span>
 				
-			  <span class="input-group-addon"><input type="radio" id="choiceFound" name="choice"> Found</span>
+			  <span class="input-group-addon"><input type="radio" value="choiceFound" name="choice"> Found</span>
 				
 			</div>
 			<button class="button12" type="button" onclick="myfunc()">X</button>

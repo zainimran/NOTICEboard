@@ -27,7 +27,6 @@ socket.on('results',(msg)=>{
 		$(".search_feed").prepend("<div><b>"+msg+"</b></div>")
 	}
 	else{
-		
 		for(i = 0; i<msg.length;i++){
 			//console.log(msg[i].image)
 			if (msg[i].Title !== undefined){

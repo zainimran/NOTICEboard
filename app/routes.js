@@ -108,11 +108,11 @@ module.exports = function(app, passport,path,clientSockets,nodemailer) {
 		res.redirect('/mainpage')
 	})
 	app.post('/deleteEvent',isLoggedIn,function(req,res){
+		res.redirect('/mainpage')
 		console.log('DELETING EVENTTTTTTTTTTTTTTT')
 		console.log(req.body.id)
 		Events.remove({'_id' : req.body.id},function(err){
 			console.log(err)
-			res.redirect('/mainpage')
 		}).exec()
 		
 
@@ -338,7 +338,7 @@ module.exports = function(app, passport,path,clientSockets,nodemailer) {
 		console.log(req.body)
 		//console.log(req.body.choice1)
 		//console.log(req.body.choice2)
-		console.log(req.body.option)
+		console.log(req.body)
 		if (req.body.choice === 'choiceLost')
 			newEvent.local.LostORFound    = 'Lost';
 		else if(req.body.choice === 'choiceFound')
