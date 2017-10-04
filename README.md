@@ -3,7 +3,11 @@ Spring 2017 Software Engineering Project
 
 # Code shifted to newbranch
 
+SCREENSHOTS:
+# Landing Page
+![Alt text](./landingpage.png?raw=true "LANDING PAGE")
 
-![alt text](https://imgur.com/a/8uAr2 "Landing Page")
+# Main Page
+![Alt text](./mainpage.png?raw=true "MAIN PAGE")
 
-![alt text](https://imgur.com/a/ByYLK "Main Page")
+
