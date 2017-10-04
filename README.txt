@@ -4,10 +4,10 @@ Spring 2017 Software Engineering Project
 
 SCREENSHOTS:
 # Landing Page
-![Alt text](/b.png?raw=true "LANDING PAGE")
+![Alt text](b.png?raw=true "LANDING PAGE")
 
 # Main Page
-![Alt text](/a.png?raw=true "MAIN PAGE")
+![Alt text](a.png?raw=true "MAIN PAGE")
 
 
 Please make sure that the requisite softwares have been installed before running the application.
